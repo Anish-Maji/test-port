@@ -1,0 +1,129 @@
+/* ==========================================================================
+   Brand Logo Ticker / Infinite Marquee CSS
+   ========================================================================== */
+
+.ticker-section {
+  background: transparent;
+  width: 100%;
+  padding: 3rem 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.ticker-heading {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.ticker-container {
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  position: relative;
+  /* Mask gradient for smooth edge fading */
+  mask-image: linear-gradient(to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 1) 12%,
+      rgba(0, 0, 0, 1) 88%,
+      rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 1) 12%,
+      rgba(0, 0, 0, 1) 88%,
+      rgba(0, 0, 0, 0) 100%);
+}
+
+.ticker-track {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  flex-shrink: 0;
+  min-width: 100%;
+  animation: scrollTicker 28s linear infinite;
+}
+
+.ticker-container:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+.ticker-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  flex-shrink: 0;
+}
+
+.ticker-brand-image {
+  height: 38px;
+  max-height: 48px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.75);
+  transition: filter var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.ticker-item:hover .ticker-brand-image {
+  filter: grayscale(0%) opacity(1);
+  transform: scale(1.05);
+}
+
+@keyframes scrollTicker {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Breakpoint responsiveness for 1200px, 768px, 360px */
+@media (min-width: 1200px) {
+  .ticker-section {
+    padding: 4rem 0;
+  }
+
+  .ticker-track {
+    gap: 5rem;
+  }
+
+  .ticker-brand-image {
+    height: 44px;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 767px) {
+  .ticker-section {
+    padding: 2.5rem 0;
+  }
+
+  .ticker-track {
+    gap: 3rem;
+  }
+
+  .ticker-brand-image {
+    height: 32px;
+    max-width: 140px;
+  }
+}
+
+@media (max-width: 360px) {
+  .ticker-track {
+    gap: 2rem;
+  }
+
+  .ticker-brand-image {
+    height: 28px;
+    max-width: 120px;
+  }
+}

@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: 'Gelasio', -apple-system, BlinkMacSystemFont, serif;
+  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'DM Mono', -apple-system, BlinkMacSystemFont, monospace;
+}
+
+/* ==========================================================================
+   Design System & Core CSS Tokens
+   ========================================================================== */
+
+:root {
+  /* Color Palette - Light Mode */
+  --bg-primary: #ffffff;
+  --bg-surface: #111827;
+  --bg-surface-hover: #1f293d;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --bg-glass-mobile: rgba(255, 255, 255, 0.98);
+
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-glow: rgba(99, 102, 241, 0.35);
+
+  --accent-primary: #6366f1;
+  --accent-primary-hover: #4f46e5;
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+
+  --text-main: #343435;
+  --text-muted: #6d6d6d;
+  --text-dim: #64748b;
+
+  /* Typography */
+  --font-heading: 'Gelasio', -apple-system, BlinkMacSystemFont, serif;
+  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'DM Mono', -apple-system, BlinkMacSystemFont, monospace;
+
+  /* Layout & Spacing */
+  --nav-height-desktop: 80px;
+  --nav-height-mobile: 68px;
+  --max-width: 1280px;
+  --radius-full: 9999px;
+  --radius-xl: 16px;
+  --radius-lg: 12px;
+  --radius-md: 8px;
+
+  /* Gap */
+  --gap-xs: 4px;
+  --gap-sm: 8px;
+  --gap-md: 16px;
+  --gap-lg: 24px;
+  --gap-xl: 32px;
+  --gap-xxl: 40px;
+  --gap-xxxl: 48px;
+  --gap-xxxxl: 64px;
+  --gap-xxxxxl: 80px;
+  --gap-x: 100px;
+  --gap-xx: 120px;
+
+  /* Elevation & Effects */
+  --blur-glass: blur(16px);
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base resets & utilities */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Helper Gradient Text */
+.gradient-text {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

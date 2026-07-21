@@ -1,0 +1,251 @@
+/* ==========================================================================
+   Responsive Header & Minimal Navbar Styles
+   ========================================================================== */
+
+/* Main Header Container */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: var(--nav-height-desktop);
+  display: flex;
+  align-items: center;
+  transition: all var(--transition-normal);
+  padding: 0 1rem;
+  background: var(--bg-primary);
+}
+
+/* Scrolled Header State */
+.header.scrolled {
+  height: calc(var(--nav-height-desktop) - 12px);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.header-container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+}
+
+/* Brand Text: Gelasio, Semi-Bold, Italics */
+.brand-text {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-style: italic;
+  font-size: 1.6rem;
+  color: #000000;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: opacity var(--transition-fast);
+}
+
+.brand-text:hover {
+  opacity: 0.8;
+}
+
+/* Desktop & Tablet Navigation Menu */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  background: transparent;
+  padding: 0;
+  border: none;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  transition: color var(--transition-fast);
+  /* text-transform: uppercase; */
+}
+
+.nav-link:hover {
+  color: #000000;
+  background: transparent !important;
+}
+
+/* Selected page: bold black with NO background opacity shield */
+.nav-link.active {
+  color: #000000;
+  font-weight: 700;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Mobile Toggle Hamburger Button */
+.mobile-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  background: transparent;
+  border: none;
+  color: #000000;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  z-index: 1001;
+}
+
+.mobile-toggle:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Mobile Navigation Overlay Drawer */
+.mobile-drawer {
+  display: none;
+}
+
+/* ==========================================================================
+   BREAKPOINTS: Explicit 1200px, 768px, and 360px Media Queries
+   ========================================================================== */
+
+/* 1. Large Desktop Screens (> 1200px) */
+@media (min-width: 1200px) {
+  .header-container {
+    padding: 0 2rem;
+  }
+
+  .brand-text {
+    font-size: 1.5rem;
+  }
+
+  .nav-menu {
+    gap: 2.5rem;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+  }
+}
+
+/* 2. Tablet Screens (768px - 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .header {
+    height: 72px;
+  }
+
+  .header-container {
+    padding: 0 1.25rem;
+  }
+
+  .brand-text {
+    font-size: 1.45rem;
+  }
+
+  .nav-menu {
+    gap: 1.5rem;
+  }
+
+  .nav-link {
+    font-size: 0.875rem;
+  }
+}
+
+/* 3. Mobile Screens (< 768px, down to 360px) */
+@media (max-width: 767px) {
+  .header {
+    height: var(--nav-height-mobile);
+  }
+
+  /* Hide desktop menu on mobile */
+  .desktop-nav {
+    display: none;
+  }
+
+  /* Show mobile toggle */
+  .mobile-toggle {
+    display: flex;
+  }
+
+  /* Mobile Overlay Drawer */
+  .mobile-drawer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-primary);
+    padding: calc(var(--nav-height-mobile) + 2rem) 1.5rem 2rem 1.5rem;
+    z-index: 1000;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal);
+  }
+
+  .mobile-drawer.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+    border: none;
+    background: transparent !important;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+    text-transform: uppercase;
+  }
+
+  .mobile-nav-item:hover,
+  .mobile-nav-item.active {
+    color: #000000;
+    font-weight: 700;
+    background: transparent !important;
+  }
+}
+
+/* 4. Ultra Compact Mobile Screens (360px & smaller) */
+@media (max-width: 360px) {
+  .header-container {
+    padding: 0 0.85rem;
+  }
+
+  .brand-text {
+    font-size: 1.35rem;
+  }
+
+  .mobile-drawer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .mobile-nav-item {
+    font-size: 1.1rem;
+  }
+}

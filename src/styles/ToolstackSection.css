@@ -1,0 +1,216 @@
+/* ==========================================================================
+   Toolstack Section Styles (Light Mode Periodic Table Style)
+   Uses DM Sans & DM Mono
+   ========================================================================== */
+
+.toolstack-section {
+  padding: 5rem 1.5rem;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.toolstack-header {
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+
+.toolstack-title {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  color: #0D0D0D;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.toolstack-subtitle {
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  color: #71717A;
+  max-width: 640px;
+  line-height: 1.6;
+}
+
+/* Groups Grid (Horizontal Flex / Grid of Tool Block Cards) */
+.toolstack-groups-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: stretch;
+  margin-bottom: 2.5rem;
+}
+
+.toolstack-group-card {
+  background: #FAFAFA;
+  border: 1px solid #E4E4E7;
+  border-radius: 4px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.toolstack-group-card.dimmed {
+  opacity: 0.35;
+  filter: grayscale(0.5);
+}
+
+/* Tile Grid inside a group card */
+.tool-tiles-grid {
+  display: grid;
+  gap: 10px;
+}
+
+
+/* Dim non-hovered sibling tiles when hovering over the grid */
+.tool-tiles-grid:hover .tool-tile:not(:hover) {
+  opacity: 0.55;
+}
+
+/* Periodic Element Style Tile */
+.tool-tile {
+  width: 76px;
+  height: 76px;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 0px;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    opacity 0.2s ease;
+  position: relative;
+  user-select: none;
+  z-index: 1;
+}
+
+/* Hovered / Highlighted Tile Effect - POP UP like reference image */
+.tool-tile:hover {
+  transform: translateY(0px) scale(1.22);
+  background-color: #FFFFFF;
+  border-color: #c7c7c7;
+  box-shadow: 0 20px 38px -8px rgba(0, 0, 0, 0.16), 0 8px 16px -4px rgba(0, 0, 0, 0.08);
+  z-index: 20;
+  opacity: 1 !important;
+}
+
+.tool-tile.tile-dimmed {
+  opacity: 0.3;
+}
+
+.tool-number {
+  align-self: flex-start;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: #9CA3AF;
+  line-height: 1;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.tool-tile:hover .tool-number {
+  color: #52525B;
+}
+
+.tool-symbol {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-top: -2px;
+  transition: transform 0.2s ease;
+}
+
+.tool-tile:hover .tool-symbol {
+  transform: scale(1.05);
+}
+
+.tool-name {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .2px;
+  color: #6B7280;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  transition: color 0.2s ease, font-weight 0.2s ease;
+}
+
+.tool-tile:hover .tool-name {
+  color: #09090B;
+  /* font-weight: 600; */
+}
+
+/* Filter Bar at Bottom */
+.toolstack-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.toolstack-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  border: 1px solid #E4E4E7;
+  border-radius: 2px;
+  padding: 6px 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: #71717A;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toolstack-filter-pill:hover {
+  border-color: #A1A1AA;
+  color: #18181B;
+}
+
+.toolstack-filter-pill.active {
+  background: #18181B;
+  border-color: #18181B;
+  color: #FFFFFF;
+}
+
+.pill-radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid #A1A1AA;
+  transition: all 0.2s ease;
+}
+
+.toolstack-filter-pill.active .pill-radio-dot {
+  border-color: #FFFFFF;
+  background-color: #FFFFFF;
+}
+
+@media (max-width: 1024px) {
+  .toolstack-group-card:nth-child(4) .tool-tiles-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .toolstack-groups-grid {
+    flex-direction: column;
+  }
+
+  .tool-tiles-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}

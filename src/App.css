@@ -1,0 +1,267 @@
+/* ==========================================================================
+   App Component Styles - Full Screen 100vh Hero Section & Responsive Fix
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
+  margin: 0;
+  padding: 0;
+}
+
+.app-layout {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  overflow-x: clip;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
+}
+
+/* Hero Section - 100vh Full Screen Viewport */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5rem 1.5rem 2rem 1.5rem;
+  overflow: hidden;
+}
+
+.hero-shapegrid-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: auto;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  text-align: left;
+  max-width: 800px;
+  width: 100%;
+  margin: auto;
+}
+
+.hero-content * {
+  pointer-events: auto;
+}
+
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 5.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0em;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  color: #000000;
+  word-wrap: break-word;
+}
+
+.hero-designation {
+  font-family: var(--font-mono);
+  font-size: clamp(0.4rem, 4vw, 1rem);
+  font-weight: 100;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  color: #000000;
+  word-wrap: break-word;
+}
+
+.hero-sub {
+  font-family: var(--font-mono);
+  font-size: clamp(0.4rem, 4vw, 1rem);
+  font-weight: 100;
+  letter-spacing: 0em;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  color: #000000;
+  word-wrap: break-word;
+}
+
+.hero-description {
+  font-family: var(--font-mono);
+  font-weight: 100;
+  max-width: 640px;
+  width: 100%;
+  font-size: clamp(.4rem, 2vw, 1rem);
+  letter-spacing: -.02em;
+  color: var(--text-muted);
+  text-align: left;
+  line-height: 1.5;
+}
+
+.simple-divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--border-subtle);
+}
+
+/* Selected Works Section */
+.works-section {
+  padding: 5rem 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.works-header {
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+
+.works-section-tag {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: #71717a;
+  text-transform: uppercase;
+}
+
+.works-section-title {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #18181b;
+  margin-top: 0.5rem;
+}
+
+.works-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.featured-work-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.featured-work-card:hover {
+  transform: translateY(-4px);
+}
+
+.work-card-media-box {
+  width: 100%;
+  height: 440px;
+  background-color: #98E4B7;
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  transition: opacity 0.2s ease;
+}
+
+.featured-work-card:hover .work-card-media-box {
+  opacity: 0.96;
+}
+
+.work-card-image {
+  max-width: 85%;
+  max-height: 380px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.08));
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.featured-work-card:hover .work-card-image {
+  transform: scale(1.02);
+}
+
+.work-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 2px;
+}
+
+.work-card-meta {
+  font-family: var(--font-mono, 'DM Mono', monospace);
+  font-size: 13px;
+  color: #71717A;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.work-card-title {
+  font-family: var(--font-heading, 'Gelasio', serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: #0D0D0D;
+  margin: 0;
+  line-height: 1.3;
+  letter-spacing: -0.2px;
+}
+
+
+/* Sections Placeholder */
+.content-section {
+  padding: 6rem 1.5rem;
+  text-align: center;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.content-section h2 {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.content-section p {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}

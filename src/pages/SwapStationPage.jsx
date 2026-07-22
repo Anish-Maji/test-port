@@ -25,6 +25,7 @@ import swapFlowImg from '../assets/swap_flow_diagram.png';
 import swapSol1Video from '../assets/solution 1.webm';
 import baazLogo from '../assets/brand logos/Baaz-Bikes-LOGO.png';
 import ssProblemImg from '../assets/ss-problem.png';
+import ssPieImg from '../assets/ss-pie-chart.png';
 
 const tocItems = [
   { id: 'tldr', label: 'Tl;dr' },
@@ -340,32 +341,43 @@ export function SwapStationPage({ onBackToWork }) {
           {/* Section 5: Initial findings */}
           <section id="findings" className="case-study-section">
             <h2 className="detail-label" style={{ marginBottom: "var(--gap-md)" }}>Initial findings</h2>
-            <p className="paragraph-body">
-              I spent 2 weeks shadowing 25 gig delivery riders at high-density swap hubs during peak lunch and evening rush hours.
-            </p>
+            <div>
+              <h3 className="body-header">
+                The support calls were not about confusion, but about a lack of transparency of the HMI or evern the FSM.
+              </h3>
+              <p className="paragraph-body">
+                Riders were calling not because they did not understand the interface but because the system was encountering real issues like stuck battery,
+                doors that did not open, and so on. The FSM or HMI failed to provide the riders with clarity of the situation, which in turn let to Frustration and hesitancy.
+              </p>
 
-            <div className="findings-container">
-              <div className="finding-row">
-                <div className="finding-tag">INSIGHT 1</div>
-                <div className="finding-content">
-                  <strong>Glare & Outdoor Visibility:</strong> 82% of drivers mount their phone on handlebars under intense direct sunlight. Fine typography and low-contrast grey buttons were impossible to read quickly without stopping.
-                </div>
-              </div>
-
-              <div className="finding-row">
-                <div className="finding-tag">INSIGHT 2</div>
-                <div className="finding-content">
-                  <strong>Glove Usage:</strong> Delivery drivers wear thick protective riding gloves. Tiny touch targets and multi-step forms caused frequent misclicks and screen frustration.
-                </div>
-              </div>
-
-              <div className="finding-row">
-                <div className="finding-tag">INSIGHT 3</div>
-                <div className="finding-content">
-                  <strong>Anxiety around Battery State-of-Health:</strong> Riders worried about receiving an old or degraded battery pack. Displaying clear battery health certification built immense trust.
-                </div>
+              <div className="initial-finding-image-container">
+                <img
+                  src={ssPieImg}
+                  alt="Monthly usage comparison showing phone support calls vs app logins"
+                  className="initial-finding-image"
+                />
               </div>
             </div>
+
+            <div>
+              <h3 className="body-header">
+                Why HMI, and not something else?
+              </h3>
+              <p className="paragraph-body">
+                The physical hardware, the rider app, and ops training all touched the swap experience. But only one touchpoint sits at the exact intersection of rider pain and business cost — and has no fallback when it fails.
+              </p>
+
+              <div className="initial-finding-image-container">
+                <img
+                  src={ssPieImg}
+                  alt="Monthly usage comparison showing phone support calls vs app logins"
+                  className="initial-finding-image"
+                />
+              </div>
+
+
+            </div>
+
           </section>
 
           {/* Section 6: Goals */}

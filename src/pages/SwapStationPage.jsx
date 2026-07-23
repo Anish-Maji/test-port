@@ -26,6 +26,7 @@ import swapSol1Video from '../assets/solution 1.webm';
 import baazLogo from '../assets/brand logos/Baaz-Bikes-LOGO.png';
 import ssProblemImg from '../assets/ss-problem.png';
 import ssPieImg from '../assets/ss-pie-chart.png';
+import ssInitialFindingImg from '../assets/ss-initial-finding-2.png';
 
 const tocItems = [
   { id: 'tldr', label: 'Tl;dr' },
@@ -367,17 +368,22 @@ export function SwapStationPage({ onBackToWork }) {
                 The physical hardware, the rider app, and ops training all touched the swap experience. But only one touchpoint sits at the exact intersection of rider pain and business cost — and has no fallback when it fails.
               </p>
 
-              <div className="initial-finding-image-container">
+              <div className="initial-finding-image-container-2">
                 <img
-                  src={ssPieImg}
+                  src={ssInitialFindingImg}
                   alt="Monthly usage comparison showing phone support calls vs app logins"
-                  className="initial-finding-image"
+                  className="initial-finding-image-2"
                 />
               </div>
-
-
             </div>
-
+            <div>
+              <h3 className="body-header has-dash">
+                Riders interact with the HMI at the highest-stakes moment of their shift.
+              </h3>
+              <p className="paragraph-body">
+                The physical hardware, the rider app, and ops training all touched the swap experience. But only one touchpoint sits at the exact intersection of rider pain and business cost — and has no fallback when it fails.
+              </p>
+            </div>
           </section>
 
           {/* Section 6: Goals */}

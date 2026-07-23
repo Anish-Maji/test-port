@@ -1,24 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  ArrowLeft,
-  TrendingUp,
-  TrendingDown,
-  Zap,
-  Clock,
-  Users,
-  CheckCircle2,
-  ShieldCheck,
-  Smartphone,
-  BatteryCharging,
-  Layers,
-  Share2,
-  Bookmark,
-  ChevronRight,
-  Sparkles,
-  Maximize2,
-  MoveDownRight,
-  ArrowUpRight
-} from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Share2 } from 'lucide-react';
 import '../styles/SwapStationPage.css';
 import swapMockupImg from '../assets/Frame 34768.png';
 import swapFlowImg from '../assets/swap_flow_diagram.png';
@@ -27,6 +8,17 @@ import baazLogo from '../assets/brand logos/Baaz-Bikes-LOGO.png';
 import ssProblemImg from '../assets/ss-problem.png';
 import ssPieImg from '../assets/ss-pie-chart.png';
 import ssInitialFindingImg from '../assets/ss-initial-finding-2.png';
+import goalSwapImg from '../assets/SS Project/goal-swap.png';
+import goalLangImg from '../assets/SS Project/goal-language.webp';
+import goalFeedbackImg from '../assets/SS Project/goal-feedback.png';
+import ssFsmVideo from '../assets/SS Project/ss-fsm.webm';
+import ss1before from '../assets/SS Project/ss-1-before.webp';
+import ss1after from '../assets/SS Project/ss-1-after.webp';
+import ss2before from '../assets/SS Project/ss-2-before.webp';
+import ss2after from '../assets/SS Project/ss-2-after.webp';
+import ss3before from '../assets/SS Project/ss-3-before.webp';
+import ss3after from '../assets/SS Project/ss-3-after.webp';
+
 
 const tocItems = [
   { id: 'tldr', label: 'Tl;dr' },
@@ -40,6 +32,8 @@ const tocItems = [
   { id: 'outcome', label: 'Outcome' },
   { id: 'reflection', label: 'Reflection' },
 ];
+
+
 
 export function SwapStationPage({ onBackToWork }) {
   const [activeSection, setActiveSection] = useState('tldr');
@@ -380,68 +374,223 @@ export function SwapStationPage({ onBackToWork }) {
               <h3 className="body-header has-dash">
                 Riders interact with the HMI at the highest-stakes moment of their shift.
               </h3>
-              <p className="paragraph-body">
-                The physical hardware, the rider app, and ops training all touched the swap experience. But only one touchpoint sits at the exact intersection of rider pain and business cost — and has no fallback when it fails.
+              <p className="paragraph-body" style={{ marginBottom: "var(--gap-lg)" }}>
+                The rider app handles account management, earnings, and route planning — but it's used before and after the swap, not during. The physical station handles the mechanical side — but slot doors and battery locks are hardware constraints outside design scope. Ops training helps new riders but doesn't scale and doesn't fix a broken feedback system.
               </p>
+              <p className="paragraph-body">
+                The swap station HMI is the only touchpoint present at the exact moment things go wrong — and the only one fully within design control. So that's where we started.
+              </p>
+            </div>
+
+            {/* 3 Stack at the end of Initial Findings */}
+            <div className="initial-findings-three-stack">
+              <div className="finding-stack-card">
+                <h4 className="finding-stack-heading">Highest Frequency</h4>
+                <p className="finding-stack-text">
+                  Riders interact with it 2-5 times a day per shift, every working day. No other touch point is used so often in the entire Baaz Ecosystem.
+                </p>
+              </div>
+
+              <div className="finding-stack-card">
+                <h4 className="finding-stack-heading">No Fallback</h4>
+                <p className="finding-stack-text">
+                  Everyy other surface has a workaround, but the HMI does not. When it fails silentlyy, the only option for the rider is to call the customer support.
+                </p>
+              </div>
+
+              <div className="finding-stack-card">
+                <h4 className="finding-stack-heading">Fully with design control</h4>
+                <p className="finding-stack-text">
+                  Hardware failure need engineers. App changes need product priotization. The HMI was our to fix.
+                </p>
+              </div>
             </div>
           </section>
 
           {/* Section 6: Goals */}
           <section id="goals" className="case-study-section">
-            <h2 className="section-heading">Goals</h2>
-            <div className="goals-grid">
-              <div className="goal-card">
-                <div className="goal-icon-wrapper"><Clock size={20} /></div>
-                <h4>Sub-15s Swap Time</h4>
-                <p>Reduce total elapsed time at station from 3.5 minutes down to under 15 seconds per swap.</p>
+            <h2 className="detail-label" style={{ marginBottom: "var(--gap-xl)" }}>GOALS</h2>
+
+            <div className="goals-list-container">
+              {/* Row 1 */}
+              <div className="goal-row-item">
+                <div className="goal-illustration-box">
+                  <img src={goalSwapImg} alt="Goal Swap" className="goal-illustration-img" />
+                </div>
+                <div className="goal-details-col">
+                  <div className="goal-pair-block">
+                    <h4 className="goal-pair-title">Complete the battery swap confidently</h4>
+                    <span className="goal-pair-label">User goal</span>
+                  </div>
+                  <div className="goal-pair-block">
+                    <h4 className="goal-pair-title">Reduce staff intervention and operational cost</h4>
+                    <span className="goal-pair-label">Business goal</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="goal-card">
-                <div className="goal-icon-wrapper"><Users size={20} /></div>
-                <h4>Cut Call Volume by 50%</h4>
-                <p>Provide self-serve station status, automated error handling, and instant locker retry directly in-app.</p>
+              {/* Row 2 */}
+              <div className="goal-row-item">
+                <div className="goal-illustration-box">
+                  <img src={goalLangImg} alt="Goal Time" className="goal-illustration-img" />
+                </div>
+                <div className="goal-details-col">
+                  <div className="goal-pair-block">
+                    <h4 className="goal-pair-title">Get in and out of the swap under 50s</h4>
+                    <span className="goal-pair-label">User goal</span>
+                  </div>
+                  <div className="goal-pair-block">
+                    <h4 className="goal-pair-title">High utilization of the swap stations</h4>
+                    <span className="goal-pair-label">Business goal</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="goal-card">
-                <div className="goal-icon-wrapper"><ShieldCheck size={20} /></div>
-                <h4>99.9% Swap Reliability</h4>
-                <p>Establish real-time offline sync between station IoT hardware and the rider mobile app.</p>
+              {/* Row 3 */}
+              <div className="goal-row-item">
+                <div className="goal-illustration-box">
+                  <img src={goalFeedbackImg} alt="Goal Feedback" className="goal-illustration-img" />
+                </div>
+                <div className="goal-details-col">
+                  <div className="goal-pair-block">
+                    <h4 className="goal-pair-title">Always know what the system is doing</h4>
+                    <span className="goal-pair-label">User goal</span>
+                  </div>
+                  <div className="goal-pair-block">
+                    <h4 className="goal-pair-title">Reduce the chances of service calls for self recorverable errors</h4>
+                    <span className="goal-pair-label">Business goal</span>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
 
           {/* Section 7: Design process */}
           <section id="process" className="case-study-section">
-            <h2 className="section-heading">Design process</h2>
+            <h2 className="detail-label" style={{ marginBottom: "var(--gap-lg)" }}>Design process</h2>
+            <h3 className='body-header'>
+              Working my way down, thinking from a high level structure...
+            </h3>
             <p className="paragraph-body">
-              We took an iterative, hardware-inclusive design approach—testing prototypes both in Figma and physically at operational station kiosks.
+              I started with the Final State Machine (FSM) or the information architechture as many might call it, and then the home hierarchy.
+              Then I moved screen by screen. The main working principle was to maintain transparency of the exact state of the swap station to the delivery rides, to reduce cognative load.
             </p>
 
-            <div className="process-timeline">
-              <div className="process-step">
-                <div className="step-badge">Phase 1</div>
-                <div className="step-details">
-                  <h4>Information Architecture & User Mapping</h4>
-                  <p>Streamlined the 7-step legacy swap flow into a streamlined 2-step Tap & Swap experience.</p>
+            <div className="fsm-video-container">
+              <video autoPlay loop muted playsInline className="fsm-video">
+                <source src={ssFsmVideo} type="video/webm" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+
+            <h3 className="body-header">
+              Finding areas of improvement in the current experience and trying 'transparency forward' during the iterations.
+            </h3>
+
+            {/* Comparison 1 */}
+            <div className="comparison-grid">
+              <div className="comparison-column">
+                <div className="comparison-card before">
+                  <img
+                    src={ss1before}
+                    alt="Before redesign: complex manual flow with low visibility"
+                    className="comparison-image"
+                  />
+                </div>
+                <div className="comparison-meta-col">
+                  <span className="comparison-badge before">BEFORE</span>
+                  <p className="comparison-description">
+                    Too many data points increase the cognative load on the user, as per Hick's Law.                 </p>
                 </div>
               </div>
 
-              <div className="process-step">
-                <div className="step-badge">Phase 2</div>
-                <div className="step-details">
-                  <h4>High-Contrast Outdoor Design System</h4>
-                  <p>Developed high-contrast color tokens, bold 18pt+ typography scales, and tap targets exceeding 56px to accommodate glove usage.</p>
+              <div className="comparison-column">
+                <div className="comparison-card after">
+                  <img
+                    src={ss1after}
+                    alt="After redesign: streamlined automated slot guidance"
+                    className="comparison-image"
+                  />
                 </div>
-              </div>
-
-              <div className="process-step">
-                <div className="step-badge">Phase 3</div>
-                <div className="step-details">
-                  <h4>Interactive Kiosk & Mobile Prototypes</h4>
-                  <p>Built synchronized prototypes connecting smartphone NFC trigger events to simulated hardware station locker responses.</p>
+                <div className="comparison-meta-col">
+                  <span className="comparison-badge after">AFTER</span>
+                  <p className="comparison-description">
+                    Simplified home screen, looking at which the rider can quickly figure out how manyy charged batteries are available at the particular swap station.
+                  </p>
                 </div>
               </div>
             </div>
+
+            {/* Comparison 2 */}
+            <div className="comparison-grid">
+              <div className="comparison-column">
+                <div className="comparison-card before">
+                  <img
+                    src={ss2before}
+                    alt="Before redesign: complex manual flow with low visibility"
+                    className="comparison-image"
+                  />
+                </div>
+                <div className="comparison-meta-col">
+                  <span className="comparison-badge before">BEFORE</span>
+                  <p className="comparison-description">
+                    The existing screen lacked contextual guidance, causing hesitation during a critical step of the battery swap.
+                  </p>
+                </div>
+              </div>
+
+              <div className="comparison-column">
+                <div className="comparison-card after">
+                  <img
+                    src={ss2after}
+                    alt="After redesign: streamlined automated slot guidance"
+                    className="comparison-image"
+                  />
+                </div>
+                <div className="comparison-meta-col">
+                  <span className="comparison-badge after">AFTER</span>
+                  <p className="comparison-description">
+                    Visual instructions, like which door is opening and progress feedback reduce ambiguity, enabling a faster and more predictable experience.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Comparison 3 */}
+            <div className="comparison-grid">
+              <div className="comparison-column">
+                <div className="comparison-card before">
+                  <img
+                    src={ss3before}
+                    alt="Before redesign: complex manual flow with low visibility"
+                    className="comparison-image"
+                  />
+                </div>
+                <div className="comparison-meta-col">
+                  <span className="comparison-badge before">BEFORE</span>
+                  <p className="comparison-description">
+                    The exsisting error screens are very vague, and do not address the real issue that is occuring in the swap station, keeping the riders in the wind.
+                  </p>
+                </div>
+              </div>
+
+              <div className="comparison-column">
+                <div className="comparison-card after">
+                  <img
+                    src={ss3after}
+                    alt="After redesign: streamlined automated slot guidance"
+                    className="comparison-image"
+                  />
+                </div>
+                <div className="comparison-meta-col">
+                  <span className="comparison-badge after">AFTER</span>
+                  <p className="comparison-description">
+                    Added new error screens, addressing the particular error that has occured, and what the rider need to do to solve the problem
+                  </p>
+                </div>
+              </div>
+            </div>
+
           </section>
 
           {/* Section 8: Test & launch */}

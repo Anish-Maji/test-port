@@ -63,7 +63,7 @@ export const Navbar = ({ onNavigateHome, activePage = 'home' }) => {
         <nav className="desktop-nav">
           <div className="nav-menu">
             {navItems.map((item) => {
-              const isActive = activePage === 'home' && activeSection === item.id;
+              const isActive = activePage === item.id || (activePage === 'home' && activeSection === item.id);
               return (
                 <a
                   key={item.id}
@@ -91,7 +91,7 @@ export const Navbar = ({ onNavigateHome, activePage = 'home' }) => {
         <div className={`mobile-drawer ${isMobileMenuOpen ? 'open' : ''}`}>
           <div className="mobile-nav-list">
             {navItems.map((item) => {
-              const isActive = activePage === 'home' && activeSection === item.id;
+              const isActive = activePage === item.id || (activePage === 'home' && activeSection === item.id);
               return (
                 <a
                   key={item.id}

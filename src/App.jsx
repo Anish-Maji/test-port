@@ -4,7 +4,9 @@ import BrandTicker from './components/BrandTicker';
 import ShapeGrid from './components/ShapeGrid';
 import Shuffle from './components/Shuffle';
 import SwapStationPage from './pages/SwapStationPage';
+import CvPage from './pages/CvPage';
 import Footer from './components/Footer';
+
 import ToolstackSection from './components/ToolstackSection';
 import BooksSection from './components/BooksSection';
 import swapMockupImg from './assets/swap_station_mockup.png';
@@ -71,15 +73,21 @@ const worksData = [
 
 export function App() {
   const [currentView, setCurrentView] = useState(() => {
-    return window.location.hash.includes('swap-station') ? 'swap-station' : 'home';
+    if (window.location.hash.includes('swap-station')) return 'swap-station';
+    if (window.location.hash.includes('cv')) return 'cv';
+    return 'home';
   });
 
   useEffect(() => {
     const handleHashChange = () => {
-      if (window.location.hash.includes('swap-station')) {
+      const hash = window.location.hash;
+      if (hash.includes('swap-station')) {
         setCurrentView('swap-station');
         window.scrollTo(0, 0);
-      } else if (currentView === 'swap-station' && window.location.hash === '#work') {
+      } else if (hash.includes('cv')) {
+        setCurrentView('cv');
+        window.scrollTo(0, 0);
+      } else if (currentView !== 'home' && (hash === '#work' || hash === '' || hash === '#play' || hash === '#about')) {
         setCurrentView('home');
       }
     };
@@ -110,6 +118,16 @@ export function App() {
       <div className="app-layout">
         <Navbar onNavigateHome={handleBackToWork} activePage="swap-station" />
         <SwapStationPage onBackToWork={handleBackToWork} />
+        <Footer />
+      </div>
+    );
+  }
+
+  if (currentView === 'cv') {
+    return (
+      <div className="app-layout">
+        <Navbar onNavigateHome={handleBackToWork} activePage="cv" />
+        <CvPage onBackToWork={handleBackToWork} />
         <Footer />
       </div>
     );

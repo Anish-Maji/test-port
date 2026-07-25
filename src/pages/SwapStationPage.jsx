@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, ArrowUpRight, Share2 } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ArrowLeft, ArrowUpRight, Share2, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import '../styles/SwapStationPage.css';
+import ssProcessVideo from '../assets/SS Project/ss-process.webm';
 import swapMockupImg from '../assets/Frame 34768.png';
 import swapFlowImg from '../assets/swap_flow_diagram.png';
 import swapSol1Video from '../assets/solution 1.webm';
@@ -18,6 +19,8 @@ import ss2before from '../assets/SS Project/ss-2-before.webp';
 import ss2after from '../assets/SS Project/ss-2-after.webp';
 import ss3before from '../assets/SS Project/ss-3-before.webp';
 import ss3after from '../assets/SS Project/ss-3-after.webp';
+import ssAllScreens from '../assets/SS Project/ss-all-screens.webp';
+import ssTechnicianScreens from '../assets/SS Project/ss-technician-screens.webp';
 
 
 const tocItems = [
@@ -39,6 +42,70 @@ export function SwapStationPage({ onBackToWork }) {
   const [activeSection, setActiveSection] = useState('tldr');
   const [activeTab, setActiveTab] = useState('mobile');
   const [copied, setCopied] = useState(false);
+
+  // States and refs for custom video player controls
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef(null);
+  const circleRef = useRef(null);
+  const animationFrameRef = useRef(null);
+
+  const updateProgress = () => {
+    if (videoRef.current && circleRef.current) {
+      const progress = videoRef.current.currentTime / videoRef.current.duration || 0;
+      const circumference = 138.23;
+      const offset = circumference - progress * circumference;
+      circleRef.current.setAttribute('stroke-dashoffset', offset);
+    }
+    if (videoRef.current && !videoRef.current.paused) {
+      animationFrameRef.current = requestAnimationFrame(updateProgress);
+    }
+  };
+
+  const handlePlay = () => {
+    setIsPlaying(true);
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+    }
+    animationFrameRef.current = requestAnimationFrame(updateProgress);
+  };
+
+  const handlePause = () => {
+    setIsPlaying(false);
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+    }
+  };
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play().catch(err => console.log('Playback interrupted:', err));
+      }
+    }
+  };
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  // Setup loop cleanup on unmount
+  useEffect(() => {
+    // If video is initially playing (autoplay), start progress loop
+    if (videoRef.current && !videoRef.current.paused) {
+      animationFrameRef.current = requestAnimationFrame(updateProgress);
+    }
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, []);
 
   // Scroll spy effect to highlight active sidebar item
   useEffect(() => {
@@ -591,6 +658,102 @@ export function SwapStationPage({ onBackToWork }) {
               </div>
             </div>
 
+            <div>
+              <h3 className='body-header'>
+                Building out a swapping flow with multiple states and edge cases.
+              </h3>
+              <p className="paragraph-body">
+                I mapped out the complete battery swapping journey, considering every possible rider interaction and system state. The redesign focused on making critical information easier to understand at a glance, improving navigation across different scenarios, and ensuring the interface gracefully handled edge cases such as battery availability, door states, swap failures, and system errors.
+                <br />
+                I used a lot of progressive disclosure to make sure the information isn't overwhelming and would surface only when the user wants to dive deep.
+              </p>
+              <div className="all-screens-image-container">
+                <img
+                  src={ssAllScreens}
+                  alt="All Screens and States Map"
+                  className="all-screens-image"
+                />
+              </div>
+            </div>
+
+            <div>
+              <p className="paragraph-body">
+                I did the same for the technician (people responsible for fixing the swap stations) screens.
+                Except the use-cases were different. The design direction of the technician screens are different from the rider screens to make the screen easily distinguishable.
+                Also, there are lots of terminologies which are specific to the technicians.
+              </p>
+              <div className="all-screens-image-container">
+                <img
+                  src={ssTechnicianScreens}
+                  alt="Technician Screens and States Map"
+                  className="all-screens-image"
+                />
+              </div>
+            </div>
+            <div>
+              <h3 className="body-header">
+                Finally, the first version was ready for a cross team meating.
+              </h3>
+              <p className="paragraph-body">
+                I mapped every state of the FSM to a HMI screen: home, perfect swap, errors and the edges in between.
+                The true swap mostly had a linear flow, starting with the home state. We had regular cross team meeting with the firmwire team and Design managers.
+                There is a snapshot to the positive flow for the swap station along with the audio.
+              </p>
+              <div className="process-video-wrapper">
+                <div className="process-video-container">
+                  <video
+                    ref={videoRef}
+                    src={ssProcessVideo}
+                    autoPlay
+                    loop
+                    muted={isMuted}
+                    playsInline
+                    onPlay={handlePlay}
+                    onPause={handlePause}
+                    className="process-video"
+                  />
+                  <div className="video-custom-controls">
+                    {/* Play/Pause Button with SVG Circular Progress Ring */}
+                    <button className="control-circle-btn play-pause-btn" onClick={togglePlay} aria-label={isPlaying ? 'Pause' : 'Play'}>
+                      <svg className="progress-ring" width="48" height="48">
+                        <circle
+                          ref={circleRef}
+                          className="progress-ring-circle"
+                          stroke="#000000"
+                          strokeWidth="2"
+                          fill="transparent"
+                          r="22"
+                          cx="24"
+                          cy="24"
+                          strokeDasharray="138.23"
+                          strokeDashoffset="138.23"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <div className="control-icon-inner">
+                        {isPlaying ? <Pause size={16} fill="#000000" color="#000000" /> : <Play size={16} fill="#000000" color="#000000" />}
+                      </div>
+                    </button>
+
+                    {/* Mute/Unmute Button */}
+                    <button className="control-circle-btn mute-btn" onClick={toggleMute} aria-label={isMuted ? 'Unmute' : 'Mute'}>
+                      <div className="control-icon-inner">
+                        {isMuted ? <VolumeX size={16} color="#000000" /> : <Volume2 size={16} color="#000000" />}
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className='body-header'>
+                Getting stakeholder buy-in
+              </h3>
+              <p className="paragraph-body">
+                Reviews and rounds of iterations are hard, but they are key to turn stakeholders into advocates for our work. I knew it was crucial to listen and address concerns, without forgetting we had to be assertive about some of the design direction we chose, and showing the value in our design direction.
+              </p>
+            </div>
           </section>
 
           {/* Section 8: Test & launch */}

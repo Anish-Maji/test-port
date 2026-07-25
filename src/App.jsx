@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 
 import ToolstackSection from './components/ToolstackSection';
 import BooksSection from './components/BooksSection';
-import swapMockupImg from './assets/swap_station_mockup.png';
+import swapMockupImg from './assets/Frame 34768.png';
 import crimsonImg from './assets/brand logos/crimson_healthcare_pvt_ltd_cover.jpeg';
 import globalEsportsImg from './assets/brand logos/Global esports.webp';
 import kioskScreenImg from './assets/swap_flow_kiosk_screen.png';
@@ -24,7 +24,7 @@ const worksData = [
     title: "Baaz's battery swap station platform",
     meta: "BAAZ MOBILITY • EV & CLEAN TECH • 2025",
     image: swapMockupImg,
-    bgColor: "#98E4B7",
+    bgColor: "#ffffffff",
     isInteractive: true,
   },
   {
@@ -244,21 +244,6 @@ export function App() {
 
         <div className="simple-divider"></div>
 
-        {/* Portfolio Sections */}
-        <section id="play" className="content-section container">
-          <h2>Play Section</h2>
-          <p>Creative experiments, side projects, animations, and personal work.</p>
-        </section>
-
-        <section id="about" className="content-section container">
-          <h2>About Section</h2>
-          <p>Bio, design philosophy, skills, and background story.</p>
-        </section>
-
-        <section id="cv" className="content-section container">
-          <h2>CV / Resume</h2>
-          <p>Downloadable CV, work experience timeline, and achievements.</p>
-        </section>
       </main>
 
       <Footer />

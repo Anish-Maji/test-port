@@ -21,6 +21,18 @@ import ss3before from '../assets/SS Project/ss-3-before.webp';
 import ss3after from '../assets/SS Project/ss-3-after.webp';
 import ssAllScreens from '../assets/SS Project/ss-all-screens.webp';
 import ssTechnicianScreens from '../assets/SS Project/ss-technician-screens.webp';
+import ssDesignSystem from '../assets/SS Project/ss-design-system.webp';
+import ssWorkflow from '../assets/SS Project/ss-workflow.webp';
+import ssConstrainsBefore from '../assets/SS Project/ss-constrains-before.webp';
+import ssConstrainsAfter from '../assets/SS Project/ss-constrains-after.webp';
+import ssPovVideo from '../assets/SS Project/ss-pov-video.webm';
+import ssTestDaynightVideo from '../assets/SS Project/ss-test-daynight.webm';
+import ssOutcome1a from '../assets/SS Project/outcome-metrics-1a.webp';
+import ssOutcome1b from '../assets/SS Project/outcome-metrics-1b.webp';
+import ssOutcome2a from '../assets/SS Project/outcome-metrics-2a.webp';
+import ssOutcome2b from '../assets/SS Project/outcome-metrics-2b.webp';
+import ssSwapStartedAudio from '../assets/SS Project/swap started.mp3';
+
 
 
 const tocItems = [
@@ -42,6 +54,47 @@ export function SwapStationPage({ onBackToWork }) {
   const [activeSection, setActiveSection] = useState('tldr');
   const [activeTab, setActiveTab] = useState('mobile');
   const [copied, setCopied] = useState(false);
+
+  // QA section video player states & refs
+  const [isPovPlaying, setIsPovPlaying] = useState(true);
+  const [isDaynightPlaying, setIsDaynightPlaying] = useState(true);
+  const povVideoRef = useRef(null);
+  const daynightVideoRef = useRef(null);
+
+  const togglePovPlay = () => {
+    if (povVideoRef.current) {
+      if (isPovPlaying) {
+        povVideoRef.current.pause();
+      } else {
+        povVideoRef.current.play().catch(err => console.log('Playback error:', err));
+      }
+    }
+  };
+
+  const toggleDaynightPlay = () => {
+    if (daynightVideoRef.current) {
+      if (isDaynightPlaying) {
+        daynightVideoRef.current.pause();
+      } else {
+        daynightVideoRef.current.play().catch(err => console.log('Playback error:', err));
+      }
+    }
+  };
+
+  // Audio narration states & refs
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const audioPlayerRef = useRef(null);
+
+  const toggleAudio = () => {
+    if (audioPlayerRef.current) {
+      if (isAudioPlaying) {
+        audioPlayerRef.current.pause();
+      } else {
+        audioPlayerRef.current.play().catch(err => console.log('Audio playback error:', err));
+      }
+      setIsAudioPlaying(!isAudioPlaying);
+    }
+  };
 
   // States and refs for custom video player controls
   const [isPlaying, setIsPlaying] = useState(true);
@@ -748,61 +801,306 @@ export function SwapStationPage({ onBackToWork }) {
 
             <div>
               <h3 className='body-header'>
-                Getting stakeholder buy-in
+                Refining the experience through continuous feedback
               </h3>
               <p className="paragraph-body">
-                Reviews and rounds of iterations are hard, but they are key to turn stakeholders into advocates for our work. I knew it was crucial to listen and address concerns, without forgetting we had to be assertive about some of the design direction we chose, and showing the value in our design direction.
-              </p>
+                The Swap Station interface went through several rounds of reviews with different stakeholders, each bringing a unique perspective. Product validated the user journey, Engineering assessed technical feasibility, and Operations highlighted real-world station scenarios. These iterations helped create a robust interface that performs reliably across everyday use and exceptional situations.              </p>
+              <div className="all-screens-image-container">
+                <img
+                  src={ssWorkflow}
+                  alt="Continuous Feedback Workflow"
+                  className="all-screens-image"
+                />
+              </div>
             </div>
           </section>
 
-          {/* Section 8: Test & launch */}
-          <section id="testing" className="case-study-section">
-            <h2 className="section-heading">Test & launch</h2>
+
+          {/* Designing with constrains */}
+          <section id="designing-with-constrains" className="case-study-section">
+            <h2 className="detail-label" style={{ marginBottom: "var(--gap-lg)" }}>Designing with constrains</h2>
+            <h3 className='body-header'>Designing for hardware constraints instead of unlimited possibilities</h3>
             <p className="paragraph-body">
-              We conducted a 4-week pilot test with 45 delivery drivers across 3 busy urban swap hubs prior to full network rollout.
+              Unlike mobile applications, the Swap Station interface runs on dedicated hardware where every interaction must be lightweight and reliable.
+              Limited memory, processing power, and UI capabilities meant modern interface patterns weren't feasible, so every screen had to be simplified without compromising usability.
+              The challenge was to create a responsive, intuitive experience while working within the platform's technical constraints.
             </p>
-            <div className="test-results-box">
-              <div className="test-stat">
-                <span className="stat-value">45 / 45</span>
-                <span className="stat-desc">Drivers completed swaps under 15 seconds on first attempt</span>
+
+
+            <div className="comparison-grid">
+              <div className="comparison-column">
+                <div className="comparison-card before">
+                  <img
+                    src={ssConstrainsBefore}
+                    alt="Before redesign: complex manual flow with low visibility"
+                    className="comparison-image"
+                  />
+                </div>
+                <div className="comparison-meta-col">
+                  <span className="comparison-badge before">BEFORE</span>
+                  <p className="comparison-description">
+                    Too many data points increase the cognative load on the user, as per Hick's Law.                 </p>
+                </div>
               </div>
-              <div className="test-stat">
-                <span className="stat-value">0</span>
-                <span className="stat-desc">Reported locker drawer assignment errors during pilot</span>
+
+              <div className="comparison-column">
+                <div className="comparison-card after">
+                  <img
+                    src={ssConstrainsAfter}
+                    alt="After redesign: streamlined automated slot guidance"
+                    className="comparison-image"
+                  />
+                </div>
+                <div className="comparison-meta-col">
+                  <span className="comparison-badge after">AFTER</span>
+                  <p className="comparison-description">
+                    Made the components used reusable for other screens taking into concideration the limitations of the software.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+
+          </section>
+
+
+          {/* Section 8: design system */}
+          <section id="design-system" className="case-study-section">
+            <h2 className="detail-label" style={{ marginBottom: "var(--gap-lg)" }}>Design system</h2>
+            <h3 className='body-header'>Adding new reusable components and documentation to Figma.</h3>
+            <p className="paragraph-body">
+              I added payment module variants, loan status chips, and receipt sections to Storybook with usage notes so implementation matched the system the app already used.
+            </p>
+            <div className="all-screens-image-container">
+              <img
+                src={ssDesignSystem}
+                alt="Swap Station Design System Components"
+                className="all-screens-image"
+              />
+            </div>
+          </section>
+
+          {/* Section 8: QA & testing*/}
+          <section id="qa-and-testing" className="case-study-section">
+            <h2 className="detail-label" style={{ marginBottom: "var(--gap-lg)" }}>Real World Validation</h2>
+            <h3 className='body-header'>I tested the HMI screens in the real world senario, through day, night and rain. Here, we are designing not just for the screens, but also for the riders.</h3>
+            <p className="paragraph-body">
+              Unlike traditional digital products, the Swap Station experience lives in unpredictable environments. I evaluated the interface across different lighting conditions and from a rider's perspective to ensure information remained visible, interactions stayed intuitive, and the swapping process felt effortless regardless of the surroundings.
+              <br />
+              <br />
+              The redesign was reviewed through realistic scenarios, including daytime and nighttime usage, as well as a first-person swapping experience to validate readability, feedback, and overall interaction flow before deployment.
+            </p>
+            <div className="qa-videos-grid">
+              <div className="qa-video-card">
+                <video
+                  ref={povVideoRef}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="square-video"
+                  onPlay={() => setIsPovPlaying(true)}
+                  onPause={() => setIsPovPlaying(false)}
+                >
+                  <source src={ssPovVideo} type="video/webm" />
+                  Your browser does not support the video tag.
+                </video>
+                <button
+                  className="video-play-pause-btn"
+                  onClick={togglePovPlay}
+                  aria-label={isPovPlaying ? "Pause video" : "Play video"}
+                  title={isPovPlaying ? "Pause" : "Play"}
+                >
+                  {isPovPlaying ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" style={{ marginLeft: '2px' }} />}
+                </button>
+              </div>
+              <div className="qa-video-card">
+                <video
+                  ref={daynightVideoRef}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="square-video"
+                  onPlay={() => setIsDaynightPlaying(true)}
+                  onPause={() => setIsDaynightPlaying(false)}
+                >
+                  <source src={ssTestDaynightVideo} type="video/webm" />
+                  Your browser does not support the video tag.
+                </video>
+                <button
+                  className="video-play-pause-btn"
+                  onClick={toggleDaynightPlay}
+                  aria-label={isDaynightPlaying ? "Pause video" : "Play video"}
+                  title={isDaynightPlaying ? "Pause" : "Play"}
+                >
+                  {isDaynightPlaying ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" style={{ marginLeft: '2px' }} />}
+                </button>
+              </div>
+            </div>
+            <h3 className="body-header has-dash" style={{ marginBottom: "var(--gap-xxxxl)" }}>
+              We launched the new version to 15 of our swap stations to test the waters...
+            </h3>
+
+            <div>
+              <h3 className='body-header'>
+                Customer calls came down massively
+              </h3>
+              <p className="paragraph-body">
+                Unlike traditional digital products, the Swap Station experience lives in unpredictable environments. I evaluated the interface across different lighting conditions and from a rider's perspective to ensure information remained visible, interactions stayed intuitive, and the swapping process felt effortless regardless of the surroundings.
+                <br />
+                <br />
+                The redesign was reviewed through realistic scenarios, including daytime and nighttime usage, as well as a first-person swapping experience to validate readability, feedback, and overall interaction flow before deployment.
+              </p>
+              {/* Outcome 1 */}
+              <div className="metrics-comparison-block">
+                <div className="metrics-images-wrapper">
+                  <div className="metrics-image-card">
+                    <img
+                      src={ssOutcome1a}
+                      alt="Before: Vague error screen lacking clear feedback"
+                    />
+                  </div>
+                  <div className="metrics-image-card">
+                    <img
+                      src={ssOutcome1b}
+                      alt="After: Contextual error screen with self-recovery instructions"
+                    />
+                  </div>
+                </div>
+                <div className="metrics-text-col">
+                  <div className="metrics-percentage">
+                    <span className="initial-val">≈40% ↓</span>
+
+                  </div>
+                  <h4 className="paragraph-body">
+                    There a clear decrease in the number of customer support calls through clear messaging.
+                  </h4>
+                </div>
+              </div>
+              {/* Outcome 2 */}
+              <div className="metrics-comparison-block">
+                <div className="metrics-images-wrapper">
+                  <div className="metrics-image-card">
+                    <img
+                      src={ssOutcome2a}
+                      alt="Before: Vague error screen lacking clear feedback"
+                    />
+                  </div>
+                  <div className="metrics-image-card">
+                    <img
+                      src={ssOutcome2b}
+                      alt="After: Contextual error screen with self-recovery instructions"
+                    />
+                  </div>
+                </div>
+                <div className="metrics-text-col">
+                  <div className="metrics-percentage">
+                    <span className="initial-val">≈20% ↓</span>
+
+                  </div>
+                  <h4 className="paragraph-body">
+                    The time the rider sent on the swap station also decreased using localized text and voice prompts.
+                  </h4>
+                  <button
+                    className={`hear-audio-btn ${isAudioPlaying ? 'playing' : ''}`}
+                    onClick={toggleAudio}
+                    aria-label="Play audio narration"
+                  >
+                    <span>{isAudioPlaying ? 'Playing audio' : 'Hear it yourself'}</span>
+                    <span className="play-icon-circle">
+                      {isAudioPlaying ? (
+                        <Pause size={10} fill="#000000" color="#000000" />
+                      ) : (
+                        <Play size={10} fill="#000000" color="#000000" style={{ marginLeft: '1px' }} />
+                      )}
+                    </span>
+                  </button>
+                  <audio
+                    ref={audioPlayerRef}
+                    src={ssSwapStartedAudio}
+                    onEnded={() => setIsAudioPlaying(false)}
+                  />
+                </div>
               </div>
             </div>
           </section>
 
           {/* Section 9: Outcome */}
           <section id="outcome" className="case-study-section">
-            <h2 className="section-heading">Outcome</h2>
+            <h2 className="body-heading" style={{ marginBottom: "var(--gap-lg)" }}>OUTCOME</h2>
+            <h3 className="body-header">Impact 1 month post launch!</h3>
             <p className="paragraph-body">
               The redesigned Swap Station platform rolled out across all 14 markets in late 2025 with overwhelming positive response from drivers, fleet partners, and internal operations.
             </p>
 
-            <div className="outcome-banner">
-              <div className="outcome-item">
-                <div className="outcome-num">395%</div>
-                <div className="outcome-lbl">Increase in monthly automated swaps</div>
+            <div className="tldr-metrics-row">
+              <div className="metric-card positive">
+                <div className="metric-number">
+                  <ArrowUpRight size={24} className="metric-icon" />
+                  <span className="metric-number-data">~60%</span>
+                </div>
+                <div className="metric-label">Swap Time</div>
               </div>
-              <div className="outcome-item">
-                <div className="outcome-num">64%</div>
-                <div className="outcome-lbl">Boost in rider satisfaction score (CSAT)</div>
+
+              <div className="metric-card positive">
+                <div className="metric-number">
+                  <ArrowUpRight size={24} className="metric-icon" />
+                  <span className="metric-number-data">~85%</span>
+                </div>
+                <div className="metric-label">Reduction in staff calls</div>
               </div>
-              <div className="outcome-item">
-                <div className="outcome-num">-29%</div>
-                <div className="outcome-lbl">Reduction in average station queue wait times</div>
+
+              <div className="metric-card highlight">
+                <div className="metric-number">
+                  <ArrowUpRight size={24} className="metric-icon" />
+                  <span className="metric-number-data">~40%</span>
+                </div>
+                <div className="metric-label">Fewer Sets</div>
               </div>
             </div>
           </section>
 
           {/* Section 10: Reflection */}
           <section id="reflection" className="case-study-section">
-            <h2 className="section-heading">Reflection</h2>
-            <p className="paragraph-body">
-              Designing Swap Station reinforced that designing software for physical hardware requires treating environmental variables—sunlight, gloves, rain, IoT network latency—as core design constraints. By prioritizing radical clarity and automated self-healing hardware workflows, we created a seamless tool that empowers thousands of riders every day.
-            </p>
+            <h2 className="body-heading" style={{ marginBottom: "var(--gap-lg)" }}>REFLECTION</h2>
+
+            <h3 className='body-header'>
+              My key takeaways and learnings!
+            </h3>
+            <div className="reflections-columns-grid">
+              <div className="reflection-column">
+                <h4 className="reflection-col-title">State mapping early saves rework</h4>
+                <p className="reflection-col-body">
+                  Mapping every machine state and edge case before designing screens helped uncover gaps early, reducing design iterations and keeping the interface consistent across the entire swapping journey.
+                </p>
+              </div>
+              <div className="reflection-column">
+                <h4 className="reflection-col-title">Validating in real environments matters</h4>
+                <p className="reflection-col-body">
+                  Design decisions that looked effective in Figma felt very different at the station. Testing across lighting conditions and from a rider's perspective highlighted usability improvements that static mockups couldn't reveal.
+                </p>
+              </div>
+            </div>
+
+            <h3 className='body-header'>
+              How would I do differently with AI?
+            </h3>
+
+            <div className="reflections-columns-grid">
+              <div className="reflection-column">
+                <h4 className="reflection-col-title">Rapid prototyping for testing</h4>
+                <p className="reflection-col-body">
+                  I would have connected the Figma MCP directly to the Nextion software and prepare the screens for different conditions, and test those in real world senarios, through different languages and conditions.
+                </p>
+              </div>
+              <div className="reflection-column">
+                <h4 className="reflection-col-title">Prototype realistic rider scenarios</h4>
+                <p className="reflection-col-body">
+                  It would be simpler to evaluate edge cases early in the design phase if AI-generated simulations could replicate various operational situations, such as failed swaps, low-light surroundings, and network outages.
+                </p>
+              </div>
+            </div>
           </section>
 
           {/* Bottom Navigation / Next Project Footer */}

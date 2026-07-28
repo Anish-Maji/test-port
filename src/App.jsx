@@ -9,7 +9,8 @@ import Footer from './components/Footer';
 
 import ToolstackSection from './components/ToolstackSection';
 import BooksSection from './components/BooksSection';
-import swapMockupImg from './assets/Frame 34768.png';
+import ProjectsSection from './components/ProjectsSection';
+import swapMockupImg from './assets/home/projects-ss.webp';
 import crimsonImg from './assets/brand logos/crimson_healthcare_pvt_ltd_cover.jpeg';
 import globalEsportsImg from './assets/brand logos/Global esports.webp';
 import kioskScreenImg from './assets/swap_flow_kiosk_screen.png';
@@ -22,49 +23,67 @@ const worksData = [
   {
     id: 'swap-station',
     title: "Baaz's battery swap station platform",
+    shortTitle: "Baaz Swap Station",
+    categoryTag: "ev.cleantech",
+    subtitle: "Battery swap station platform for EV smart mobility · Baaz Mobility",
     meta: "BAAZ MOBILITY • EV & CLEAN TECH • 2025",
     image: swapMockupImg,
-    bgColor: "#ffffffff",
+    bgColor: "linear-gradient(135deg, #f3e8ff 0%, #e0e7ff 100%)",
     isInteractive: true,
   },
   {
     id: 'crimson-healthcare',
     title: "Crimson Healthcare — MedTech Digital Platform",
+    shortTitle: "Crimson Healthcare",
+    categoryTag: "medtech",
+    subtitle: "MedTech digital platform for clinical diagnostics & medical innovation",
     meta: "CRIMSON HEALTHCARE • MEDICAL TECH • 2024",
     image: crimsonImg,
-    bgColor: "#F1F5F9",
+    bgColor: "#eef0f2",
     isInteractive: false,
   },
   {
     id: 'global-esports',
     title: "Global Esports — Brand Identity & Gaming Hub",
+    shortTitle: "Global Esports",
+    categoryTag: "gaming.media",
+    subtitle: "Brand identity & digital gaming hub experience",
     meta: "GLOBAL ESPORTS • GAMING & MEDIA • 2024",
     image: globalEsportsImg,
-    bgColor: "#18181B",
+    bgColor: "linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%)",
     isInteractive: false,
   },
   {
     id: 'kiosk-hmi',
     title: "Station Touchscreen Kiosk Interface System",
+    shortTitle: "Kiosk Touchscreen HMI",
+    categoryTag: "hardware.hmi",
+    subtitle: "Station touchscreen interface system for battery swapping",
     meta: "BAAZ MOBILITY • HARDWARE HMI • 2025",
     image: kioskScreenImg,
-    bgColor: "#E0E7FF",
+    bgColor: "#f1f5f9",
     isInteractive: false,
   },
   {
     id: 'rider-app',
     title: "Rider Mobile Swap & Live Status Companion",
+    shortTitle: "Rider Companion App",
+    categoryTag: "mobile.app",
+    subtitle: "Rider mobile swap & live status companion app",
     meta: "BAAZ MOBILITY • MOBILE APP • 2024",
     image: historyScreenImg,
-    bgColor: "#FEF3C7",
+    bgColor: "#fef3c7",
     isInteractive: false,
   },
   {
     id: 'fleet-portal',
     title: "IoT Fleet Operations & Analytics Dashboard",
+    shortTitle: "IoT Fleet Operations",
+    categoryTag: "iot.saas",
+    subtitle: "IoT fleet operations & real-time analytics dashboard",
     meta: "BAAZ MOBILITY • SAAS DASHBOARD • 2025",
     image: frameImg,
-    bgColor: "#DCFCE7",
+    bgColor: "linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%)",
     isInteractive: false,
   },
 ];
@@ -189,48 +208,8 @@ export function App() {
 
         <div className="simple-divider"></div>
 
-        {/* Selected Works / Case Studies Section */}
-        <section className="works-section container">
-          {/* <div className="works-header">
-            <span className="works-section-tag">SELECTED CASE STUDIES</span>
-            <h2 className="works-section-title">Featured Works</h2>
-          </div> */}
-
-          <div className="works-grid">
-            {worksData.map((work) => (
-              <div
-                key={work.id}
-                className="featured-work-card"
-                onClick={work.isInteractive ? handleOpenCaseStudy : undefined}
-                role={work.isInteractive ? "button" : undefined}
-                tabIndex={work.isInteractive ? 0 : undefined}
-                onKeyDown={
-                  work.isInteractive
-                    ? (e) => e.key === 'Enter' && handleOpenCaseStudy()
-                    : undefined
-                }
-              >
-                <div
-                  className="work-card-media-box"
-                  style={{ backgroundColor: work.bgColor }}
-                >
-                  <img
-                    src={work.image}
-                    alt={work.title}
-                    className="work-card-image"
-                  />
-                </div>
-
-                <div className="work-card-content">
-                  <div className="category-meta-tag">
-                    {work.meta}
-                  </div>
-                  <h3 className="work-card-title">{work.title}</h3>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* Redesigned Works / Case Studies Section */}
+        <ProjectsSection worksData={worksData} onOpenCaseStudy={handleOpenCaseStudy} />
 
         <div className="simple-divider"></div>
 

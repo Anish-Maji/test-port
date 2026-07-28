@@ -793,34 +793,7 @@
   color: #52525b;
 }
 
-/* Test Results Box */
-.test-results-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 28px;
-  margin-top: 24px;
-}
 
-.test-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.stat-value {
-  font-size: 28px;
-  font-weight: 700;
-  color: #0f172a;
-}
-
-.stat-desc {
-  font-size: 13px;
-  color: #64748b;
-}
 
 /* Outcome Banner */
 .outcome-banner {
@@ -1099,6 +1072,68 @@
   object-fit: contain;
 }
 
+/* QA & Testing Videos Grid */
+.qa-videos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+  margin-bottom: 40px;
+}
+
+.qa-video-card {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.square-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+
+.video-play-pause-btn {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #18181b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+  padding: 0;
+}
+
+.video-play-pause-btn:hover {
+  background: rgba(255, 255, 255, 0.98);
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.video-play-pause-btn:active {
+  transform: scale(0.95);
+}
+
 /* Before & After Comparison Grid */
 .comparison-grid {
   display: grid;
@@ -1167,6 +1202,164 @@
   margin: 0;
 }
 
+/* Metrics Comparison Block (2 Cards + Bottom-Aligned Text) */
+.metrics-comparison-block {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-top: 36px;
+  margin-bottom: 48px;
+}
+
+.metrics-images-wrapper {
+  display: flex;
+  gap: 16px;
+  flex: 2;
+  min-width: 0;
+}
+
+.metrics-image-card {
+  flex: 1;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 280px;
+  position: relative;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.metrics-image-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02);
+}
+
+.metrics-image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+.hear-audio-btn {
+  align-self: flex-start;
+  margin-top: 8px;
+  background-color: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 9999px;
+  padding: 8px 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  font-family: var(--font-sans, 'DM Sans', sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  color: #18181b;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.hear-audio-btn:hover {
+  background-color: #fafafa;
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.hear-audio-btn:active {
+  transform: scale(0.97);
+}
+
+.hear-audio-btn.playing {
+  border-color: #10b981;
+  /* green indicator when playing */
+}
+
+.play-icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid #18181b;
+}
+
+.metrics-text-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 12px;
+  min-width: 250px;
+}
+
+.metrics-percentage {
+  font-family: var(--font-sans, 'DM Sans', sans-serif);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metrics-percentage .initial-val {
+  color: #c94f1e;
+}
+
+.metrics-percentage .arrow-symbol {
+  color: #a1a1aa;
+}
+
+.metrics-percentage .final-val {
+  color: #10b981;
+}
+
+.metrics-subtitle {
+  font-family: var(--font-sans, 'DM Sans', sans-serif);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: #18181b;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+/* Reflection Section 2-Column Layout */
+.reflections-columns-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-top: 36px;
+  margin-bottom: 24px;
+}
+
+.reflection-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.reflection-col-title {
+  font-family: var(--font-sans, 'DM Sans', sans-serif);
+  font-size: 20px;
+  font-weight: 500;
+  color: #0d0d0d;
+  margin: 0;
+
+}
+
+.reflection-col-body {
+  font-family: var(--font-sans, 'DM Sans', sans-serif);
+  font-size: 15px;
+  line-height: 1.6;
+  color: #52525b;
+  margin: 0;
+}
+
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .case-study-container {
@@ -1183,7 +1376,8 @@
   .problem-cards-grid,
   .goals-grid,
   .outcome-banner,
-  .initial-findings-three-stack {
+  .initial-findings-three-stack,
+  .qa-videos-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1204,6 +1398,21 @@
     height: 380px;
     padding: 24px;
   }
+
+  .metrics-comparison-block {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .metrics-text-col {
+    padding-bottom: 0;
+  }
+
+  .reflections-columns-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1215,5 +1424,14 @@
   .goal-illustration-box {
     width: 100%;
     height: 130px;
+  }
+
+  .metrics-images-wrapper {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .metrics-image-card {
+    height: 300px;
   }
 }

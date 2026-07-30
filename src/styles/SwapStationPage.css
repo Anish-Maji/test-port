@@ -1287,6 +1287,39 @@
   border: 1.5px solid #18181b;
 }
 
+/* Solution section Flow 2 Audio Container & Button positioning */
+.flow-media-container.solution-audio-container {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+
+.flow-media-container.solution-audio-container .flow-media-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  max-height: none;
+}
+
+.hear-audio-btn.absolute-btn {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0;
+  z-index: 5;
+}
+
+.hear-audio-btn.absolute-btn:hover {
+  transform: translateX(-50%) scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.hear-audio-btn.absolute-btn:active {
+  transform: translateX(-50%) scale(0.97);
+}
+
 .metrics-text-col {
   flex: 1;
   display: flex;
@@ -1307,7 +1340,7 @@
 }
 
 .metrics-percentage .initial-val {
-  color: #c94f1e;
+  color: #149c1b;
 }
 
 .metrics-percentage .arrow-symbol {
@@ -1360,6 +1393,222 @@
   margin: 0;
 }
 
+/* Contact Prompt Box */
+.contact-prompt-box {
+  background: #fafafa;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  padding: 24px 32px;
+  margin-top: 48px;
+  margin-bottom: 40px;
+}
+
+.contact-tag {
+  font-family: var(--font-sans, 'DM Sans', sans-serif);
+  font-size: 16px;
+  font-weight: 500;
+  /* letter-spacing: 0.08em; */
+  color: #c94f1e;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.contact-text {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 16px;
+  line-height: 1.5;
+  color: #27272a;
+  margin: 0;
+}
+
+.contact-link {
+  color: #18181b;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.contact-link:hover {
+  color: #c94f1e;
+}
+
+/* Related Projects Section */
+.related-projects-section {
+  margin-top: 48px;
+  margin-bottom: 64px;
+}
+
+.related-section-title {
+  font-family: var(--font-sans, 'DM Sans', sans-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: #18181b;
+  margin-bottom: 24px;
+}
+
+.related-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.related-project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.related-card-media {
+  border-radius: 8px;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #0000000f;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.related-project-card:hover .related-card-media {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.related-card-meta {
+  font-family: var(--font-mono, 'DM Mono', monospace);
+  color: #71717a;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 500;
+  margin: 0;
+  margin-top: 4px;
+}
+
+.related-card-title {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  color: #18181b;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* Custom CSS/SVG Mockups for Streamline and Checkmate */
+.streamline-media-bg {
+  background-color: #000000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkmate-media-bg {
+  background: linear-gradient(135deg, #fae8ff 0%, #e0f2fe 50%, #fef2f2 100%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Styled Phone Mockup inside Checkmate Card */
+.mockup-phone-body {
+  width: 115px;
+  height: 220px;
+  background-color: #000000;
+  border-radius: 20px;
+  border: 3.5px solid #1c1c1e;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  padding: 6px;
+  transform: translateY(16px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.related-project-card:hover .mockup-phone-body {
+  transform: translateY(8px);
+}
+
+.mockup-phone-screen {
+  width: 100%;
+  height: 100%;
+  background-color: #f4f4f5;
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 4px 4px 4px;
+}
+
+.mockup-phone-island {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 8px;
+  background-color: #000000;
+  border-radius: 9999px;
+  z-index: 10;
+}
+
+.mockup-widget {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 6px 4px;
+  margin-bottom: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.mockup-widget-title {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 7px;
+  font-weight: 700;
+  color: #18181b;
+  margin-bottom: 4px;
+}
+
+.mockup-widget-item {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-bottom: 2px;
+}
+
+.mockup-checkbox {
+  width: 6px;
+  height: 6px;
+  border-radius: 1.5px;
+  border: 0.8px solid #a1a1aa;
+}
+
+.mockup-checkbox.checked {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.mockup-bar {
+  height: 3px;
+  background-color: #e4e4e7;
+  border-radius: 1px;
+  flex: 1;
+}
+
+.mockup-bar.short {
+  width: 60%;
+  flex: none;
+}
+
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .case-study-container {
@@ -1410,6 +1659,11 @@
   }
 
   .reflections-columns-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .related-projects-grid {
     grid-template-columns: 1fr;
     gap: 24px;
   }

@@ -5,6 +5,7 @@ import ssProcessVideo from '../assets/SS Project/ss-process.webm';
 import swapMockupImg from '../assets/Frame 34768.png';
 import swapFlowImg from '../assets/swap_flow_diagram.png';
 import swapSol1Video from '../assets/solution 1.webm';
+import swapSol2Video from '../assets/SS Project/solution 2.webm';
 import baazLogo from '../assets/brand logos/Baaz-Bikes-LOGO.png';
 import ssProblemImg from '../assets/ss-problem.png';
 import ssPieImg from '../assets/ss-pie-chart.png';
@@ -43,7 +44,7 @@ const tocItems = [
   { id: 'findings', label: 'Initial findings' },
   { id: 'goals', label: 'Goals' },
   { id: 'process', label: 'Design process' },
-  { id: 'testing', label: 'Test & launch' },
+  { id: 'qa-and-testing', label: 'Test & launch' },
   { id: 'outcome', label: 'Outcome' },
   { id: 'reflection', label: 'Reflection' },
 ];
@@ -93,6 +94,21 @@ export function SwapStationPage({ onBackToWork }) {
         audioPlayerRef.current.play().catch(err => console.log('Audio playback error:', err));
       }
       setIsAudioPlaying(!isAudioPlaying);
+    }
+  };
+
+  // Flow 2 Audio narration states & refs
+  const [isFlow2AudioPlaying, setIsFlow2AudioPlaying] = useState(false);
+  const flow2AudioPlayerRef = useRef(null);
+
+  const toggleFlow2Audio = () => {
+    if (flow2AudioPlayerRef.current) {
+      if (isFlow2AudioPlaying) {
+        flow2AudioPlayerRef.current.pause();
+      } else {
+        flow2AudioPlayerRef.current.play().catch(err => console.log('Audio playback error:', err));
+      }
+      setIsFlow2AudioPlaying(!isFlow2AudioPlaying);
     }
   };
 
@@ -270,18 +286,19 @@ export function SwapStationPage({ onBackToWork }) {
           <div className="project-details-grid">
             <div className="detail-column">
               <span className="detail-label">TIMELINE</span>
-              <span className="detail-value">4 months</span>
+              <span className="detail-value">5 months</span>
             </div>
             <div className="detail-column">
               <span className="detail-label">ROLE</span>
-              <span className="detail-value">Lead Product Designer (Me!)</span>
+              <span className="detail-value">Product Designer (Me!)</span>
             </div>
             <div className="detail-column">
               <span className="detail-label">TEAM</span>
               <div className="detail-team-list">
                 <span>Design Manager</span>
+                <span>CGI Designer</span>
                 <span>Product Managers</span>
-                <span>Developers</span>
+                <span>Firmware Engineers</span>
               </div>
             </div>
           </div>
@@ -317,7 +334,7 @@ export function SwapStationPage({ onBackToWork }) {
                     <ArrowUpRight size={24} className="metric-icon" />
                     <span className="metric-number-data">~40%</span>
                   </div>
-                  <div className="metric-label">Fewer Sets</div>
+                  <div className="metric-label">Fewer steps in swaps</div>
                 </div>
               </div>
             </div>
@@ -326,7 +343,7 @@ export function SwapStationPage({ onBackToWork }) {
           {/* Section 2: Solution */}
           <section id="solution" className="case-study-section">
             <div className="detail-label" style={{ marginBottom: "var(--gap-md)" }}>SOLUTION</div>
-            <h2 className="section-heading">Here are some of the key flows</h2>
+            <h2 className="section-heading">Here are some of the key design principles</h2>
 
             <div className="solution-flows-list">
               {/* Flow 1 */}
@@ -350,18 +367,37 @@ export function SwapStationPage({ onBackToWork }) {
               {/* Flow 2 */}
               <div className="solution-flow-item">
                 <div className="flow-media-col">
-                  <div className="flow-media-container">
+                  <div className="flow-media-container solution-audio-container">
                     <img
-                      src={swapFlowImg}
-                      alt="Leading with transparency"
+                      src={ssOutcome2b}
+                      alt="Speaking the language of the rider"
                       className="flow-media-image"
+                    />
+                    <button
+                      className={`hear-audio-btn absolute-btn ${isFlow2AudioPlaying ? 'playing' : ''}`}
+                      onClick={toggleFlow2Audio}
+                      aria-label="Play audio narration"
+                    >
+                      <span>{isFlow2AudioPlaying ? 'Playing audio' : 'Hear it yourself'}</span>
+                      <span className="play-icon-circle">
+                        {isFlow2AudioPlaying ? (
+                          <Pause size={10} fill="#000000" color="#000000" />
+                        ) : (
+                          <Play size={10} fill="#000000" color="#000000" style={{ marginLeft: '1px' }} />
+                        )}
+                      </span>
+                    </button>
+                    <audio
+                      ref={flow2AudioPlayerRef}
+                      src={ssSwapStartedAudio}
+                      onEnded={() => setIsFlow2AudioPlaying(false)}
                     />
                   </div>
                 </div>
                 <div className="flow-text-col">
-                  <h3 className="flow-title">Leading with transparency</h3>
+                  <h3 className="flow-title">Speaking the language of the rider</h3>
                   <p className="flow-desc">
-                    Station locker details lead with glanceable information, then progressively disclose locker unlock steps when a rider arrives. Unfamiliar status messages link to quick guide overlays. Everything updates real-time when lockers open or latch.
+                    A wide range of riders may participate in the switching process thanks to localized text and audio instruction, which lowers language barriers and boosts confidence in each exchange.
                   </p>
                 </div>
               </div>
@@ -370,17 +406,16 @@ export function SwapStationPage({ onBackToWork }) {
               <div className="solution-flow-item">
                 <div className="flow-media-col">
                   <div className="flow-media-container">
-                    <img
-                      src={swapMockupImg}
-                      alt="Automated battery health tracking"
-                      className="flow-media-image"
-                    />
+                    <video autoPlay loop muted playsInline>
+                      <source src={swapSol2Video} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
                 </div>
                 <div className="flow-text-col">
-                  <h3 className="flow-title">Automated battery health tracking</h3>
+                  <h3 className="flow-title">Turning system complexity into simple interactions</h3>
                   <p className="flow-desc">
-                    Battery state-of-charge and range estimates are updated in real-time as soon as a battery is inserted into the locker, ensuring riders always depart with clear range transparency and zero unexpected drop-offs.
+                    The interface converts the dozens of machine states that the Swap Station controls in the background into understandable, contextual interactions so that riders are always aware of what is going on and what needs to be done.
                   </p>
                 </div>
               </div>
@@ -391,11 +426,11 @@ export function SwapStationPage({ onBackToWork }) {
           <section id="overview" className="case-study-section">
             <h2 className="detail-label" style={{ marginBottom: "var(--gap-md)" }}>Overview</h2>
             <h3 className="body-header">
-              Baaz operates a battery swapping network for commercial EV two-wheelers, where rider uptime directly impacts earnings and fleet efficiency.
+              Baaz operates mobility infrastructure for commercial EV two-wheelers, where rider uptime directly impacts earnings and fleet efficiency.
             </h3>
 
             <p className="paragraph-body">
-              Battery swapping is a critical touchpoint, connecting vehicles, stations, and the rider app. Any friction in this high-frequency flow increases rider downtime, reduces deliveries, which ultimately results in lower system throughput. However, the existing experience introduced hesitation and inconsistency at key steps, slowing down what should be a fast, repeatable action. At scale, even small delays per swap compound into lost delivery capacity, lower rider earnings, and reduced system throughput.
+              Battery swapping is a critical touchpoint, connecting vehicles, stations, and the rider app. Any friction in this high-frequency flow increases rider downtime, reduces deliveries, which ultimately results in lower system throughput. However, the existing HMI experience introduced hesitation and inconsistency at key steps, thus slowing down a fast, repeatable action. At scale, even small delays per swap compound into lost delivery capacity, lower rider earnings, and reduced system output.
             </p>
             {/* <div className="info-quote-box">
               <p>
@@ -433,7 +468,7 @@ export function SwapStationPage({ onBackToWork }) {
               High swap time due to an unoptimised FSM, leading to higher support calls and operational cost.
             </h3>
             <p className="paragraph-body">
-              The swap station is a self-serve platform — there is no staff member guiding the rider through the process. The HMI carries that responsibility entirely. When the FSM states weren't reflected accurately on screen, riders had no way to know what the system was doing or what to do next. Every gap between system state and screen state became a potential support call.
+              The swap station is a self serve platform. There is no employee assisting the rider with the swap. That is the sole duty of the HMI. Riders were unable to understand what the system was doing or what to do next when the FSM states were not accurately displayed on the screen. Every discrepancy between the screen and system states turned into a possible support call.
             </p>
 
             <div className="problem-image-container">
@@ -449,7 +484,8 @@ export function SwapStationPage({ onBackToWork }) {
               An unoptimised swap flow directly reduces earning potential for delivery riders.
             </h3>
             <p className="paragraph-body">
-              Delivery riders are paid per order. Time spent at a swap station is time not moving — and not earning. A swap that should take 90 seconds stretching to 3–4 minutes doesn't just frustrate the rider, it compounds across every shift. At scale, across hundreds of riders doing multiple swaps daily, the lost time translates directly into lost income. A better HMI isn't just a usability improvement — it's a livelihood improvement.
+              Delivery riders get compensated according to each order. Spending time at a swap station means that you are not working or making money. The rider is not only irritated when a change that should take 50 seconds takes three to four minutes, but it becomes worse every shift.
+              When hundreds of riders perform several exchanges per day, the lost time directly translates into lost revenue. A better HMI improves livelihood as well as usability.
             </p>
           </section>
 
@@ -458,7 +494,7 @@ export function SwapStationPage({ onBackToWork }) {
             <h2 className="detail-label" style={{ marginBottom: "var(--gap-md)" }}>Initial findings</h2>
             <div>
               <h3 className="body-header">
-                The support calls were not about confusion, but about a lack of transparency of the HMI or evern the FSM.
+                The support calls were not about confusion, but about a lack of transparency of the HMI or even the FSM.
               </h3>
               <p className="paragraph-body">
                 Riders were calling not because they did not understand the interface but because the system was encountering real issues like stuck battery,
@@ -479,7 +515,7 @@ export function SwapStationPage({ onBackToWork }) {
                 Why HMI, and not something else?
               </h3>
               <p className="paragraph-body">
-                The physical hardware, the rider app, and ops training all touched the swap experience. But only one touchpoint sits at the exact intersection of rider pain and business cost — and has no fallback when it fails.
+                The physical hardware, the rider app, and operations training all touched the swap experience. But only one touchpoint sits at the exact intersection of rider pain and business cost, the swap station HMI display and it has no fallback when it fails.
               </p>
 
               <div className="initial-finding-image-container-2">
@@ -495,10 +531,10 @@ export function SwapStationPage({ onBackToWork }) {
                 Riders interact with the HMI at the highest-stakes moment of their shift.
               </h3>
               <p className="paragraph-body" style={{ marginBottom: "var(--gap-lg)" }}>
-                The rider app handles account management, earnings, and route planning — but it's used before and after the swap, not during. The physical station handles the mechanical side — but slot doors and battery locks are hardware constraints outside design scope. Ops training helps new riders but doesn't scale and doesn't fix a broken feedback system.
+                The rider app handles account management, earnings, and route planning. It is used before and after the swap, not during the swapping process. The physical station handles that side of the process, but stuck doors and non-functional battery locks are hardware constraints outside design scope. Operations training helps new riders, but it does not cater to the scale or fix a broken feedback system.
               </p>
               <p className="paragraph-body">
-                The swap station HMI is the only touchpoint present at the exact moment things go wrong — and the only one fully within design control. So that's where we started.
+                The swap station's HMI is the only touchpoint present during the swapping process, and the only thing that us fully within design control. So that's where we started.
               </p>
             </div>
 
@@ -514,7 +550,7 @@ export function SwapStationPage({ onBackToWork }) {
               <div className="finding-stack-card">
                 <h4 className="finding-stack-heading">No Fallback</h4>
                 <p className="finding-stack-text">
-                  Everyy other surface has a workaround, but the HMI does not. When it fails silentlyy, the only option for the rider is to call the customer support.
+                  Every other surface has a workaround, but the HMI does not. When it fails silently, the only option for the rider is to call the customer support.
                 </p>
               </div>
 
@@ -539,7 +575,7 @@ export function SwapStationPage({ onBackToWork }) {
                 </div>
                 <div className="goal-details-col">
                   <div className="goal-pair-block">
-                    <h4 className="goal-pair-title">Complete the battery swap confidently</h4>
+                    <h4 className="goal-pair-title">Complete the battery swap confidently under 50s</h4>
                     <span className="goal-pair-label">User goal</span>
                   </div>
                   <div className="goal-pair-block">
@@ -556,11 +592,11 @@ export function SwapStationPage({ onBackToWork }) {
                 </div>
                 <div className="goal-details-col">
                   <div className="goal-pair-block">
-                    <h4 className="goal-pair-title">Get in and out of the swap under 50s</h4>
+                    <h4 className="goal-pair-title">Comprehend each instruction in the language of their choice.</h4>
                     <span className="goal-pair-label">User goal</span>
                   </div>
                   <div className="goal-pair-block">
-                    <h4 className="goal-pair-title">High utilization of the swap stations</h4>
+                    <h4 className="goal-pair-title">Lower language barrier, increasing the effectiveness of first-time exchanges.</h4>
                     <span className="goal-pair-label">Business goal</span>
                   </div>
                 </div>
@@ -592,8 +628,7 @@ export function SwapStationPage({ onBackToWork }) {
               Working my way down, thinking from a high level structure...
             </h3>
             <p className="paragraph-body">
-              I started with the Final State Machine (FSM) or the information architechture as many might call it, and then the home hierarchy.
-              Then I moved screen by screen. The main working principle was to maintain transparency of the exact state of the swap station to the delivery rides, to reduce cognative load.
+              I began with the information architecture, also known as the Final State Machine (FSM), and then I moved on to the home screen. I then proceeded screen by screen. The main working principle was to maintain transparency of the exact state of the swap station to the delivery rides, to reduce cognative load.
             </p>
 
             <div className="fsm-video-container">
@@ -606,6 +641,9 @@ export function SwapStationPage({ onBackToWork }) {
             <h3 className="body-header">
               Finding areas of improvement in the current experience and trying 'transparency forward' during the iterations.
             </h3>
+            <p className='body-description'>
+              By studying the existing interface, I identified opportunities to simplify information, improve visual hierarchy, and make battery availability easier to understand at a glance. Each iteration focused on increasing transparency while reducing the cognitive effort required during a swap.
+            </p>
 
             {/* Comparison 1 */}
             <div className="comparison-grid">
@@ -620,7 +658,7 @@ export function SwapStationPage({ onBackToWork }) {
                 <div className="comparison-meta-col">
                   <span className="comparison-badge before">BEFORE</span>
                   <p className="comparison-description">
-                    Too many data points increase the cognative load on the user, as per Hick's Law.                 </p>
+                    Too many data points increase the cognitive load on the user, as per Hick's Law.                 </p>
                 </div>
               </div>
 
@@ -635,7 +673,7 @@ export function SwapStationPage({ onBackToWork }) {
                 <div className="comparison-meta-col">
                   <span className="comparison-badge after">AFTER</span>
                   <p className="comparison-description">
-                    Simplified home screen, looking at which the rider can quickly figure out how manyy charged batteries are available at the particular swap station.
+                    Simplified home screen, looking at which the rider can quickly figure out how many charged batteries are available at the particular swap station.
                   </p>
                 </div>
               </div>
@@ -689,7 +727,7 @@ export function SwapStationPage({ onBackToWork }) {
                 <div className="comparison-meta-col">
                   <span className="comparison-badge before">BEFORE</span>
                   <p className="comparison-description">
-                    The exsisting error screens are very vague, and do not address the real issue that is occuring in the swap station, keeping the riders in the wind.
+                    The existing error screens are very vague, and do not address the real issue that is occurring in the swap station, keeping the riders in the wind.
                   </p>
                 </div>
               </div>
@@ -718,7 +756,8 @@ export function SwapStationPage({ onBackToWork }) {
               <p className="paragraph-body">
                 I mapped out the complete battery swapping journey, considering every possible rider interaction and system state. The redesign focused on making critical information easier to understand at a glance, improving navigation across different scenarios, and ensuring the interface gracefully handled edge cases such as battery availability, door states, swap failures, and system errors.
                 <br />
-                I used a lot of progressive disclosure to make sure the information isn't overwhelming and would surface only when the user wants to dive deep.
+                <br />
+                I used progressive disclosure to make sure the information isn't overwhelming and would surface only when the user wants to dive deep.
               </p>
               <div className="all-screens-image-container">
                 <img
@@ -745,11 +784,11 @@ export function SwapStationPage({ onBackToWork }) {
             </div>
             <div>
               <h3 className="body-header">
-                Finally, the first version was ready for a cross team meating.
+                Finally, the first version was ready for a cross team meeting.
               </h3>
               <p className="paragraph-body">
-                I mapped every state of the FSM to a HMI screen: home, perfect swap, errors and the edges in between.
-                The true swap mostly had a linear flow, starting with the home state. We had regular cross team meeting with the firmwire team and Design managers.
+                I mapped every state of the FSM to a HMI screen: home, positive swap, errors and the edges in between.
+                The positive swap mostly had a linear flow, starting with the home state. We had regular cross-team meeting with the Firmware team and Design managers.
                 There is a snapshot to the positive flow for the swap station along with the audio.
               </p>
               <div className="process-video-wrapper">
@@ -804,7 +843,7 @@ export function SwapStationPage({ onBackToWork }) {
                 Refining the experience through continuous feedback
               </h3>
               <p className="paragraph-body">
-                The Swap Station interface went through several rounds of reviews with different stakeholders, each bringing a unique perspective. Product validated the user journey, Engineering assessed technical feasibility, and Operations highlighted real-world station scenarios. These iterations helped create a robust interface that performs reliably across everyday use and exceptional situations.              </p>
+                The Swap Station interface went through several rounds of reviews with different stakeholders, each bringing a unique perspective. Product validated the user journey, Engineering assessed technical feasibility, and Operations highlighted real-world scenarios. These iterations helped create a robust interface that performs reliably across everyday use and exceptional situations.              </p>
               <div className="all-screens-image-container">
                 <img
                   src={ssWorkflow}
@@ -821,7 +860,7 @@ export function SwapStationPage({ onBackToWork }) {
             <h2 className="detail-label" style={{ marginBottom: "var(--gap-lg)" }}>Designing with constrains</h2>
             <h3 className='body-header'>Designing for hardware constraints instead of unlimited possibilities</h3>
             <p className="paragraph-body">
-              Unlike mobile applications, the Swap Station interface runs on dedicated hardware where every interaction must be lightweight and reliable.
+              Unlike mobile applications, the swap station interface runs on dedicated hardware where every interaction must be lightweight and reliable.
               Limited memory, processing power, and UI capabilities meant modern interface patterns weren't feasible, so every screen had to be simplified without compromising usability.
               The challenge was to create a responsive, intuitive experience while working within the platform's technical constraints.
             </p>
@@ -839,7 +878,7 @@ export function SwapStationPage({ onBackToWork }) {
                 <div className="comparison-meta-col">
                   <span className="comparison-badge before">BEFORE</span>
                   <p className="comparison-description">
-                    Too many data points increase the cognative load on the user, as per Hick's Law.                 </p>
+                    Designing within the limitations of the Nextion HMI editor required balancing usability with restricted UI components, memory, and processing capabilities.                 </p>
                 </div>
               </div>
 
@@ -854,7 +893,7 @@ export function SwapStationPage({ onBackToWork }) {
                 <div className="comparison-meta-col">
                   <span className="comparison-badge after">AFTER</span>
                   <p className="comparison-description">
-                    Made the components used reusable for other screens taking into concideration the limitations of the software.
+                    A simplified, reusable interface optimized for the embedded hardware, delivering a consistent experience without exceeding platform constraints.
                   </p>
                 </div>
               </div>
@@ -869,7 +908,7 @@ export function SwapStationPage({ onBackToWork }) {
             <h2 className="detail-label" style={{ marginBottom: "var(--gap-lg)" }}>Design system</h2>
             <h3 className='body-header'>Adding new reusable components and documentation to Figma.</h3>
             <p className="paragraph-body">
-              I added payment module variants, loan status chips, and receipt sections to Storybook with usage notes so implementation matched the system the app already used.
+              To maintain consistency across dozens of machine states and screens, I built a reusable component library in Figma. Standardizing cards, buttons, status indicators, and layouts made the interface easier to scale, iterate, and hand off for development.
             </p>
             <div className="all-screens-image-container">
               <img
@@ -883,9 +922,9 @@ export function SwapStationPage({ onBackToWork }) {
           {/* Section 8: QA & testing*/}
           <section id="qa-and-testing" className="case-study-section">
             <h2 className="detail-label" style={{ marginBottom: "var(--gap-lg)" }}>Real World Validation</h2>
-            <h3 className='body-header'>I tested the HMI screens in the real world senario, through day, night and rain. Here, we are designing not just for the screens, but also for the riders.</h3>
+            <h3 className='body-header'>I tested the HMI screens in the real world scenario, through day, night and rain. Here, we are designing not just for the screens, but also for the riders.</h3>
             <p className="paragraph-body">
-              Unlike traditional digital products, the Swap Station experience lives in unpredictable environments. I evaluated the interface across different lighting conditions and from a rider's perspective to ensure information remained visible, interactions stayed intuitive, and the swapping process felt effortless regardless of the surroundings.
+              Unlike traditional digital products, the swap station experience lives in unpredictable environments. I evaluated the interface across different lighting conditions and from a rider's perspective to ensure information remained visible, interactions stayed intuitive, and the swapping process felt effortless regardless of the surroundings.
               <br />
               <br />
               The redesign was reviewed through realistic scenarios, including daytime and nighttime usage, as well as a first-person swapping experience to validate readability, feedback, and overall interaction flow before deployment.
@@ -947,10 +986,8 @@ export function SwapStationPage({ onBackToWork }) {
                 Customer calls came down massively
               </h3>
               <p className="paragraph-body">
-                Unlike traditional digital products, the Swap Station experience lives in unpredictable environments. I evaluated the interface across different lighting conditions and from a rider's perspective to ensure information remained visible, interactions stayed intuitive, and the swapping process felt effortless regardless of the surroundings.
-                <br />
-                <br />
-                The redesign was reviewed through realistic scenarios, including daytime and nighttime usage, as well as a first-person swapping experience to validate readability, feedback, and overall interaction flow before deployment.
+                The redesign focused on making the Swap Station more self-explanatory. Clear messaging, multilingual support, and contextual feedback reduced confusion during swaps, improving rider confidence while lowering dependency on customer support.
+
               </p>
               {/* Outcome 1 */}
               <div className="metrics-comparison-block">
@@ -1056,7 +1093,7 @@ export function SwapStationPage({ onBackToWork }) {
                   <ArrowUpRight size={24} className="metric-icon" />
                   <span className="metric-number-data">~40%</span>
                 </div>
-                <div className="metric-label">Fewer Sets</div>
+                <div className="metric-label">Fewer steps </div>
               </div>
             </div>
           </section>
@@ -1064,24 +1101,26 @@ export function SwapStationPage({ onBackToWork }) {
           {/* Section 10: Reflection */}
           <section id="reflection" className="case-study-section">
             <h2 className="body-heading" style={{ marginBottom: "var(--gap-lg)" }}>REFLECTION</h2>
-
-            <h3 className='body-header'>
-              My key takeaways and learnings!
-            </h3>
-            <div className="reflections-columns-grid">
-              <div className="reflection-column">
-                <h4 className="reflection-col-title">State mapping early saves rework</h4>
-                <p className="reflection-col-body">
-                  Mapping every machine state and edge case before designing screens helped uncover gaps early, reducing design iterations and keeping the interface consistent across the entire swapping journey.
-                </p>
-              </div>
-              <div className="reflection-column">
-                <h4 className="reflection-col-title">Validating in real environments matters</h4>
-                <p className="reflection-col-body">
-                  Design decisions that looked effective in Figma felt very different at the station. Testing across lighting conditions and from a rider's perspective highlighted usability improvements that static mockups couldn't reveal.
-                </p>
+            <div style={{ marginBottom: "var(--gap-xxxxl)" }}>
+              <h3 className='body-header'>
+                My key takeaways and learnings!
+              </h3>
+              <div className="reflections-columns-grid" >
+                <div className="reflection-column">
+                  <h4 className="reflection-col-title">State mapping early saves rework</h4>
+                  <p className="reflection-col-body">
+                    Mapping every machine state and edge case before designing screens helped uncover gaps early, reducing design iterations and keeping the interface consistent across the entire swapping journey.
+                  </p>
+                </div>
+                <div className="reflection-column">
+                  <h4 className="reflection-col-title">Validating in real environments matters</h4>
+                  <p className="reflection-col-body">
+                    Design decisions that looked effective in Figma felt very different at the station. Testing across lighting conditions and from a rider's perspective highlighted usability improvements that static mockups couldn't reveal.
+                  </p>
+                </div>
               </div>
             </div>
+
 
             <h3 className='body-header'>
               How would I do differently with AI?
@@ -1102,6 +1141,70 @@ export function SwapStationPage({ onBackToWork }) {
               </div>
             </div>
           </section>
+
+
+          {/* Contact me */}
+          <div className="contact-prompt-box">
+            <span className="contact-tag">CURIOUS TO KNOW MORE?</span>
+            <p className="contact-text">
+              This is just a small part of the design process, to get the full story <a href="mailto:masteranishmaji@gmail.com" className="contact-link">get in touch</a>.
+            </p>
+          </div>
+
+          <div className="simple-divider" style={{ margin: "40px 0" }}></div>
+
+          {/* Other Projects */}
+          <div className="related-projects-section">
+            <h3 className="related-section-title">Also check out..</h3>
+            <div className="related-projects-grid">
+              <div className="related-project-card">
+                <div className="related-card-media streamline-media-bg">
+                  <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M75 25C65 15 50 15 40 25C30 35 30 45 40 55C50 65 70 65 80 75C90 85 75 95 65 95C55 95 45 90 35 80" stroke="#22c55e" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M25 75C35 85 50 85 60 75" stroke="#22c55e" strokeWidth="12" strokeLinecap="round" />
+                  </svg>
+                </div>
+                <p className="related-card-meta">STREAMLINE &bull; B2B SAAS &bull; 2023</p>
+                <h4 className="related-card-title">Design tool for Streamline</h4>
+              </div>
+
+              <div className="related-project-card">
+                <div className="related-card-media checkmate-media-bg">
+                  <div className="mockup-phone-body">
+                    <div className="mockup-phone-island"></div>
+                    <div className="mockup-phone-screen">
+                      {/* Mock Widget 1 */}
+                      <div className="mockup-widget" style={{ borderLeft: "3px solid #f472b6" }}>
+                        <div className="mockup-widget-title">Today's Todo</div>
+                        <div className="mockup-widget-item">
+                          <span className="mockup-checkbox checked"></span>
+                          <span className="mockup-bar"></span>
+                        </div>
+                        <div className="mockup-widget-item">
+                          <span className="mockup-checkbox"></span>
+                          <span className="mockup-bar short"></span>
+                        </div>
+                      </div>
+                      {/* Mock Widget 2 */}
+                      <div className="mockup-widget" style={{ borderLeft: "3px solid #3b82f6" }}>
+                        <div className="mockup-widget-title">Shared Tasks</div>
+                        <div className="mockup-widget-item">
+                          <span className="mockup-checkbox"></span>
+                          <span className="mockup-bar"></span>
+                        </div>
+                        <div className="mockup-widget-item">
+                          <span className="mockup-checkbox checked"></span>
+                          <span className="mockup-bar"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p className="related-card-meta">CHECKMATE &bull; PRODUCTIVITY &bull; 2026</p>
+                <h4 className="related-card-title">Checkmate: Collaborative todo for shared living</h4>
+              </div>
+            </div>
+          </div>
 
           {/* Bottom Navigation / Next Project Footer */}
           <footer className="case-study-footer">

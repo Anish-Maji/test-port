@@ -126,17 +126,23 @@ export default function BooksSection() {
   return (
     <section className="books-section">
       <div className="books-container">
-        <h2 className="books-title">How I get inspired?</h2>
 
-        <div 
+        <div className="books-header-wrapper">
+          <h2 className="books-title">How I get inspired?</h2>
+          <p className='books-details'>
+            Great ideas rarely come from a single place. These books have shaped how I think about design, human behavior, creativity, and building products that people genuinely enjoy using.
+          </p>
+        </div>
+
+        <div
           className={`books-carousel-wrapper ${isPaused ? 'paused' : ''}`}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
           <div className="books-track">
             {carouselBooks.map((book, index) => (
-              <div 
-                key={`${book.id}-${index}`} 
+              <div
+                key={`${book.id}-${index}`}
                 className="book-item-wrapper"
               >
                 <div className="book-3d">
@@ -161,10 +167,10 @@ export default function BooksSection() {
                   <div className="book-cover-wrapper">
                     {/* Front Face of Cover with actual Book Cover Image */}
                     <div className="cover-front">
-                      <img 
-                        src={book.coverImage} 
-                        alt={book.title} 
-                        className="book-cover-img" 
+                      <img
+                        src={book.coverImage}
+                        alt={book.title}
+                        className="book-cover-img"
                       />
                       {/* Book spine edge accent */}
                       <div className="cover-spine-shadow"></div>

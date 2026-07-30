@@ -5,6 +5,7 @@ import ShapeGrid from './components/ShapeGrid';
 import Shuffle from './components/Shuffle';
 import SwapStationPage from './pages/SwapStationPage';
 import CvPage from './pages/CvPage';
+import PlayPage from './pages/PlayPage';
 import Footer from './components/Footer';
 
 import ToolstackSection from './components/ToolstackSection';
@@ -25,7 +26,7 @@ const worksData = [
     title: "Baaz's battery swap station platform",
     shortTitle: "Baaz Swap Station",
     categoryTag: "ev.cleantech",
-    subtitle: "Battery swap station platform for EV smart mobility · Baaz Mobility",
+    subtitle: "Battery swap station platform for EV smart mobility",
     meta: "BAAZ MOBILITY • EV & CLEAN TECH • 2025",
     image: swapMockupImg,
     bgColor: "linear-gradient(135deg, #f3e8ff 0%, #e0e7ff 100%)",
@@ -94,6 +95,7 @@ export function App() {
   const [currentView, setCurrentView] = useState(() => {
     if (window.location.hash.includes('swap-station')) return 'swap-station';
     if (window.location.hash.includes('cv')) return 'cv';
+    if (window.location.hash.includes('play')) return 'play';
     return 'home';
   });
 
@@ -106,7 +108,10 @@ export function App() {
       } else if (hash.includes('cv')) {
         setCurrentView('cv');
         window.scrollTo(0, 0);
-      } else if (currentView !== 'home' && (hash === '#work' || hash === '' || hash === '#play' || hash === '#about')) {
+      } else if (hash.includes('play')) {
+        setCurrentView('play');
+        window.scrollTo(0, 0);
+      } else if (currentView !== 'home' && (hash === '#work' || hash === '' || hash === '#about')) {
         setCurrentView('home');
       }
     };
@@ -147,6 +152,16 @@ export function App() {
       <div className="app-layout">
         <Navbar onNavigateHome={handleBackToWork} activePage="cv" />
         <CvPage onBackToWork={handleBackToWork} />
+        <Footer />
+      </div>
+    );
+  }
+
+  if (currentView === 'play') {
+    return (
+      <div className="app-layout">
+        <Navbar onNavigateHome={handleBackToWork} activePage="play" />
+        <PlayPage onBackToWork={handleBackToWork} />
         <Footer />
       </div>
     );

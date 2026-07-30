@@ -3,12 +3,13 @@
    ========================================================================== */
 
 .books-section {
-  padding: 80px 0 100px;
   background-color: #FAFAFA;
   overflow: hidden;
   position: relative;
   border-top: 1px solid #F4F4F5;
   border-bottom: 1px solid #F4F4F5;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .books-container {
@@ -19,14 +20,31 @@
   align-items: center;
 }
 
-.books-title {
-  font-family: var(--font-heading, 'Gelasio', serif);
-  font-size: 32px;
-  font-weight: 400;
-  color: #18181B;
-  text-align: center;
-  margin-bottom: 60px;
-  letter-spacing: -0.01em;
+.books-header-wrapper {
+  width: 100%;
+  align-items: left;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+
+}
+
+.books-header-wrapper .books-title {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 500;
+  color: #0d0d0d;
+  text-align: left;
+  margin-bottom: 0.75rem;
+  letter-spacing: .05rem;
+}
+
+.books-details {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 14px;
+  color: #71717A;
+  max-width: 554px;
+  line-height: 1.6;
 }
 
 /* ==========================================================================
@@ -35,6 +53,8 @@
 
 .books-carousel-wrapper {
   width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
   overflow: hidden;
   position: relative;
   padding: 40px 0 60px;

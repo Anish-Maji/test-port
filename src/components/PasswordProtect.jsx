@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Lock, ArrowRight, X } from 'lucide-react';
+import { LockKeyhole, ArrowRight, X } from 'lucide-react';
 import './PasswordProtect.css';
 
 const LinkedinIcon = ({ size = 18, color = "currentColor", fill = "none" }) => (
@@ -43,7 +43,7 @@ export default function PasswordProtect({ onUnlock, correctPassword = 'baaz2025'
               {/* Left Badge */}
               <div className="nda-left-badge">
                 <div className="nda-lock-circle">
-                  <Lock size={18} color="#ea580c" fill="#ea580c" />
+                  <LockKeyhole size={24} strokeWidth="3px" color="#ea580c" />
                 </div>
                 <span className="nda-lock-title">NDA Restricted Content</span>
               </div>
@@ -57,8 +57,8 @@ export default function PasswordProtect({ onUnlock, correctPassword = 'baaz2025'
 
             {/* Buttons Row */}
             <div className="nda-buttons-row">
-              <button 
-                className="nda-btn btn-secondary" 
+              <button
+                className="nda-btn btn-secondary"
                 onClick={() => {
                   setShowInput(true);
                   setError('');
@@ -66,10 +66,10 @@ export default function PasswordProtect({ onUnlock, correctPassword = 'baaz2025'
               >
                 I know the password!
               </button>
-              <a 
-                href={linkedinUrl} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href={linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="nda-btn btn-primary"
               >
                 <LinkedinIcon size={16} fill="none" color="#ffffff" />
@@ -81,15 +81,15 @@ export default function PasswordProtect({ onUnlock, correctPassword = 'baaz2025'
           <div className="nda-card-content password-form-view">
             <div className="password-form-header">
               <h4 className="password-form-title">Enter Access Password</h4>
-              <button 
-                className="password-form-close" 
+              <button
+                className="password-form-close"
                 onClick={() => setShowInput(false)}
                 aria-label="Back"
               >
                 <X size={16} />
               </button>
             </div>
-            
+
             <form onSubmit={handleSubmit} className="password-input-form">
               <div className="password-input-wrapper">
                 <input

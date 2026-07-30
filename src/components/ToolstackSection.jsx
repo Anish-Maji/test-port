@@ -66,9 +66,9 @@ export function ToolstackSection() {
   return (
     <section className="toolstack-section container">
       <div className="toolstack-header">
-        <h2 className="toolstack-title">what's in my toolstack</h2>
+        <h2 className="toolstack-title">What's in my toolstack</h2>
         <p className="toolstack-subtitle">
-          the handy manny of design: name the tool, know the job, let it do the talking. and a few tools i forgot the name of.
+          Every tool has a function. This toolbox covers my entire design process, from wireframes and prototypes to code, animation, and artificial intelligence.
         </p>
       </div>
 
@@ -119,7 +119,7 @@ export function ToolstackSection() {
               className={`toolstack-filter-pill ${isActive ? 'active' : ''}`}
             >
               <span className={`pill-radio-dot ${isActive ? 'active' : ''}`}></span>
-              <span>{cat}</span>
+              <span className="pill-text">{cat}</span>
             </button>
           );
         })}

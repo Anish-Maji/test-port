@@ -33,6 +33,7 @@ import ssOutcome1b from '../assets/SS Project/outcome-metrics-1b.webp';
 import ssOutcome2a from '../assets/SS Project/outcome-metrics-2a.webp';
 import ssOutcome2b from '../assets/SS Project/outcome-metrics-2b.webp';
 import ssSwapStartedAudio from '../assets/SS Project/swap started.mp3';
+import PasswordProtect from '../components/PasswordProtect';
 
 
 
@@ -52,6 +53,7 @@ const tocItems = [
 
 
 export function SwapStationPage({ onBackToWork }) {
+  const [isUnlocked, setIsUnlocked] = useState(() => sessionStorage.getItem('ss_unlocked') === 'true');
   const [activeSection, setActiveSection] = useState('tldr');
   const [activeTab, setActiveTab] = useState('mobile');
   const [copied, setCopied] = useState(false);
@@ -216,7 +218,7 @@ export function SwapStationPage({ onBackToWork }) {
   };
 
   return (
-    <div className="case-study-root">
+    <div className={`case-study-root ${!isUnlocked ? 'nda-locked' : ''}`}>
       <div className="case-study-container">
 
         {/* Left Sticky Sidebar / Content Bar */}
@@ -270,6 +272,18 @@ export function SwapStationPage({ onBackToWork }) {
               Redesigning Swap Station HMI <br /> <span style={{ fontStyle: 'italic', color: '#C94F1E' }}>to make battery swaps under 50 second.</span>
             </h1>
           </header>
+
+          {!isUnlocked && (
+            <PasswordProtect 
+              correctPassword="baaz2025" 
+              onUnlock={() => {
+                setIsUnlocked(true);
+                sessionStorage.setItem('ss_unlocked', 'true');
+              }}
+            />
+          )}
+
+          <div className="case-study-body-content">
 
           {/* Hero Mint Green Banner Container with Phone Mockup */}
           <div className="hero-banner-container">
@@ -1214,7 +1228,8 @@ export function SwapStationPage({ onBackToWork }) {
             </button>
           </footer>
 
-        </main>
+        </div>
+      </main>
 
       </div>
     </div >

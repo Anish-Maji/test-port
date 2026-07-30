@@ -128,6 +128,7 @@
 .case-study-main {
   flex: 1;
   min-width: 0;
+  position: relative;
 }
 
 .case-study-header {
@@ -1688,4 +1689,16 @@
   .metrics-image-card {
     height: 300px;
   }
+}
+
+/* NDA Lock Blur Styling */
+.nda-locked {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.nda-locked .case-study-body-content {
+  filter: blur(12px);
+  pointer-events: none;
+  user-select: none;
 }

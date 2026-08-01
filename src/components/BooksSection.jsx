@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import '../styles/BooksSection.css';
 
 // Import real book cover images from assets
-import hookedCover from '../assets/books cover/hooked.jpg';
-import designAsArtCover from '../assets/books cover/design-as-art.jpg';
-import creativeConfidenceCover from '../assets/books cover/creative-confidance.jpg';
+import hookedCover from '../assets/books cover/hooked.webp';
+import designAsArtCover from '../assets/books cover/design as art.webp';
+import creativeConfidenceCover from '../assets/books cover/creative confidance.webp';
+import historyofGraphicsCover from '../assets/books cover/history of graphics design.webp';
+import shoeDogCover from '../assets/books cover/shoe dog.webp';
+import thinkingFastSlowCover from '../assets/books cover/thinking fast and slow.webp';
+
 
 // SVG Data URIs for additional iconic book covers
 const steveJobsCover = "data:image/svg+xml;utf8," + encodeURIComponent(`
@@ -67,13 +71,13 @@ const booksData = [
   },
   {
     id: 2,
-    title: 'Steve Jobs',
-    coverImage: steveJobsCover,
+    title: 'History of Graphics Design',
+    coverImage: historyofGraphicsCover,
     patternType: 'mint-pattern',
-    insideTitle: 'Steve Jobs',
-    insideAuthor: 'Walter Isaacson',
-    insideExcerpt: 'People who are crazy enough to think they can change the world are the ones who do.',
-    tag: 'Biography & Leadership'
+    insideTitle: 'History of Graphics Design',
+    insideAuthor: 'Philip B. Meggs',
+    insideExcerpt: 'Design is the power of intention. The intention to make order out of chaos, to create structure out of randomness, and to bring clarity out of ambiguity.',
+    tag: 'Graphic Design History'
   },
   {
     id: 3,
@@ -97,23 +101,23 @@ const booksData = [
   },
   {
     id: 5,
-    title: 'The Design of Everyday Things',
-    coverImage: normanCover,
+    title: 'Shoe Dog',
+    coverImage: shoeDogCover,
     patternType: 'red-door',
-    insideTitle: 'Everyday Things',
-    insideAuthor: 'Don Norman',
-    insideExcerpt: 'Two of the most important characteristics of good design are discoverability and understanding.',
-    tag: 'User Experience'
+    insideTitle: 'Shoe Dog',
+    insideAuthor: 'Phil Knight',
+    insideExcerpt: 'It’s hard to do when you’re trying to do everything yourself. But you’re not alone. You have your team. You have your friends. You have your family.',
+    tag: 'Entrepreneurship'
   },
   {
     id: 6,
-    title: 'Atomic Habits',
-    coverImage: atomicHabitsCover,
+    title: 'Thinking, Fast and Slow',
+    coverImage: thinkingFastSlowCover,
     patternType: 'gold-dots',
-    insideTitle: 'Atomic Habits',
-    insideAuthor: 'James Clear',
-    insideExcerpt: 'You do not rise to the level of your goals. You fall to the level of your systems.',
-    tag: 'Behavioral Design'
+    insideTitle: 'Thinking, Fast and Slow',
+    insideAuthor: 'Daniel Kahneman',
+    insideExcerpt: 'We are prone to overestimate how much we understand about the world and to underestimate the role of chance in events.',
+    tag: 'Cognitive Psychology'
   }
 ];
 

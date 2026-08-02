@@ -10,8 +10,11 @@ import Footer from './components/Footer';
 
 import ToolstackSection from './components/ToolstackSection';
 import BooksSection from './components/BooksSection';
+import VisualPlaygroundSection from './components/VisualPlaygroundSection';
+import CinematicBrainSection from './components/CinematicBrainSection';
 import ProjectsSection from './components/ProjectsSection';
 import swapMockupImg from './assets/home/projects-ss.webp';
+import laundryVideo from './assets/home/laundry-thumbnail.webm';
 import crimsonImg from './assets/brand logos/crimson_healthcare_pvt_ltd_cover.jpeg';
 import globalEsportsImg from './assets/brand logos/Global esports.webp';
 import kioskScreenImg from './assets/swap_flow_kiosk_screen.png';
@@ -33,15 +36,16 @@ const worksData = [
     isInteractive: true,
   },
   {
-    id: 'crimson-healthcare',
-    title: "Crimson Healthcare — MedTech Digital Platform",
-    shortTitle: "Crimson Healthcare",
-    categoryTag: "medtech",
-    subtitle: "MedTech digital platform for clinical diagnostics & medical innovation",
-    meta: "CRIMSON HEALTHCARE • MEDICAL TECH • 2024",
-    image: crimsonImg,
-    bgColor: "#eef0f2",
-    isInteractive: false,
+    id: 'hostel-laundry',
+    title: "Revolutionizing Laundry in Hostels",
+    shortTitle: "Revolutionizing Laundry in Hostels",
+    categoryTag: "product.design",
+    subtitle: "Hooked ideology based laundry service for college students",
+    meta: "BEHANCE • PRODUCT DESIGN • 2024",
+    video: laundryVideo,
+    externalUrl: "https://www.behance.net/gallery/193222351/Revolutionizing-Laundry-in-Hostels",
+    bgColor: "#111827",
+    isInteractive: true,
   },
   {
     id: 'global-esports',
@@ -235,6 +239,16 @@ export function App() {
 
         {/* How I Get Inspired - Books Showcase Section */}
         <BooksSection />
+
+        <div className="simple-divider"></div>
+
+        {/* Visual Playground / Archive Section */}
+        <VisualPlaygroundSection />
+
+        <div className="simple-divider"></div>
+
+        {/* My Cinematic Brain / Instagram Feed Section */}
+        <CinematicBrainSection />
 
         <div className="simple-divider"></div>
 

@@ -1,9 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ArrowRight, ArrowDown, ArrowUp } from 'lucide-react';
 import './ProjectsSection.css';
 
 export default function ProjectsSection({ worksData, onOpenCaseStudy }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const videoRefs = useRef({});
+
+  const handleCardMouseEnter = (work) => {
+    const video = videoRefs.current[work.id];
+    if (video) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    }
+  };
+
+  const handleCardMouseLeave = (work) => {
+    const video = videoRefs.current[work.id];
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+  };
+
+  const handleCardClick = (work) => {
+    if (work.externalUrl) {
+      window.open(work.externalUrl, '_blank', 'noopener,noreferrer');
+    } else if (work.isInteractive && onOpenCaseStudy) {
+      onOpenCaseStudy(work.id);
+    }
+  };
 
   return (
     <section className="projects-redesign-section" id="work">
@@ -22,21 +47,19 @@ export default function ProjectsSection({ worksData, onOpenCaseStudy }) {
       <div className={`projects-grid-wrapper ${isExpanded ? 'expanded' : 'collapsed'}`}>
         <div className="projects-bento-grid">
           {worksData.map((work) => {
-            const isInteractive = work.isInteractive;
+            const isClickable = work.isInteractive || !!work.externalUrl;
             return (
               <div
                 key={work.id}
-                className={`bento-project-card ${isInteractive ? 'interactive' : ''}`}
-                onClick={() => {
-                  if (isInteractive && onOpenCaseStudy) {
-                    onOpenCaseStudy(work.id);
-                  }
-                }}
-                role={isInteractive ? 'button' : undefined}
-                tabIndex={isInteractive ? 0 : undefined}
+                className={`bento-project-card ${isClickable ? 'interactive' : ''}`}
+                onClick={() => handleCardClick(work)}
+                onMouseEnter={() => handleCardMouseEnter(work)}
+                onMouseLeave={() => handleCardMouseLeave(work)}
+                role={isClickable ? 'button' : undefined}
+                tabIndex={isClickable ? 0 : undefined}
                 onKeyDown={(e) => {
-                  if (isInteractive && onOpenCaseStudy && e.key === 'Enter') {
-                    onOpenCaseStudy(work.id);
+                  if (isClickable && e.key === 'Enter') {
+                    handleCardClick(work);
                   }
                 }}
               >
@@ -50,13 +73,25 @@ export default function ProjectsSection({ worksData, onOpenCaseStudy }) {
                     <ArrowRight size={15} />
                   </div>
 
-                  <img
-                    src={work.image}
-                    alt={work.title}
-                    className="bento-card-image"
-                    loading="lazy"
-                    draggable={false}
-                  />
+                  {work.video ? (
+                    <video
+                      ref={(el) => (videoRefs.current[work.id] = el)}
+                      src={work.video}
+                      className="bento-card-video"
+                      muted
+                      playsInline
+                      loop={false}
+                      preload="auto"
+                    />
+                  ) : (
+                    <img
+                      src={work.image}
+                      alt={work.title}
+                      className="bento-card-image"
+                      loading="lazy"
+                      draggable={false}
+                    />
+                  )}
                 </div>
 
                 {/* Details */}

@@ -12,6 +12,7 @@ import ToolstackSection from './components/ToolstackSection';
 import BooksSection from './components/BooksSection';
 import VisualPlaygroundSection from './components/VisualPlaygroundSection';
 import CinematicBrainSection from './components/CinematicBrainSection';
+import TestimonialsSection from './components/TestimonialsSection';
 import ProjectsSection from './components/ProjectsSection';
 import WebsiteLoader from './components/WebsiteLoader';
 import swapMockupImg from './assets/home/projects-ss.webp';
@@ -253,6 +254,11 @@ export function App() {
 
         {/* My Cinematic Brain / Instagram Feed Section */}
         <CinematicBrainSection />
+
+        <div className="simple-divider"></div>
+
+        {/* Testimonials Section */}
+        <TestimonialsSection />
 
         <div className="simple-divider"></div>
 

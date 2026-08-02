@@ -13,6 +13,7 @@ import BooksSection from './components/BooksSection';
 import VisualPlaygroundSection from './components/VisualPlaygroundSection';
 import CinematicBrainSection from './components/CinematicBrainSection';
 import ProjectsSection from './components/ProjectsSection';
+import WebsiteLoader from './components/WebsiteLoader';
 import swapMockupImg from './assets/home/projects-ss.webp';
 import laundryVideo from './assets/home/laundry-thumbnail.webm';
 import crimsonImg from './assets/brand logos/crimson_healthcare_pvt_ltd_cover.jpeg';
@@ -173,6 +174,9 @@ export function App() {
 
   return (
     <div className="app-layout">
+      {/* Preloading Website Loader */}
+      <WebsiteLoader />
+
       {/* Navigation Bar */}
       <Navbar onNavigateHome={handleBackToWork} activePage="home" />
 

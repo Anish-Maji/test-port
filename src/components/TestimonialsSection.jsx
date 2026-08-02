@@ -2,11 +2,11 @@ import React, { useRef, useEffect } from 'react';
 import '../styles/TestimonialsSection.css';
 
 // ============================================================================
-// MARQUEE SPEED CONFIGURATION (Tweak these values to suit your demand!)
+// SPEED CONFIGURATION CONSTANTS (Tweak these for slower/faster scrolling!)
 // ============================================================================
-const NORMAL_SPEED = 0.25;  // Default normal scroll speed (px per frame)
-const HOVER_SPEED = 0.02;   // Ultra-slow scroll speed when HOVERED (10x slower!)
-const EASING_FACTOR = 0.15; // Speed transition response factor (0.01 - 0.5)
+const DEFAULT_NORMAL_SPEED = 0.4;  // Very calm & slow default scroll speed (px per frame)
+const DEFAULT_HOVER_SPEED = 0.1;   // Near-pause speed on hover (px per frame)
+const DEFAULT_EASING = 0.2;        // Instant responsive speed transition (0.05 - 0.5)
 // ============================================================================
 
 const testimonialsData = [
@@ -52,25 +52,36 @@ const testimonialsData = [
   },
 ];
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({
+  normalSpeed = DEFAULT_NORMAL_SPEED,
+  hoverSpeed = DEFAULT_HOVER_SPEED,
+  easing = DEFAULT_EASING,
+}) {
   const trackRef = useRef(null);
   const posRef = useRef(0);
+  const currentSpeedRef = useRef(normalSpeed);
   const isHoveredRef = useRef(false);
   const animFrameId = useRef(null);
+
+  // Store speed values in refs so modifications update the animation loop immediately
+  const normalSpeedRef = useRef(normalSpeed);
+  const hoverSpeedRef = useRef(hoverSpeed);
+  const easingRef = useRef(easing);
+
+  normalSpeedRef.current = normalSpeed;
+  hoverSpeedRef.current = hoverSpeed;
+  easingRef.current = easing;
 
   // Duplicate array 3 times for continuous looping
   const marqueeItems = [...testimonialsData, ...testimonialsData, ...testimonialsData];
 
   useEffect(() => {
-    let currentSpeed = NORMAL_SPEED;
-
     const animate = () => {
-      // Switches between HOVER_SPEED (0.02) and NORMAL_SPEED (0.25)
-      const targetSpeed = isHoveredRef.current ? HOVER_SPEED : NORMAL_SPEED;
-      currentSpeed += (targetSpeed - currentSpeed) * EASING_FACTOR;
+      const targetSpeed = isHoveredRef.current ? hoverSpeedRef.current : normalSpeedRef.current;
+      currentSpeedRef.current += (targetSpeed - currentSpeedRef.current) * easingRef.current;
 
       if (trackRef.current) {
-        posRef.current -= currentSpeed;
+        posRef.current -= currentSpeedRef.current;
         const totalWidth = trackRef.current.scrollWidth;
         const singleSetWidth = totalWidth / 3;
 
@@ -97,7 +108,7 @@ export default function TestimonialsSection() {
       <div className="testimonials-container">
         {/* Header Section */}
         <div className="testimonials-header-wrapper">
-          <h2 className="testimonials-title">...things they say behind my back</h2>
+          <h2 className="testimonials-title">what they say about me....</h2>
         </div>
 
         {/* Marquee Track Container */}

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
 import '../styles/VisualPlaygroundSection.css';
 
 import GenesisEdu from '../assets/playground/project-1.webp';
@@ -67,43 +66,8 @@ const archiveItemsData = [
 ];
 
 export default function VisualPlaygroundSection() {
-  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
-  const [isPaused, setIsPaused] = useState(false);
-
   // Triple items array for 100% seamless, gap-free continuous carousel loop
   const carouselItems = [...archiveItemsData, ...archiveItemsData, ...archiveItemsData];
-
-  const handleOpenModal = (item) => {
-    const origIndex = archiveItemsData.findIndex((i) => i.id === item.id);
-    setSelectedItemIndex(origIndex !== -1 ? origIndex : 0);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedItemIndex(null);
-  };
-
-  const handlePrevItem = (e) => {
-    e.stopPropagation();
-    setSelectedItemIndex((prev) => (prev === 0 ? archiveItemsData.length - 1 : prev - 1));
-  };
-
-  const handleNextItem = (e) => {
-    e.stopPropagation();
-    setSelectedItemIndex((prev) => (prev === archiveItemsData.length - 1 ? 0 : prev + 1));
-  };
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (selectedItemIndex === null) return;
-      if (e.key === 'Escape') handleCloseModal();
-      if (e.key === 'ArrowLeft') setSelectedItemIndex((prev) => (prev === 0 ? archiveItemsData.length - 1 : prev - 1));
-      if (e.key === 'ArrowRight') setSelectedItemIndex((prev) => (prev === archiveItemsData.length - 1 ? 0 : prev + 1));
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedItemIndex]);
-
-  const activeItem = selectedItemIndex !== null ? archiveItemsData[selectedItemIndex] : null;
 
   return (
     <section className="playground-section" id="archive">
@@ -117,18 +81,13 @@ export default function VisualPlaygroundSection() {
           </p>
         </div>
 
-        {/* Carousel Track */}
-        <div
-          className={`playground-carousel-wrapper ${isPaused ? 'paused' : ''}`}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
+        {/* Carousel Track (Continuous loop without stopping on hover) */}
+        <div className="playground-carousel-wrapper">
           <div className="playground-track">
             {carouselItems.map((item, index) => (
               <div
                 key={`${item.id}-${index}`}
                 className="playground-card-wrapper"
-                onClick={() => handleOpenModal(item)}
               >
                 <div className="playground-card">
                   <div className="card-image-box">
@@ -146,48 +105,6 @@ export default function VisualPlaygroundSection() {
         </div>
 
       </div>
-
-      {/* Lightbox / Modal */}
-      {activeItem && (
-        <div className="playground-modal-backdrop" onClick={handleCloseModal}>
-          <div className="playground-modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close-btn" onClick={handleCloseModal} aria-label="Close modal">
-              <X size={20} />
-            </button>
-
-            <div className="modal-body">
-              <div className="modal-image-container">
-                <img src={activeItem.image} alt={activeItem.title} className="modal-image" />
-              </div>
-
-              <div className="modal-info-panel">
-                <div className="modal-meta-row">
-                  <span className="modal-tag">{activeItem.tag}</span>
-                  <span className="modal-year">{activeItem.year}</span>
-                </div>
-                <h3 className="modal-title">{activeItem.title}</h3>
-                <p className="modal-category">{activeItem.category}</p>
-                <div className="modal-divider"></div>
-                <p className="modal-description">{activeItem.description}</p>
-
-                <div className="modal-nav-row">
-                  <button className="modal-nav-btn" onClick={handlePrevItem}>
-                    <ChevronLeft size={16} />
-                    <span>Previous</span>
-                  </button>
-                  <span className="modal-counter">
-                    {selectedItemIndex + 1} / {archiveItemsData.length}
-                  </span>
-                  <button className="modal-nav-btn" onClick={handleNextItem}>
-                    <span>Next</span>
-                    <ChevronRight size={16} />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }

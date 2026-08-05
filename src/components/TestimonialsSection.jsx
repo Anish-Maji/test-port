@@ -14,21 +14,21 @@ const testimonialsData = [
     id: 1,
     quote: (
       <>
-        Anish's timely delivery of exceptional work is impressive. He reliably met deadlines, demonstrating his commitment. His creativity in tackling design challenges and keen eye for detail significantly raised our design quality.
+        I had a very good experience with Anish and his team for redesigning my company logo. He is very creative, particular and passionate with his work. He also simply managed to work on every change to produce the best result. I am satisfied with his work and would definitely recommend him for all sorts of branding and re-branding !
       </>
     ),
-    author: 'Vysak A',
-    role: 'PRODUCT DESIGN LEADER • REVOLUT',
+    author: 'Shashwat Jhatakia',
+    role: 'OWNER • ARIHANT',
   },
   {
     id: 2,
     quote: (
       <>
-        What truly sets Anish apart is his unwavering dedication to continuous improvement. He has proven to be an invaluable team player, collaborating with colleagues from diverse backgrounds and skill sets.
+        Worked with Anish on freelance projects. Reliable. Clear communication. Ensures Minimum revisions after 1st round of feedback.
       </>
     ),
-    author: 'Siddharth Jain',
-    role: 'PRODUCT DESIGN LEAD • KUKU FM',
+    author: 'Rajat Jain',
+    role: 'CO-FOUNDER • SMARTIVITY',
   },
   {
     id: 3,
@@ -37,8 +37,8 @@ const testimonialsData = [
         Anish has excellent problem-solving abilities in the area of UX design.He is knowledgeable about user issues, corporate requirements, and innovative problem - solving.
       </>
     ),
-    author: 'C Subramanya',
-    role: 'SENIOR PRODUCT DESIGNER • SWIGGY',
+    author: 'Vijay Singh Thakur',
+    role: 'SENIOR PRODUCT DESIGNER • CIPLA',
   },
   {
     id: 4,

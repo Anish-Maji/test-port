@@ -6,6 +6,7 @@ import Shuffle from './components/Shuffle';
 import SwapStationPage from './pages/SwapStationPage';
 import CvPage from './pages/CvPage';
 import PlayPage from './pages/PlayPage';
+import AboutPage from './pages/AboutPage';
 import Footer from './components/Footer';
 
 import ToolstackSection from './components/ToolstackSection';
@@ -102,6 +103,7 @@ export function App() {
     if (window.location.hash.includes('swap-station')) return 'swap-station';
     if (window.location.hash.includes('cv')) return 'cv';
     if (window.location.hash.includes('play')) return 'play';
+    if (window.location.hash.includes('about')) return 'about';
     return 'home';
   });
 
@@ -117,7 +119,10 @@ export function App() {
       } else if (hash.includes('play')) {
         setCurrentView('play');
         window.scrollTo(0, 0);
-      } else if (currentView !== 'home' && (hash === '#work' || hash === '' || hash === '#about')) {
+      } else if (hash.includes('about')) {
+        setCurrentView('about');
+        window.scrollTo(0, 0);
+      } else if (currentView !== 'home' && (hash === '#work' || hash === '')) {
         setCurrentView('home');
       }
     };
@@ -173,6 +178,16 @@ export function App() {
     );
   }
 
+  if (currentView === 'about') {
+    return (
+      <div className="app-layout">
+        <Navbar onNavigateHome={handleBackToWork} activePage="about" />
+        <AboutPage onBackToWork={handleBackToWork} />
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="app-layout">
       {/* Preloading Website Loader */}
@@ -195,6 +210,7 @@ export function App() {
             hoverTrailAmount={5}
             className="hero-shapegrid-bg"
           />
+
           <div className="hero-content">
             <Shuffle
               text="a.niche"

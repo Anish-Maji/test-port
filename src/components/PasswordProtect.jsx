@@ -2,20 +2,15 @@ import React, { useState } from 'react';
 import { LockKeyhole, ArrowRight, X } from 'lucide-react';
 import './PasswordProtect.css';
 
-const LinkedinIcon = ({ size = 18, color = "currentColor", fill = "none" }) => (
+const LinkedinIcon = ({ size = 18 }) => (
   <svg
     width={size}
     height={size}
     viewBox="0 0 24 24"
-    fill={fill}
-    stroke={color}
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
+    fill="currentColor"
   >
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect x="2" y="9" width="4" height="12" />
-    <circle cx="4" cy="4" r="2" />
+    <circle cx="4" cy="3.8" r="2.2" />
+    <path d="M1.8 9h4.4v13H1.8zM9.8 9h4.2v1.9c.7-1.2 2.1-2.1 4.2-2.1 3.2 0 4.8 2.1 4.8 5.8V22h-4.4v-6.6c0-1.8-.6-2.9-2.1-2.9-1.2 0-2 .9-2.2 1.7-.1.3-.1.7-.1 1.1V22H9.8V9z" />
   </svg>
 );
 

@@ -162,10 +162,10 @@ export const TicTacToeGame = () => {
     <div className="ttt-game-container">
       {/* Left side text header */}
       <div className="ttt-header-content">
-        <p className="ttt-sub-label">Let's Play With Me</p>
+        <p className="ttt-sub-label">Can you beat me?</p>
         <h1 className="ttt-main-title">Tic-tac-toe, on the house.</h1>
         <p className="ttt-description">
-          A short break from case studies. You're X, AI is playing O — take turns and see who removes the last bit of friction.
+          A short break from case studies. <br />You're X, AI is playing O. Let's take turns and see who removes the last bit of friction.
         </p>
 
         {/* Scorecard Pill */}

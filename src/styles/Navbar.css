@@ -15,6 +15,7 @@
   transition: all var(--transition-normal);
   padding: 0 1rem;
   background: var(--bg-primary);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* Scrolled Header State */
@@ -73,7 +74,7 @@
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  transition: color var(--transition-fast);
+  transition: color var(--transition-normal);
   /* text-transform: uppercase; */
 }
 

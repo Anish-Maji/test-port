@@ -30,6 +30,7 @@ import project3 from './assets/playground/project-3.webp';
 import project4 from './assets/playground/project-4.webp';
 import project5 from './assets/playground/project-5.webp';
 import project6 from './assets/playground/project-6.webp';
+import arihant from './assets/home/arihant-coming-soon.webm';
 
 import './App.css';
 
@@ -68,47 +69,14 @@ const worksData = [
     isInteractive: true,
   },
   {
-    id: 'global-esports',
-    title: "Global Esports — Brand Identity & Gaming Hub",
-    shortTitle: "Global Esports",
-    categoryTag: "gaming.media",
-    subtitle: "Brand identity & digital gaming hub experience",
-    meta: "GLOBAL ESPORTS • GAMING & MEDIA • 2024",
-    image: globalEsportsImg,
+    id: 'arihant-rebranding',
+    title: "Arihant Rebranding",
+    shortTitle: "Arihant",
+    categoryTag: "product.design",
+    subtitle: "Brand identity & visual design for Arihant",
+    meta: "ARIHANT • PRODUCT DESIGN • 2025",
+    video: arihant,
     bgColor: "linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%)",
-    isInteractive: false,
-  },
-  {
-    id: 'kiosk-hmi',
-    title: "Station Touchscreen Kiosk Interface System",
-    shortTitle: "Kiosk Touchscreen HMI",
-    categoryTag: "hardware.hmi",
-    subtitle: "Station touchscreen interface system for battery swapping",
-    meta: "BAAZ MOBILITY • HARDWARE HMI • 2025",
-    image: kioskScreenImg,
-    bgColor: "#f1f5f9",
-    isInteractive: false,
-  },
-  {
-    id: 'rider-app',
-    title: "Rider Mobile Swap & Live Status Companion",
-    shortTitle: "Rider Companion App",
-    categoryTag: "mobile.app",
-    subtitle: "Rider mobile swap & live status companion app",
-    meta: "BAAZ MOBILITY • MOBILE APP • 2024",
-    image: historyScreenImg,
-    bgColor: "#fef3c7",
-    isInteractive: false,
-  },
-  {
-    id: 'fleet-portal',
-    title: "IoT Fleet Operations & Analytics Dashboard",
-    shortTitle: "IoT Fleet Operations",
-    categoryTag: "iot.saas",
-    subtitle: "IoT fleet operations & real-time analytics dashboard",
-    meta: "BAAZ MOBILITY • SAAS DASHBOARD • 2025",
-    image: frameImg,
-    bgColor: "linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%)",
     isInteractive: false,
   },
 ];

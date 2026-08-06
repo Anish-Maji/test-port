@@ -14,7 +14,7 @@ const LinkedinIcon = ({ size = 18 }) => (
   </svg>
 );
 
-export default function PasswordProtect({ onUnlock, correctPassword = 'baaz2025', linkedinUrl = 'https://www.linkedin.com/in/anishmaji/' }) {
+export default function PasswordProtect({ onUnlock, correctPassword = 'baaz2025', linkedinUrl = 'https://www.linkedin.com/in/anish-maji/' }) {
   const [showInput, setShowInput] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -38,7 +38,7 @@ export default function PasswordProtect({ onUnlock, correctPassword = 'baaz2025'
               {/* Left Badge */}
               <div className="nda-left-badge">
                 <div className="nda-lock-circle">
-                  <LockKeyhole size={24} strokeWidth="3px" color="#ea580c" />
+                  <LockKeyhole size={24} strokeWidth="3px" color="#84CC16" />
                 </div>
                 <span className="nda-lock-title">NDA Restricted Content</span>
               </div>

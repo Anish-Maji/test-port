@@ -6,7 +6,6 @@ const navItems = [
   { id: 'work', label: 'Work', href: '#work' },
   { id: 'play', label: 'Play', href: '#play' },
   { id: 'about', label: 'About', href: '#about' },
-  { id: 'cv', label: 'CV', href: '#cv' },
 ];
 
 export const Navbar = ({ onNavigateHome, activePage = 'home' }) => {

@@ -34,7 +34,7 @@ const testimonialsData = [
     id: 3,
     quote: (
       <>
-        Anish has excellent problem-solving abilities in the area of UX design.He is knowledgeable about user issues, corporate requirements, and innovative problem - solving.
+        I have enjoyed working with Anish on a couple of projects. He is sincere and creative, with a great eye for visual design. Beyond his design skills, he is thoughtful, collaborative and genuinely committed to doing great work. It has been a pleasure working with him and I would happily recommend him!
       </>
     ),
     author: 'Vijay Singh Thakur',

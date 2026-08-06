@@ -42,16 +42,26 @@ const defaultImagesToPreload = [
   post5,
 ];
 
+// Module-level flag: persists across SPA page switches (Work, Play, About, CV),
+// but resets automatically whenever the user refreshes the browser page (F5 / reload).
+let hasLoadedInSession = false;
+
 export default function WebsiteLoader({ onFinish }) {
-  const [progress, setProgress] = useState(0);
+  const [isDone, setIsDone] = useState(() => hasLoadedInSession);
+  const [progress, setProgress] = useState(hasLoadedInSession ? 100 : 0);
   const [isFadingOut, setIsFadingOut] = useState(false);
-  const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
+    // If the loader has already executed in this session, skip execution
+    if (hasLoadedInSession) {
+      if (onFinish) onFinish();
+      return;
+    }
+
     let loadedCount = 0;
     const totalCount = defaultImagesToPreload.length;
     const startTime = Date.now();
-    const minDisplayDuration = 1000; // 1 second minimum default timer
+    const minDisplayDuration = 1000; // 1 second minimum display
     let isFinished = false;
 
     // Smooth progress tick while loading
@@ -74,9 +84,10 @@ export default function WebsiteLoader({ onFinish }) {
         setTimeout(() => {
           setIsFadingOut(true);
           setTimeout(() => {
+            hasLoadedInSession = true;
             setIsDone(true);
             if (onFinish) onFinish();
-          }, 100); // 500ms fade-out transition
+          }, 500); // 500ms fade-out transition
         }, 150);
       }, remainingTime);
     };

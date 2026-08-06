@@ -4,7 +4,6 @@ import BrandTicker from './components/BrandTicker';
 import ShapeGrid from './components/ShapeGrid';
 import Shuffle from './components/Shuffle';
 import SwapStationPage from './pages/SwapStationPage';
-import CvPage from './pages/CvPage';
 import PlayPage from './pages/PlayPage';
 import AboutPage from './pages/AboutPage';
 import Footer from './components/Footer';
@@ -18,13 +17,31 @@ import ProjectsSection from './components/ProjectsSection';
 import WebsiteLoader from './components/WebsiteLoader';
 import swapMockupImg from './assets/home/projects-ss.webp';
 import laundryVideo from './assets/home/laundry-thumbnail.webm';
+import nintendoImg from './assets/home/nintendo.png';
 import crimsonImg from './assets/brand logos/crimson_healthcare_pvt_ltd_cover.jpeg';
 import globalEsportsImg from './assets/brand logos/Global esports.webp';
 import kioskScreenImg from './assets/swap_flow_kiosk_screen.png';
 import historyScreenImg from './assets/swap_flow_history_screen.png';
 import frameImg from './assets/Frame 34768.png';
 
+import project1 from './assets/playground/project-1.webp';
+import project2 from './assets/playground/project-2.webp';
+import project3 from './assets/playground/project-3.webp';
+import project4 from './assets/playground/project-4.webp';
+import project5 from './assets/playground/project-5.webp';
+import project6 from './assets/playground/project-6.webp';
+
 import './App.css';
+
+const heroSlideshowImages = [
+  swapMockupImg,
+  project2,
+  project1,
+  project3,
+  project4,
+  project5,
+  project6,
+];
 
 const worksData = [
   {
@@ -101,20 +118,25 @@ const worksData = [
 export function App() {
   const [currentView, setCurrentView] = useState(() => {
     if (window.location.hash.includes('swap-station')) return 'swap-station';
-    if (window.location.hash.includes('cv')) return 'cv';
     if (window.location.hash.includes('play')) return 'play';
     if (window.location.hash.includes('about')) return 'about';
     return 'home';
   });
+
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlideIndex((prev) => (prev + 1) % heroSlideshowImages.length);
+    }, 2800);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
       if (hash.includes('swap-station')) {
         setCurrentView('swap-station');
-        window.scrollTo(0, 0);
-      } else if (hash.includes('cv')) {
-        setCurrentView('cv');
         window.scrollTo(0, 0);
       } else if (hash.includes('play')) {
         setCurrentView('play');
@@ -153,16 +175,6 @@ export function App() {
       <div className="app-layout">
         <Navbar onNavigateHome={handleBackToWork} activePage="swap-station" />
         <SwapStationPage onBackToWork={handleBackToWork} />
-        <Footer />
-      </div>
-    );
-  }
-
-  if (currentView === 'cv') {
-    return (
-      <div className="app-layout">
-        <Navbar onNavigateHome={handleBackToWork} activePage="cv" />
-        <CvPage onBackToWork={handleBackToWork} />
         <Footer />
       </div>
     );
@@ -211,33 +223,61 @@ export function App() {
             className="hero-shapegrid-bg"
           />
 
-          <div className="hero-content">
-            <Shuffle
-              text="a.niche"
-              tag="h1"
-              className="hero-title"
-              shuffleDirection="right"
-              duration={0.35}
-              animationMode="evenodd"
-              shuffleTimes={1}
-              ease="power3.out"
-              stagger={0.03}
-              threshold={0.1}
-              triggerOnce={true}
-              triggerOnHover={true}
-              respectReducedMotion={true}
-              textAlign="left"
-            />
-            <p className="hero-designation">
-              PRODUCT DESIGNER
-              <br />
-            </p>
-            <p className="hero-sub">
-              /anish/
-            </p>
-            <p className="hero-description">
-              a.niche. a place where ideas find their purpose. A personal space for thoughtful design, experimentation, and craftsmanship.
-            </p>
+          <div className="hero-layout-grid">
+            {/* Left Content Column */}
+            <div className="hero-content">
+              <Shuffle
+                text="a.niche"
+                tag="h1"
+                className="hero-title"
+                shuffleDirection="right"
+                duration={0.35}
+                animationMode="evenodd"
+                shuffleTimes={1}
+                ease="power3.out"
+                stagger={0.03}
+                threshold={0.1}
+                triggerOnce={true}
+                triggerOnHover={true}
+                respectReducedMotion={true}
+                textAlign="left"
+              />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <p className="hero-designation">
+                  PRODUCT DESIGNER
+                  <br />
+                </p>
+                <p className="hero-sub">
+                  /anish/
+                </p>
+                <p className="hero-description">
+                  a.niche. a place where ideas find their purpose. A personal space for thoughtful design, experimentation, and craftsmanship.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Column: Nintendo Game Boy SP Device & Screen Slideshow */}
+            <div className="hero-device-container">
+              <div className="nintendo-device-wrapper">
+                <img
+                  src={nintendoImg}
+                  alt="Nintendo Game Boy SP"
+                  className="nintendo-device-img"
+                  draggable={false}
+                />
+                <div className="nintendo-screen-viewport">
+                  {heroSlideshowImages.map((src, idx) => (
+                    <img
+                      key={idx}
+                      src={src}
+                      alt={`Project Slide ${idx + 1}`}
+                      className={`nintendo-screen-slide ${idx === activeSlideIndex ? 'active' : ''}`}
+                      loading="eager"
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

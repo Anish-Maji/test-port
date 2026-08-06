@@ -104,25 +104,25 @@ body {
   position: relative;
   width: 100%;
   max-width: 530px;
+  aspect-ratio: 676 / 1152;
   user-select: none;
   margin: 0 0 -277px auto;
-  padding-top: 100;
 }
 
 .nintendo-device-img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
   display: block;
-  /* filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.12)); */
 }
 
 .nintendo-screen-viewport {
   position: absolute;
-  top: 11%;
-  left: 19%;
-  width: 61.2%;
-  height: 25.2%;
-  border-radius: 2px;
+  top: 7.5rem;
+  left: 6.4rem;
+  width: 20.21rem;
+  height: 13.41rem;
+  border-radius: 3px;
   overflow: hidden;
   background-color: #0d0d0d;
   z-index: 2;

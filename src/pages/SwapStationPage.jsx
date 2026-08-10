@@ -57,7 +57,7 @@ const tocItems = [
 // Set to `true` to require password protection for this case study.
 // Set to `false` to disable password protection (case study becomes freely accessible).
 // ============================================================================
-const ENABLE_PASSWORD_PROTECTION = false;
+const ENABLE_PASSWORD_PROTECTION = true;
 
 export function SwapStationPage({ onBackToWork }) {
   const [isUnlocked, setIsUnlocked] = useState(() => {

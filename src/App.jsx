@@ -25,6 +25,7 @@ import globalEsportsImg from './assets/brand logos/Global esports.webp';
 import kioskScreenImg from './assets/swap_flow_kiosk_screen.png';
 import historyScreenImg from './assets/swap_flow_history_screen.png';
 import frameImg from './assets/Frame 34768.png';
+import referralthumb from './assets/home/referral.webm';
 
 import project1 from './assets/playground/project-1.webp';
 import project2 from './assets/playground/project-2.webp';
@@ -65,7 +66,7 @@ const worksData = [
     categoryTag: "growth.product",
     subtitle: "Gamified referral & payout tracking engine for EV fleet drivers",
     meta: "BAAZ MOBILITY • GROWTH & PRODUCT • 2025",
-    image: referralHeroImg,
+    video: referralthumb,
     bgColor: "linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%)",
     isInteractive: true,
   },

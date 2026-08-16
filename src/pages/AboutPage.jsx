@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FileText } from 'lucide-react';
 import cvFile from '../assets/CV/cv.pdf';
 import aboutHeroImg from '../assets/about-hero-photo.webp';
@@ -68,7 +68,17 @@ const socialLinks = [
   { name: 'BEHANCE', href: 'https://www.behance.net/anishmaji_', target: '_blank' }
 ];
 
-export default function AboutPage({ onBackToWork }) {
+// ============================================================================
+// PAGE TITLE CONFIGURATION
+// Change the string below to update the browser tab title for this page.
+// ============================================================================
+const DEFAULT_PAGE_TITLE = "About Anish | a.niche Portfolio";
+
+export default function AboutPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }) {
+  useEffect(() => {
+    document.title = pageTitle;
+  }, [pageTitle]);
+
   // Triple items array for 100% seamless, continuous carousel loop
   const carouselItems = [...photoItemsData, ...photoItemsData, ...photoItemsData];
 

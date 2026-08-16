@@ -53,13 +53,23 @@ const tocItems = [
 
 
 // ============================================================================
+// PAGE TITLE CONFIGURATION
+// Change the string below to update the browser tab title for this page.
+// ============================================================================
+const DEFAULT_PAGE_TITLE = "Baaz Swap Station | a.niche";
+
+// ============================================================================
 // PASSWORD PROTECTION TOGGLE
 // Set to `true` to require password protection for this case study.
 // Set to `false` to disable password protection (case study becomes freely accessible).
 // ============================================================================
 const ENABLE_PASSWORD_PROTECTION = false;
 
-export function SwapStationPage({ onBackToWork }) {
+export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }) {
+  useEffect(() => {
+    document.title = pageTitle;
+  }, [pageTitle]);
+
   const [isUnlocked, setIsUnlocked] = useState(() => {
     if (!ENABLE_PASSWORD_PROTECTION) return true;
     return sessionStorage.getItem('ss_unlocked') === 'true';

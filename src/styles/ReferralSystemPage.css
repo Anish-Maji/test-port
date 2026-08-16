@@ -1,0 +1,897 @@
+/* ==========================================================================
+   Referral System Case Study Page Styles (Fully Scoped & Isolated)
+   ========================================================================== */
+
+.referral-study-root {
+  background-color: #ffffff;
+  color: #27272a;
+  min-height: 100vh;
+  padding-top: 100px;
+  padding-bottom: 120px;
+  font-family: var(--font-body, 'DM Sans', -apple-system, sans-serif);
+}
+
+.referral-study-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 64px;
+  position: relative;
+}
+
+/* ==========================================================================
+   Left Sidebar / Content Bar (Table of Contents)
+   ========================================================================== */
+
+.referral-study-sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 100px;
+  align-self: flex-start;
+  height: fit-content;
+  z-index: 10;
+}
+
+.referral-sidebar-sticky-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.referral-back-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #71717a;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 12px;
+  transition: color 0.2s ease;
+}
+
+.referral-back-link-btn:hover {
+  color: #18181b;
+}
+
+.referral-toc-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.referral-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.referral-toc-btn {
+  background: none;
+  border: none;
+  color: #a1a1aa;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+  cursor: pointer;
+  padding: 2px 0;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.referral-toc-btn:hover {
+  color: #52525b;
+}
+
+.referral-toc-btn.active {
+  color: #18181b;
+  font-weight: 600;
+}
+
+.referral-sidebar-footer-actions {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f4f4f5;
+}
+
+.referral-action-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  color: #3f3f46;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.referral-action-icon-btn:hover {
+  background: #e4e4e7;
+  color: #18181b;
+}
+
+/* ==========================================================================
+   Right Main Case Study Area
+   ========================================================================== */
+
+.referral-study-main {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+
+.referral-study-header {
+  margin-bottom: 28px;
+}
+
+.referral-category-meta-tag {
+  font-family: var(--font-mono, 'DM Mono', monospace);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.2px;
+  color: #3f3f46;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.referral-study-title {
+  font-family: var(--font-heading, 'Gelasio', serif);
+  font-size: 40px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #18181b;
+  letter-spacing: -0.02em;
+}
+
+/* Hero Banner Container */
+.referral-hero-banner-container {
+  width: 100%;
+  position: relative;
+  margin-bottom: var(--gap-xxxxl, 64px);
+  overflow: hidden;
+}
+
+.referral-hero-banner-inner {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  border-radius: 12px;
+  border: 1px solid #f4f4f5;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.referral-hero-banner-image,
+.referral-hero-banner-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+
+/* Project Details Grid (TIMELINE, ROLE, TEAM) */
+.referral-project-details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding-bottom: 32px;
+  margin-bottom: var(--gap-xxxxl, 64px);
+}
+
+.referral-detail-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.referral-detail-label {
+  font-family: var(--font-sans, 'DM Sans', sans-serif);
+  font-size: 15px;
+  line-height: 18.4px;
+  letter-spacing: 1px;
+  color: #5D5D5D;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.referral-detail-value {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 15px;
+  color: #3f3f46;
+  font-weight: 500;
+}
+
+.referral-detail-team-list {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 15px;
+  color: #3f3f46;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Section 1: TL;DR Box & Key Metrics
+   ========================================================================== */
+
+.referral-study-section {
+  margin-bottom: var(--gap-xx, 120px);
+  scroll-margin-top: 120px;
+}
+
+.referral-tldr-card-box {
+  background-color: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 4px;
+  padding: 32px;
+  position: relative;
+}
+
+.referral-tldr-badge {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 15px;
+  color: #3f3f46;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.referral-tldr-text {
+  font-size: 16px;
+  color: #5D5D5D;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* Metrics Row */
+.referral-tldr-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.referral-metric-card {
+  background: transparent;
+  border: none;
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.referral-metric-number {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.referral-metric-card.positive .referral-metric-number {
+  color: #15803d;
+}
+
+.referral-metric-card.highlight .referral-metric-number {
+  color: #047857;
+}
+
+.referral-metric-icon {
+  stroke-width: 2.5px;
+}
+
+.referral-metric-number-data {
+  color: #5D5D5D;
+  font-size: 24px;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.referral-metric-label {
+  font-size: 15px;
+  color: #6b7280;
+  font-weight: 500;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+}
+
+/* Section Common Headings */
+.referral-section-heading {
+  font-family: var(--font-sans, 'DM Sans', sans-serif);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #0D0D0D;
+  margin-bottom: 16px;
+}
+
+.referral-body-header {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 28.5px;
+  letter-spacing: -0.2px;
+  color: #0D0D0D;
+  margin-bottom: 16px;
+}
+
+.referral-body-header.has-dash {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.referral-body-header.has-dash::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 22px;
+  background-color: #ff7a00;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.referral-paragraph-body {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #5d5d5d;
+  margin-bottom: 20px;
+}
+
+/* Solution Flows Layout */
+.referral-solution-flows-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xxxxl, 64px);
+  margin-top: 32px;
+}
+
+.referral-solution-flow-item {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 40px;
+  align-items: stretch;
+}
+
+.referral-flow-media-col {
+  width: 100%;
+}
+
+.referral-flow-media-container {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 100%;
+  min-height: 340px;
+  border-radius: 12px;
+  border: 1px solid #f4f4f5;
+  position: relative;
+}
+
+.referral-flow-media-image {
+  width: 100%;
+  object-fit: contain;
+}
+
+.referral-flow-text-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-self: flex-end;
+  padding-bottom: 12px;
+}
+
+.referral-flow-title {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 500;
+  color: #0D0D0D;
+  margin-bottom: 12px;
+}
+
+.referral-flow-desc {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 15px;
+  line-height: 24px;
+  color: #5D5D5D;
+  margin: 0;
+}
+
+/* Company Relink Card */
+.referral-company-relink-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #fafafa;
+  border: 1px solid #e4e4e7;
+  padding: 16px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  margin-top: 24px;
+  width: fit-content;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.referral-company-relink-card:hover {
+  border-color: #d4d4d8;
+  background: #f4f4f5;
+}
+
+.referral-company-logo-box {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e4e4e7;
+  padding: 4px;
+}
+
+.referral-company-logo-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.referral-company-relink-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.referral-company-relink-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #18181b;
+  font-size: 15px;
+}
+
+.referral-relink-arrow-icon {
+  color: #71717a;
+}
+
+.referral-company-relink-sub {
+  font-size: 13px;
+  color: #71717a;
+}
+
+/* Problem and Finding Images & Videos */
+.referral-problem-image-container,
+.referral-initial-finding-image-container,
+.referral-initial-finding-image-container-2,
+.referral-all-screens-image-container {
+  margin: 28px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fdfdfd;
+  border: 1px solid #f4f4f5;
+  position: relative;
+  width: 100%;
+}
+
+.referral-problem-image,
+.referral-initial-finding-image,
+.referral-initial-finding-image-2,
+.referral-all-screens-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.referral-video-play-pause-btn {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #18181b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+  padding: 0;
+}
+
+.referral-video-play-pause-btn:hover {
+  background: rgba(255, 255, 255, 0.98);
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.referral-video-play-pause-btn:active {
+  transform: scale(0.95);
+}
+
+/* 3 Stack Cards */
+.referral-initial-findings-three-stack {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.referral-finding-stack-card {
+  background: #fafafa;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.referral-finding-stack-heading {
+  font-size: 16px;
+  font-weight: 600;
+  color: #18181b;
+  margin-bottom: 8px;
+}
+
+.referral-finding-stack-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #52525b;
+  margin: 0;
+}
+
+/* Goals Section Layout (Illustration Box + User/Business Goal Pairs) */
+.referral-goals-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 16px;
+}
+
+.referral-goal-row-item {
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
+}
+
+.referral-goal-illustration-box {
+  width: 145px;
+  height: 193px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.referral-goal-illustration-img {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.referral-goal-details-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 4px;
+}
+
+.referral-goal-pair-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.referral-goal-pair-title {
+  font-family: var(--font-sans, 'DM Sans', sans-serif);
+  font-size: 17px;
+  line-height: 28.5px;
+  font-weight: 500;
+  color: #0d0d0d;
+  letter-spacing: -0.2px;
+  margin: 0;
+}
+
+.referral-goal-pair-label {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 14px;
+  line-height: 20px;
+  color: #717171;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Comparison Grid */
+.referral-comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 32px 0;
+}
+
+.referral-comparison-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.referral-comparison-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e4e4e7;
+  background: #ffffff;
+}
+
+.referral-comparison-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.referral-comparison-meta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.referral-comparison-badge {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.referral-comparison-badge.before {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.referral-comparison-badge.after {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.referral-comparison-description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #52525b;
+  margin: 0;
+}
+
+/* Interactive Zoomable Flow Diagram Container */
+.referral-flow-diagram-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 32px 0;
+  border-radius: 12px;
+  border: 1px solid #e4e4e7;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+}
+
+.referral-flow-diagram-container {
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 32px;
+  user-select: none;
+  cursor: default;
+}
+
+.referral-flow-diagram-container.is-zoomed {
+  cursor: grab;
+}
+
+.referral-flow-diagram-container.is-dragging {
+  cursor: grabbing;
+}
+
+.referral-flow-diagram-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transform-origin: center center;
+}
+
+/* Floating Zoom Controls (Top Right Vertical Stack - Reference Image 2) */
+.referral-zoom-controls-stack {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 10;
+}
+
+.referral-zoom-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  color: #18181b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+}
+
+.referral-zoom-btn:hover:not(:disabled) {
+  background: #fafafa;
+  border-color: #d4d4d8;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.referral-zoom-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.referral-zoom-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Design Decisions Section Layout */
+.referral-decision-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: flex-end;
+  margin-top: 32px;
+}
+
+.referral-decision-image-col {
+  background: #fdfdfd;
+  border: 1px solid #f4f4f5;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+  max-height: 480px;
+}
+
+.referral-decision-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.referral-decision-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 16px;
+}
+
+.referral-decision-title {
+  font-family: var(--font-sans, 'DM Sans', sans-serif);
+  font-size: 19px;
+  line-height: 28px;
+  font-weight: 600;
+  color: #18181b;
+  margin: 0;
+}
+
+.referral-decision-desc {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 15px;
+  line-height: 24px;
+  color: #52525b;
+  margin: 0;
+}
+
+/* Reflection Section 2-Column Layout */
+.referral-reflections-columns-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+.referral-reflection-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.referral-reflection-col-title {
+  font-family: var(--font-sans, 'DM Sans', sans-serif);
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+  color: #0d0d0d;
+  margin: 0;
+}
+
+.referral-reflection-col-body {
+  font-family: var(--font-sans, 'DM Sans', sans-serif);
+  font-size: 15px;
+  line-height: 1.6;
+  color: #52525b;
+  margin: 0;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .referral-study-container {
+    gap: 40px;
+  }
+
+  .referral-study-sidebar {
+    width: 160px;
+  }
+
+  .referral-initial-findings-three-stack,
+  .referral-tldr-metrics-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .referral-study-container {
+    flex-direction: column;
+    gap: 32px;
+    padding: 0 16px;
+  }
+
+  .referral-study-sidebar {
+    width: 100%;
+    position: static;
+  }
+
+  .referral-study-title {
+    font-size: 28px;
+  }
+
+  .referral-project-details-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .referral-solution-flow-item,
+  .referral-comparison-grid,
+  .referral-goal-row-item,
+  .referral-decision-grid,
+  .referral-reflections-columns-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -4,6 +4,7 @@ import BrandTicker from './components/BrandTicker';
 import ShapeGrid from './components/ShapeGrid';
 import Shuffle from './components/Shuffle';
 import SwapStationPage from './pages/SwapStationPage';
+import ReferralSystemPage from './pages/ReferralSystemPage';
 import PlayPage from './pages/PlayPage';
 import AboutPage from './pages/AboutPage';
 import Footer from './components/Footer';
@@ -16,6 +17,7 @@ import TestimonialsSection from './components/TestimonialsSection';
 import ProjectsSection from './components/ProjectsSection';
 import WebsiteLoader from './components/WebsiteLoader';
 import swapMockupImg from './assets/home/projects-ss.webp';
+import referralHeroImg from './assets/referral_hero.png';
 import laundryVideo from './assets/home/laundry-thumbnail.webm';
 import nintendoImg from './assets/home/nintendo.png';
 import crimsonImg from './assets/brand logos/crimson_healthcare_pvt_ltd_cover.jpeg';
@@ -57,6 +59,17 @@ const worksData = [
     isInteractive: true,
   },
   {
+    id: 'referral-system',
+    title: "Baaz's Driver Referral System",
+    shortTitle: "Baaz Referral System",
+    categoryTag: "growth.product",
+    subtitle: "Gamified referral & payout tracking engine for EV fleet drivers",
+    meta: "BAAZ MOBILITY • GROWTH & PRODUCT • 2025",
+    image: referralHeroImg,
+    bgColor: "linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%)",
+    isInteractive: true,
+  },
+  {
     id: 'hostel-laundry',
     title: "Revolutionizing Laundry in Hostels",
     shortTitle: "Revolutionizing Laundry in Hostels",
@@ -83,15 +96,28 @@ const worksData = [
 
 
 
+// ============================================================================
+// HOME PAGE TITLE CONFIGURATION
+// Change the string below to update the browser tab title for the homepage.
+// ============================================================================
+const HOME_PAGE_TITLE = "a.niche | Anish Maji - Product Designer";
+
 export function App() {
   const [currentView, setCurrentView] = useState(() => {
     if (window.location.hash.includes('swap-station')) return 'swap-station';
+    if (window.location.hash.includes('referral-system')) return 'referral-system';
     if (window.location.hash.includes('play')) return 'play';
     if (window.location.hash.includes('about')) return 'about';
     return 'home';
   });
 
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentView === 'home') {
+      document.title = HOME_PAGE_TITLE;
+    }
+  }, [currentView]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -105,6 +131,9 @@ export function App() {
       const hash = window.location.hash;
       if (hash.includes('swap-station')) {
         setCurrentView('swap-station');
+        window.scrollTo(0, 0);
+      } else if (hash.includes('referral-system')) {
+        setCurrentView('referral-system');
         window.scrollTo(0, 0);
       } else if (hash.includes('play')) {
         setCurrentView('play');
@@ -121,10 +150,16 @@ export function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, [currentView]);
 
-  const handleOpenCaseStudy = () => {
-    setCurrentView('swap-station');
-    window.location.hash = 'swap-station';
-    window.scrollTo(0, 0);
+  const handleOpenCaseStudy = (id = 'swap-station') => {
+    if (id === 'referral-system') {
+      setCurrentView('referral-system');
+      window.location.hash = 'referral-system';
+      window.scrollTo(0, 0);
+    } else {
+      setCurrentView('swap-station');
+      window.location.hash = 'swap-station';
+      window.scrollTo(0, 0);
+    }
   };
 
   const handleBackToWork = () => {
@@ -143,6 +178,16 @@ export function App() {
       <div className="app-layout">
         <Navbar onNavigateHome={handleBackToWork} activePage="swap-station" />
         <SwapStationPage onBackToWork={handleBackToWork} />
+        <Footer />
+      </div>
+    );
+  }
+
+  if (currentView === 'referral-system') {
+    return (
+      <div className="app-layout">
+        <Navbar onNavigateHome={handleBackToWork} activePage="referral-system" />
+        <ReferralSystemPage onBackToWork={handleBackToWork} />
         <Footer />
       </div>
     );

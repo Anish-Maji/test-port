@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import TicTacToeGame from '../components/TicTacToeGame';
 import '../styles/PlayPage.css';
 
-export const PlayPage = ({ onBackToWork }) => {
+// ============================================================================
+// PAGE TITLE CONFIGURATION
+// Change the string below to update the browser tab title for this page.
+// ============================================================================
+const DEFAULT_PAGE_TITLE = "Play | a.niche Portfolio";
+
+export const PlayPage = ({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }) => {
+  useEffect(() => {
+    document.title = pageTitle;
+  }, [pageTitle]);
   return (
     <div className="play-page-container">
       <div className="play-content-wrapper">

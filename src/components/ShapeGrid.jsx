@@ -268,9 +268,25 @@ const ShapeGrid = ({
     };
 
     const handleMouseMove = event => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
       const rect = canvas.getBoundingClientRect();
       const mouseX = event.clientX - rect.left;
       const mouseY = event.clientY - rect.top;
+
+      if (
+        mouseX < 0 ||
+        mouseX > rect.width ||
+        mouseY < 0 ||
+        mouseY > rect.height
+      ) {
+        if (hoveredSquare.current && hoverTrailAmount > 0) {
+          trailCells.current.unshift({ ...hoveredSquare.current });
+          if (trailCells.current.length > hoverTrailAmount) trailCells.current.length = hoverTrailAmount;
+        }
+        hoveredSquare.current = null;
+        return;
+      }
 
       if (isHex) {
         const colShift = Math.floor(gridOffset.current.x / hexHoriz);
@@ -361,24 +377,14 @@ const ShapeGrid = ({
       }
     };
 
-    const handleMouseLeave = () => {
-      if (hoveredSquare.current && hoverTrailAmount > 0) {
-        trailCells.current.unshift({ ...hoveredSquare.current });
-        if (trailCells.current.length > hoverTrailAmount) trailCells.current.length = hoverTrailAmount;
-      }
-      hoveredSquare.current = null;
-    };
-
-    canvas.addEventListener('mousemove', handleMouseMove);
-    canvas.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('mousemove', handleMouseMove);
 
     requestRef.current = requestAnimationFrame(updateAnimation);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(requestRef.current);
-      canvas.removeEventListener('mousemove', handleMouseMove);
-      canvas.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, [direction, speed, borderColor, hoverFillColor, squareSize, shape, hoverTrailAmount]);
 

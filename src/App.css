@@ -71,6 +71,7 @@ body {
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 3rem;
+  pointer-events: none;
 }
 
 .hero-content {
@@ -86,7 +87,9 @@ body {
   padding-bottom: 3rem;
 }
 
-.hero-content * {
+.hero-content a,
+.hero-content button,
+.hero-title {
   pointer-events: auto;
 }
 
@@ -98,6 +101,7 @@ body {
   position: relative;
   z-index: 1;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .nintendo-device-wrapper {

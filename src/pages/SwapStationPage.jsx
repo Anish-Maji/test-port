@@ -34,6 +34,7 @@ import ssOutcome2a from '../assets/SS Project/outcome-metrics-2a.webp';
 import ssOutcome2b from '../assets/SS Project/outcome-metrics-2b.webp';
 import ssSwapStartedAudio from '../assets/SS Project/swap started.mp3';
 import PasswordProtect from '../components/PasswordProtect';
+import defaultWorksData from '../data/worksData';
 
 
 
@@ -65,10 +66,13 @@ const DEFAULT_PAGE_TITLE = "Baaz Swap Station | a.niche";
 // ============================================================================
 const ENABLE_PASSWORD_PROTECTION = true;
 
-export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }) {
+export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE, worksData: propsWorksData, onOpenCaseStudy }) {
   useEffect(() => {
     document.title = pageTitle;
   }, [pageTitle]);
+
+  const activeWorksData = (propsWorksData && propsWorksData.length > 0) ? propsWorksData : defaultWorksData;
+  const relatedProjects = activeWorksData.filter(work => work.id !== 'swap-station').slice(0, 2);
 
   const [isUnlocked, setIsUnlocked] = useState(() => {
     if (!ENABLE_PASSWORD_PROTECTION) return true;
@@ -291,7 +295,7 @@ export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }
               SWAP STATION &bull; EV & CLEAN TECH &bull; 2025
             </div>
             <h1 className="case-study-title">
-              Redesigning Swap Station HMI <br /> <span style={{ fontStyle: 'italic', color: '#C94F1E' }}>to make battery swaps under 50 second.</span>
+              Redesigning Swap Station HMI <br /> <span style={{ fontStyle: 'italic', color: '#C94F1E' }}>to make battery swaps under 50 seconds.</span>
             </h1>
           </header>
 
@@ -466,7 +470,7 @@ export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }
               </h3>
 
               <p className="paragraph-body">
-                Battery swapping is a critical touchpoint, connecting vehicles, stations, and the rider app. Any friction in this high-frequency flow increases rider downtime, reduces deliveries, which ultimately results in lower system throughput. However, the existing HMI experience introduced hesitation and inconsistency at key steps, thus slowing down a fast, repeatable action. At scale, even small delays per swap compound into lost delivery capacity, lower rider earnings, and reduced system output.
+                Battery swapping is a critical touchpoint, connecting vehicles, stations, and the rider app. Any friction in this high-frequency flow increases rider downtime, reduces deliveries and ultimately results in lower system throughput. However, the existing HMI experience introduced hesitation and inconsistency at key steps, thus slowing down a fast, repeatable action. At scale, even small delays per swap compound into lost delivery capacity, lower rider earnings, and reduced system output.
               </p>
               {/* <div className="info-quote-box">
               <p>
@@ -534,7 +538,7 @@ export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }
                 </h3>
                 <p className="paragraph-body">
                   Riders were calling not because they did not understand the interface but because the system was encountering real issues like stuck battery,
-                  doors that did not open, and so on. The FSM or HMI failed to provide the riders with clarity of the situation, which in turn let to Frustration and hesitancy.
+                  doors that did not open, and so on. The FSM or HMI failed to provide the riders with clarity of the situation, which in turn led to frustration and hesitancy.
                 </p>
 
                 <div className="initial-finding-image-container">
@@ -570,7 +574,7 @@ export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }
                   The rider app handles account management, earnings, and route planning. It is used before and after the swap, not during the swapping process. The physical station handles that side of the process, but stuck doors and non-functional battery locks are hardware constraints outside design scope. Operations training helps new riders, but it does not cater to the scale or fix a broken feedback system.
                 </p>
                 <p className="paragraph-body">
-                  The swap station's HMI is the only touchpoint present during the swapping process, and the only thing that us fully within design control. So that's where we started.
+                  The swap station's HMI is the only touchpoint present during the swapping process, and the only thing that is fully within design control. So that's where we started.
                 </p>
               </div>
 
@@ -593,7 +597,7 @@ export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }
                 <div className="finding-stack-card">
                   <h4 className="finding-stack-heading">Fully with design control</h4>
                   <p className="finding-stack-text">
-                    Hardware failure need engineers. App changes need product priotization. The HMI was our to fix.
+                    Hardware failure needs engineers. App changes need product prioritization. The HMI was ours to fix.
                   </p>
                 </div>
               </div>
@@ -664,7 +668,7 @@ export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }
                 Working my way down, thinking from a high level structure...
               </h3>
               <p className="paragraph-body">
-                I began with the information architecture, also known as the Final State Machine (FSM), and then I moved on to the home screen. I then proceeded screen by screen. The main working principle was to maintain transparency of the exact state of the swap station to the delivery rides, to reduce cognative load.
+                I began with the information architecture, also known as the Finite State Machine (FSM), and then I moved on to the home screen. I then proceeded screen by screen. The main working principle was to maintain transparency of the exact state of the swap station to the delivery riders, to reduce cognitive load.
               </p>
 
               <div className="fsm-video-container">
@@ -779,7 +783,7 @@ export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }
                   <div className="comparison-meta-col">
                     <span className="comparison-badge after">AFTER</span>
                     <p className="comparison-description">
-                      Added new error screens, addressing the particular error that has occured, and what the rider need to do to solve the problem
+                      Added new error screens, addressing the particular error that has occurred, and what the rider needs to do to solve the problem
                     </p>
                   </div>
                 </div>
@@ -807,7 +811,7 @@ export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }
               <div>
                 <p className="paragraph-body">
                   I did the same for the technician (people responsible for fixing the swap stations) screens.
-                  Except the use-cases were different. The design direction of the technician screens are different from the rider screens to make the screen easily distinguishable.
+                  Except the use-cases were different. The design direction of the technician screens is different from the rider screens to make the screen easily distinguishable.
                   Also, there are lots of terminologies which are specific to the technicians.
                 </p>
                 <div className="all-screens-image-container">
@@ -825,7 +829,7 @@ export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }
                 <p className="paragraph-body">
                   I mapped every state of the FSM to a HMI screen: home, positive swap, errors and the edges in between.
                   The positive swap mostly had a linear flow, starting with the home state. We had regular cross-team meeting with the Firmware team and Design managers.
-                  There is a snapshot to the positive flow for the swap station along with the audio.
+                  There is a snapshot of the positive flow for the swap station along with the audio.
                 </p>
                 <div className="process-video-wrapper">
                   <div className="process-video-container">
@@ -893,7 +897,7 @@ export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }
 
             {/* Designing with constrains */}
             <section id="designing-with-constrains" className="case-study-section">
-              <h2 className="detail-label" style={{ marginBottom: "var(--gap-lg)" }}>Designing with constrains</h2>
+              <h2 className="detail-label" style={{ marginBottom: "var(--gap-lg)" }}>Designing with constraints</h2>
               <h3 className='body-header'>Designing for hardware constraints instead of unlimited possibilities</h3>
               <p className="paragraph-body">
                 Unlike mobile applications, the swap station interface runs on dedicated hardware where every interaction must be lightweight and reliable.
@@ -1047,7 +1051,7 @@ export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }
 
                     </div>
                     <h4 className="paragraph-body">
-                      There a clear decrease in the number of customer support calls through clear messaging.
+                      There is a clear decrease in the number of customer support calls through clear messaging.
                     </h4>
                   </div>
                 </div>
@@ -1159,14 +1163,14 @@ export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }
 
 
               <h3 className='body-header'>
-                How would I do differently with AI?
+                What would I do differently with AI?
               </h3>
 
               <div className="reflections-columns-grid">
                 <div className="reflection-column">
                   <h4 className="reflection-col-title">Rapid prototyping for testing</h4>
                   <p className="reflection-col-body">
-                    I would have connected the Figma MCP directly to the Nextion software and prepare the screens for different conditions, and test those in real world senarios, through different languages and conditions.
+                    I would have connected the Figma MCP directly to the Nextion software and prepare the screens for different conditions, and test those in real world scenarios, through different languages and conditions.
                   </p>
                 </div>
                 <div className="reflection-column">
@@ -1183,7 +1187,7 @@ export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }
             <div className="contact-prompt-box">
               <span className="contact-tag">CURIOUS TO KNOW MORE?</span>
               <p className="contact-text">
-                This is just a small part of the design process, to get the full story <a href="mailto:masteranishmaji@gmail.com" className="contact-link">get in touch</a>.
+                This is just a small part of the design process. To get the full story, <a href="mailto:masteranishmaji@gmail.com" className="contact-link">get in touch</a>.
               </p>
             </div>
 
@@ -1193,62 +1197,66 @@ export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }
             <div className="related-projects-section">
               <h3 className="related-section-title">Also check out..</h3>
               <div className="related-projects-grid">
-                <div className="related-project-card">
-                  <div className="related-card-media streamline-media-bg">
-                    <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M75 25C65 15 50 15 40 25C30 35 30 45 40 55C50 65 70 65 80 75C90 85 75 95 65 95C55 95 45 90 35 80" stroke="#22c55e" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M25 75C35 85 50 85 60 75" stroke="#22c55e" strokeWidth="12" strokeLinecap="round" />
-                    </svg>
-                  </div>
-                  <p className="related-card-meta">STREAMLINE &bull; B2B SAAS &bull; 2023</p>
-                  <h4 className="related-card-title">Design tool for Streamline</h4>
-                </div>
+                {relatedProjects.map((work) => {
+                  const isClickable = work.isInteractive || !!work.externalUrl;
+                  const handleProjectClick = () => {
+                    if (work.externalUrl) {
+                      window.open(work.externalUrl, '_blank', 'noopener,noreferrer');
+                    } else if (work.isInteractive) {
+                      if (onOpenCaseStudy) {
+                        onOpenCaseStudy(work.id);
+                      } else {
+                        window.location.hash = work.id;
+                        window.scrollTo(0, 0);
+                      }
+                    }
+                  };
 
-                <div className="related-project-card">
-                  <div className="related-card-media checkmate-media-bg">
-                    <div className="mockup-phone-body">
-                      <div className="mockup-phone-island"></div>
-                      <div className="mockup-phone-screen">
-                        {/* Mock Widget 1 */}
-                        <div className="mockup-widget" style={{ borderLeft: "3px solid #f472b6" }}>
-                          <div className="mockup-widget-title">Today's Todo</div>
-                          <div className="mockup-widget-item">
-                            <span className="mockup-checkbox checked"></span>
-                            <span className="mockup-bar"></span>
-                          </div>
-                          <div className="mockup-widget-item">
-                            <span className="mockup-checkbox"></span>
-                            <span className="mockup-bar short"></span>
-                          </div>
-                        </div>
-                        {/* Mock Widget 2 */}
-                        <div className="mockup-widget" style={{ borderLeft: "3px solid #3b82f6" }}>
-                          <div className="mockup-widget-title">Shared Tasks</div>
-                          <div className="mockup-widget-item">
-                            <span className="mockup-checkbox"></span>
-                            <span className="mockup-bar"></span>
-                          </div>
-                          <div className="mockup-widget-item">
-                            <span className="mockup-checkbox checked"></span>
-                            <span className="mockup-bar"></span>
-                          </div>
-                        </div>
+                  return (
+                    <div
+                      key={work.id}
+                      className={`related-project-card ${isClickable ? 'interactive' : ''}`}
+                      onClick={handleProjectClick}
+                      role={isClickable ? 'button' : undefined}
+                      tabIndex={isClickable ? 0 : undefined}
+                      onKeyDown={(e) => {
+                        if (isClickable && e.key === 'Enter') {
+                          handleProjectClick();
+                        }
+                      }}
+                    >
+                      <div
+                        className="related-card-media"
+                        style={{ background: work.bgColor || '#f4f4f5' }}
+                      >
+                        {work.video ? (
+                          <video
+                            src={work.video}
+                            className="related-card-video"
+                            muted
+                            playsInline
+                            autoPlay
+                            loop
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          />
+                        ) : (
+                          <img
+                            src={work.image}
+                            alt={work.title}
+                            className="related-card-image"
+                            loading="lazy"
+                            draggable={false}
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          />
+                        )}
                       </div>
+                      <p className="related-card-meta">{work.meta || work.categoryTag}</p>
+                      <h4 className="related-card-title">{work.shortTitle || work.title}</h4>
                     </div>
-                  </div>
-                  <p className="related-card-meta">CHECKMATE &bull; PRODUCTIVITY &bull; 2026</p>
-                  <h4 className="related-card-title">Checkmate: Collaborative todo for shared living</h4>
-                </div>
+                  );
+                })}
               </div>
             </div>
-
-            {/* Bottom Navigation / Next Project Footer */}
-            <footer className="case-study-footer">
-              <button className="footer-back-btn" onClick={onBackToWork}>
-                <ArrowLeft size={18} />
-                <span>Back to all works</span>
-              </button>
-            </footer>
 
           </div>
         </main>

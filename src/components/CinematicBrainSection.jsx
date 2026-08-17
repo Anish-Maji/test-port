@@ -33,7 +33,7 @@ const cinematicPostsData = [
     username: '@anishmaji_',
     location: 'Dharmashala, India',
     image: post1,
-    caption: 'Some places dont ask for anything more, but tell you to slow down a bit.Take a pause. Visit yourself. 🤍 #dharmashala #tours #indiareels',
+    caption: "Some places don't ask for anything more, but tell you to slow down a bit.Take a pause. Visit yourself. 🤍 #dharmashala #tours #indiareels",
     likes: '60',
     comments: '11',
     postUrl: 'https://www.instagram.com/p/DaqfyBJwUDo/'
@@ -53,7 +53,7 @@ const cinematicPostsData = [
     username: '@anishmaji_',
     location: 'Yamuna, Delhi',
     image: post3,
-    caption: 'Lets bring back the colors for my little section by the Yamuna....',
+    caption: "Let's bring back the colors for my little section by the Yamuna....",
     likes: '72',
     comments: '2',
     postUrl: 'https://www.instagram.com/p/DGppLd6yu1w/'

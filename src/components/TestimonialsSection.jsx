@@ -24,7 +24,7 @@ const testimonialsData = [
     id: 2,
     quote: (
       <>
-        Worked with Anish on freelance projects. Reliable. Clear communication. Ensures Minimum revisions after 1st round of feedback.
+        Worked with Anish on freelance projects. Reliable. Clear communication. Ensures minimum revisions after 1st round of feedback.
       </>
     ),
     author: 'Rajat Jain',

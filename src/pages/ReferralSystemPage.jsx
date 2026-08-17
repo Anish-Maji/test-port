@@ -348,12 +348,12 @@ export function ReferralSystemPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITL
             {/* Section 1: TL;DR */}
             <section id="tldr" className="referral-study-section referral-section-tldr">
               <div className="referral-tldr-card-box">
-                <div className="referral-tldr-badge">TL ; DR</div>
+                <div className="referral-tldr-badge">TL;DR</div>
                 <p className="referral-tldr-text">
-                  Baaz already had a referral program, but it just was not a system. Riders had to physically bring their referral to a hub, where the referrer was paid ₹100 in cash. There was no way to track who referred whom, no record of what had already been paid, and referrals routinely fell through the cracks, while other competitors were peeping into Delhi NCR.
+                  Baaz already had a referral program, but it just was not a system. Riders had to physically bring their referral to a hub, where the referrer was paid ₹100 in cash. There was no way to track who referred whom, no record of what had already been paid, and referrals routinely fell through the cracks, while other competitors were extending into Delhi NCR.
                   <br />
                   <br />
-                  I designed a centralized, in-app referral flow for Baazigar in one week with fewer steps, clear status at every stage, and a saved-state experience for returning riders. Within two weeks of launch, the program brought in 200+ new riders, with 400+ referrals tracked end-to-end for the first time.
+                  I designed a centralized, in-app referral flow for Baazigar in one week with fewer steps, clear status at every stage, and a saved-state experience for returning riders. Within a week of launch, the program brought in 200+ new riders, with 400+ referrals tracked end-to-end for the first time.
                 </p>
 
                 {/* Key Impact Metrics Row */}
@@ -482,7 +482,7 @@ export function ReferralSystemPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITL
               </h3>
 
               <p className="referral-paragraph-body">
-                Referrals are Baaz's lowest-cost growth lever, connecting existing riders, new riders, and hub operations in a single loop. Any friction in this loop delays new rider onboarding, discourages existing riders from referring again, and ultimately slows the program's growth compounding effect. However, the existing referral process ran entirely offline, a new rider had to be physically brought to a hub, where the referrer was paid ₹100 in cash, thus introducing inconsistency and zero traceability at every step. At scale, even small gaps in this process compound into missed referrals, disputed or duplicate payouts, and a growth channel Baaz couldn't reliably measure or trust.
+                Referrals are Baaz's lowest-cost growth lever, connecting existing riders, new riders, and hub operations in a single loop. Any friction in this loop delays new rider onboarding, discourages existing riders from referring again, and ultimately slows the program's growth compounding effect. However, the existing referral process ran entirely offline; a new rider had to be physically brought to a hub, where the referrer was paid ₹100 in cash, thus introducing inconsistency and zero traceability at every step. At scale, even small gaps in this process compound into missed referrals, disputed or duplicate payouts, and a growth channel Baaz couldn't reliably measure or trust.
               </p>
 
               <a
@@ -514,7 +514,7 @@ export function ReferralSystemPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITL
                 No centralized referral system, thus making every referral ran on trust and memory, not data.
               </h3>
               <p className="referral-paragraph-body">
-                A new rider had to be physically brought to a hub by their referrer, who was then immediately given ₹100 in cash. The current referral method was completely manual. There was no procedure in place to stop repeated or contested payouts, no record of the referral, and no way to confirm it later. Referrals frequently went unnoticed; riders who brought in a buddy occasionally never received credit, and hub employes lacked a trustworthy method to verify who had referred whom.
+                A new rider had to be physically brought to a hub by their referrer, who was then immediately given ₹100 in cash. The current referral method was completely manual. There was no procedure in place to stop repeated or contested payouts, no record of the referral, and no way to confirm it later. Referrals frequently went unnoticed; occasionally riders who brought in a buddy never received credit, and hub employees lacked a trustworthy method to verify who had referred whom.
               </p>
 
               <div className="referral-problem-image-container">
@@ -602,7 +602,7 @@ export function ReferralSystemPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITL
                 I mapped all three touchpoints first: who generates a code, who redeems it, and who gets paid.
               </h3>
               <p className="referral-paragraph-body">
-                A referral is not a single flow, it's three people meeting the same system at different times. I traced the referrer's share screen, the new joiner's redemption during onboarding, and the referrer's payout redemption weeks later, including every failure state in between. That map shows exactly how the new process is much more useful, still keeping it as simple as possible.
+                A referral is not a single flow, it's three people meeting the same system at different times. I traced the referrer's share screen, the new joiner's redemption during onboarding, and the referrer's payout redemption weeks later, including every failure state in between. That map shows exactly how the new process is much more useful, while keeping it as simple as possible.
               </p>
 
               {/* Interactive Zoomable Flow Diagram Container */}
@@ -712,7 +712,7 @@ export function ReferralSystemPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITL
                 <div className="referral-decision-text-col">
                   <h4 className="referral-decision-title">Clear messaging, everywhere it mattered</h4>
                   <p className="referral-decision-desc">
-                    Every state in this system says exactly what is happening. A valid code shows who referred you by name. An invalid code either indicates that it is invalid or that it has expired. Nobody hands a stranger's code to a signup form without proof it's real, so every screen in this system had to earn that proof on its own.
+                    Every state in this system says exactly what is happening. A valid code shows who referred you by name. An invalid code indicated either the code is wrong or it has expired. Nobody hands a stranger's code to a signup form without proof it's real, so every screen in this system had to earn that proof on its own.
                   </p>
                 </div>
               </div>
@@ -805,7 +805,7 @@ export function ReferralSystemPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITL
                     The best growth mechanics are the ones that don't need to be clever.
                   </h4>
                   <p className="referral-reflection-col-body">
-                    Nothing about the referral system is a novel interaction pattern; it is a core field, and following Jacob’s Law we kept it similar to what any other app in the world does. What made it work wasn't invention, it was making sure every one of those familiar pieces closed the trust gap the old process left open.
+                    Nothing about the referral system is a novel interaction pattern; it is a core flow, and following Jacob’s Law we kept it similar to what any other app in the world does. What made it work wasn't invention, it was making sure every one of those familiar pieces closed the trust gap the old process left open.
                   </p>
                 </div>
               </div>

@@ -23,20 +23,20 @@ const workExperiences = [
   {
     role: 'Product & Visual Designer',
     company: 'Baaz Bikes',
-    period: '2023- Present',
+    period: '2023 - Present',
     location: 'Gurugram, India'
   },
   {
     role: 'Visual Designer Freelancer',
     company: 'Smartivity',
     location: 'New Delhi, India',
-    period: '2022- 2023'
+    period: '2022 - 2023'
   },
   {
     role: 'UI UX Design Intern',
     company: 'Tangle Design',
     location: 'Pune, India',
-    period: 'Jun - Sep 2021'
+    period: 'Jun 2021 - Sep 2021'
   },
   {
     role: 'Visual Design Intern',
@@ -48,7 +48,7 @@ const workExperiences = [
     role: 'Visual & Production Designer',
     company: 'Global Esports India',
     location: 'Mumbai, India',
-    period: '2020- 2022'
+    period: 'Sep 2020 - Feb 2022'
   }
 ];
 
@@ -92,7 +92,7 @@ export default function AboutPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE
         <section className="about-hero-section">
           <div className="about-hero-left">
             <h1 className="about-hero-heading">
-              I am a designer by passions and explorer by heart. I love the things that I am doing.
+              I am a designer by passion and explorer by heart. I love the things that I am doing.
             </h1>
 
             <p className="about-hero-description">

@@ -23,7 +23,7 @@ export const worksData = [
     subtitle: "Gamified referral & payout tracking engine for EV fleet drivers",
     meta: "BAAZ MOBILITY • GROWTH & PRODUCT • 2025",
     video: referralthumb,
-    bgColor: "linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%)",
+    bgColor: "#0d0d0d",
     isInteractive: true,
   },
   {
@@ -35,7 +35,7 @@ export const worksData = [
     meta: "BEHANCE • PRODUCT DESIGN • 2024",
     video: laundryVideo,
     externalUrl: "https://www.behance.net/gallery/193222351/Revolutionizing-Laundry-in-Hostels",
-    bgColor: "#111827",
+    bgColor: "radial-gradient(139.8% 139.8% at 95.63% -0.02%, #4EDFFA 32.59%, #078AB7 100%)",
     isInteractive: true,
   },
   {

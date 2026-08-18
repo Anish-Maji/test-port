@@ -49,10 +49,12 @@
 .ticker-track {
   display: flex;
   align-items: center;
-  gap: 4rem;
+  width: max-content;
   flex-shrink: 0;
-  min-width: 100%;
-  animation: scrollTicker 28s linear infinite;
+  gap: 3.5rem;
+  padding-right: 3.5rem;
+  will-change: transform;
+  animation: scrollTicker 80s linear infinite;
 }
 
 .ticker-container:hover .ticker-track {
@@ -63,7 +65,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0;
   flex-shrink: 0;
 }
 
@@ -73,18 +75,17 @@
   width: auto;
   max-width: 180px;
   object-fit: contain;
-  /* filter: grayscale(100%) opacity(0.75); */
-  /* transition: filter var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast); */
+  filter: grayscale(100%) opacity(0.65);
+  transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
 .ticker-item:hover .ticker-brand-image {
-  /* filter: grayscale(0%) opacity(1);
-  transform: scale(1.05); */
+  filter: grayscale(0%) opacity(1);
 }
 
 @keyframes scrollTicker {
   0% {
-    transform: translateX(0%);
+    transform: translateX(0);
   }
 
   100% {
@@ -99,7 +100,8 @@
   }
 
   .ticker-track {
-    gap: 3rem;
+    gap: 7rem;
+    padding-right: 7rem;
   }
 
   .ticker-brand-image {
@@ -114,7 +116,8 @@
   }
 
   .ticker-track {
-    gap: 3rem;
+    gap: 2.5rem;
+    padding-right: 2.5rem;
   }
 
   .ticker-brand-image {
@@ -126,6 +129,7 @@
 @media (max-width: 360px) {
   .ticker-track {
     gap: 2rem;
+    padding-right: 2rem;
   }
 
   .ticker-brand-image {

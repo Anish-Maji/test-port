@@ -212,7 +212,7 @@ export function App() {
                 respectReducedMotion={true}
                 textAlign="left"
               />
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div className='hero-all'>
                 <p className="hero-designation">
                   PRODUCT DESIGNER
                   <br />

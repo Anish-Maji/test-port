@@ -24,10 +24,10 @@ const dynamicBrandLogos = Object.entries(logoModules).map(([path, url]) => {
 export const BrandTicker = () => {
   const logoList = dynamicBrandLogos.length > 0 ? dynamicBrandLogos : [];
 
-  // Repeat logos if few are present to ensure continuous marquee loop
-  const repeatedLogos = logoList.length > 0 && logoList.length < 8
-    ? [...logoList, ...logoList, ...logoList]
-    : logoList;
+  // Repeat logos array 4 times to ensure seamless infinite marquee loop across wide viewports
+  const repeatedLogos = logoList.length > 0
+    ? [...logoList, ...logoList, ...logoList, ...logoList]
+    : [];
 
   if (repeatedLogos.length === 0) {
     return null;

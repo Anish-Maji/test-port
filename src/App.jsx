@@ -57,7 +57,7 @@ const heroSlideshowImages = [
 // HOME PAGE TITLE CONFIGURATION
 // Change the string below to update the browser tab title for the homepage.
 // ============================================================================
-const HOME_PAGE_TITLE = "a.niche | Anish Maji - Product Designer";
+const HOME_PAGE_TITLE = "Anish Maji - Product Designer";
 
 export function App() {
   const [currentView, setCurrentView] = useState(() => {

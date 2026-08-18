@@ -215,7 +215,6 @@ export function App() {
               <div className='hero-all'>
                 <p className="hero-designation">
                   PRODUCT DESIGNER
-                  <br />
                 </p>
                 <p className="hero-sub">
                   /anish/

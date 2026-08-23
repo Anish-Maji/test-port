@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { PullCord } from 'pullcord';
+import 'pullcord/pullcord.css';
+import { Sun, Moon } from 'lucide-react';
 import Navbar from './components/Navbar';
 import BrandTicker from './components/BrandTicker';
 import ShapeGrid from './components/ShapeGrid';
@@ -18,15 +21,7 @@ import ProjectsSection from './components/ProjectsSection';
 import WebsiteLoader from './components/WebsiteLoader';
 import worksData from './data/worksData';
 import swapMockupImg from './assets/home/projects-ss.webp';
-import referralHeroImg from './assets/referral_hero.png';
-import laundryVideo from './assets/home/laundry-thumbnail.webm';
 import nintendoImg from './assets/home/nintendo.png';
-import crimsonImg from './assets/brand logos/crimson_healthcare_pvt_ltd_cover.jpeg';
-import globalEsportsImg from './assets/brand logos/Global esports.webp';
-import kioskScreenImg from './assets/swap_flow_kiosk_screen.png';
-import historyScreenImg from './assets/swap_flow_history_screen.png';
-import frameImg from './assets/Frame 34768.png';
-import referralthumb from './assets/home/referral.webm';
 
 import project1 from './assets/playground/project-1.webp';
 import project2 from './assets/playground/project-2.webp';
@@ -34,7 +29,6 @@ import project3 from './assets/playground/project-3.webp';
 import project4 from './assets/playground/project-4.webp';
 import project5 from './assets/playground/project-5.webp';
 import project6 from './assets/playground/project-6.webp';
-import arihant from './assets/home/arihant-coming-soon.webm';
 
 import './App.css';
 
@@ -69,6 +63,20 @@ export function App() {
   });
 
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('portfolio_theme');
+    if (savedTheme) return savedTheme;
+    return 'light';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('portfolio_theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+  };
 
   useEffect(() => {
     if (currentView === 'home') {
@@ -133,6 +141,25 @@ export function App() {
   if (currentView === 'swap-station') {
     return (
       <div className="app-layout">
+        <PullCord
+          className="desktop-pullcord"
+          onPull={toggleTheme}
+          pulled={theme === 'dark'}
+          ariaLabel="Toggle theme"
+          config={{
+            gravity: 1250,
+            damping: 0.94,
+            iterations: 20,
+            stretchMax: 28,
+          }}
+        />
+        <button
+          className="mobile-theme-toggle-btn"
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+        >
+          {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} strokeWidth={2.2} />}
+        </button>
         <Navbar onNavigateHome={handleBackToWork} activePage="swap-station" />
         <SwapStationPage onBackToWork={handleBackToWork} worksData={worksData} onOpenCaseStudy={handleOpenCaseStudy} />
         <Footer />
@@ -143,6 +170,25 @@ export function App() {
   if (currentView === 'referral-system') {
     return (
       <div className="app-layout">
+        <PullCord
+          className="desktop-pullcord"
+          onPull={toggleTheme}
+          pulled={theme === 'dark'}
+          ariaLabel="Toggle theme"
+          config={{
+            gravity: 1250,
+            damping: 0.94,
+            iterations: 20,
+            stretchMax: 28,
+          }}
+        />
+        <button
+          className="mobile-theme-toggle-btn"
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+        >
+          {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} strokeWidth={2.2} />}
+        </button>
         <Navbar onNavigateHome={handleBackToWork} activePage="referral-system" />
         <ReferralSystemPage onBackToWork={handleBackToWork} />
         <Footer />
@@ -153,6 +199,25 @@ export function App() {
   if (currentView === 'play') {
     return (
       <div className="app-layout">
+        <PullCord
+          className="desktop-pullcord"
+          onPull={toggleTheme}
+          pulled={theme === 'dark'}
+          ariaLabel="Toggle theme"
+          config={{
+            gravity: 1250,
+            damping: 0.94,
+            iterations: 20,
+            stretchMax: 28,
+          }}
+        />
+        <button
+          className="mobile-theme-toggle-btn"
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+        >
+          {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} strokeWidth={2.2} />}
+        </button>
         <Navbar onNavigateHome={handleBackToWork} activePage="play" />
         <PlayPage onBackToWork={handleBackToWork} />
         <Footer />
@@ -163,6 +228,25 @@ export function App() {
   if (currentView === 'about') {
     return (
       <div className="app-layout">
+        <PullCord
+          className="desktop-pullcord"
+          onPull={toggleTheme}
+          pulled={theme === 'dark'}
+          ariaLabel="Toggle theme"
+          config={{
+            gravity: 1250,
+            damping: 0.94,
+            iterations: 20,
+            stretchMax: 28,
+          }}
+        />
+        <button
+          className="mobile-theme-toggle-btn"
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+        >
+          {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} strokeWidth={2.2} />}
+        </button>
         <Navbar onNavigateHome={handleBackToWork} activePage="about" />
         <AboutPage onBackToWork={handleBackToWork} />
         <Footer />
@@ -172,6 +256,29 @@ export function App() {
 
   return (
     <div className="app-layout">
+      {/* Physics-based Hanging PullCord Theme Toggle (Desktop Only) */}
+      <PullCord
+        className="desktop-pullcord"
+        onPull={toggleTheme}
+        pulled={theme === 'dark'}
+        ariaLabel="Toggle theme"
+        config={{
+          gravity: 1250,
+          damping: 0.94,
+          iterations: 20,
+          stretchMax: 28,
+        }}
+      />
+
+      {/* Floating Theme Toggle Button (Mobile Only) */}
+      <button
+        className="mobile-theme-toggle-btn"
+        onClick={toggleTheme}
+        aria-label="Toggle theme"
+      >
+        {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} strokeWidth={2.2} />}
+      </button>
+
       {/* Preloading Website Loader */}
       <WebsiteLoader />
 
@@ -186,8 +293,8 @@ export function App() {
             speed={0.01}
             squareSize={40}
             direction="diagonal"
-            borderColor="rgba(0, 0, 0, 0.06)"
-            hoverFillColor="rgba(0, 0, 0, 0.12)"
+            borderColor={theme === 'dark' ? "rgba(255, 255, 255, 0.08)" : "rgba(0, 0, 0, 0.06)"}
+            hoverFillColor={theme === 'dark' ? "rgba(255, 255, 255, 0.16)" : "rgba(0, 0, 0, 0.12)"}
             shape="square"
             hoverTrailAmount={5}
             className="hero-shapegrid-bg"

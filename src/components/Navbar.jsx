@@ -58,33 +58,35 @@ export const Navbar = ({ onNavigateHome, activePage = 'home' }) => {
           a.niche
         </a>
 
-        {/* Desktop & Tablet Navigation links */}
-        <nav className="desktop-nav">
-          <div className="nav-menu">
-            {navItems.map((item) => {
-              const isActive = activePage === item.id || (activePage === 'home' && activeSection === item.id);
-              return (
-                <a
-                  key={item.id}
-                  href={item.href}
-                  className={`nav-link ${isActive ? 'active' : ''}`}
-                  onClick={(e) => handleNavClick(e, item.id)}
-                >
-                  {item.label}
-                </a>
-              );
-            })}
-          </div>
-        </nav>
+        {/* Right Section: Desktop Navigation links */}
+        <div className="nav-right">
+          <nav className="desktop-nav">
+            <div className="nav-menu">
+              {navItems.map((item) => {
+                const isActive = activePage === item.id || (activePage === 'home' && activeSection === item.id);
+                return (
+                  <a
+                    key={item.id}
+                    href={item.href}
+                    className={`nav-link ${isActive ? 'active' : ''}`}
+                    onClick={(e) => handleNavClick(e, item.id)}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
+            </div>
+          </nav>
 
-        {/* Mobile Hamburger Toggle Button */}
-        <button
-          className="mobile-toggle"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-        >
-          {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
-        </button>
+          {/* Mobile Hamburger Toggle Button */}
+          <button
+            className="mobile-toggle"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          >
+            {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
 
         {/* Mobile Navigation Drawer */}
         <div className={`mobile-drawer ${isMobileMenuOpen ? 'open' : ''}`}>

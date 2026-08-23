@@ -88,6 +88,17 @@
   filter: grayscale(0%) opacity(1) !important;
 }
 
+[data-theme="dark"] .ticker-brand-image {
+  -webkit-filter: grayscale(100%) brightness(1.8) opacity(0.85);
+  filter: grayscale(100%) brightness(1.8) opacity(0.85);
+}
+
+[data-theme="dark"] .ticker-brand-image:hover,
+[data-theme="dark"] .ticker-item:hover .ticker-brand-image {
+  -webkit-filter: grayscale(0%) brightness(1) opacity(1) !important;
+  filter: grayscale(0%) brightness(1) opacity(1) !important;
+}
+
 @keyframes scrollTicker {
   0% {
     transform: translateX(0);

@@ -3,11 +3,11 @@
    ========================================================================== */
 
 .books-section {
-  background-color: #FAFAFA;
+  background-color: var(--bg-primary);
   overflow: hidden;
   position: relative;
-  border-top: 1px solid #F4F4F5;
-  border-bottom: 1px solid #F4F4F5;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
   width: 100%;
   margin: 0 auto;
 }
@@ -33,7 +33,7 @@
   font-family: var(--font-body, 'DM Sans', sans-serif);
   font-size: clamp(1.8rem, 3.5vw, 2.5rem);
   font-weight: 500;
-  color: #0d0d0d;
+  color: var(--text-main);
   text-align: left;
   margin-bottom: 0.75rem;
   letter-spacing: .05rem;
@@ -42,7 +42,7 @@
 .books-details {
   font-family: var(--font-body, 'DM Sans', sans-serif);
   font-size: 14px;
-  color: #71717A;
+  color: var(--text-muted);
   max-width: 554px;
   line-height: 1.6;
 }

@@ -3,7 +3,6 @@ import { ArrowLeft, ArrowUpRight, Share2, Play, Pause, Volume2, VolumeX } from '
 import '../styles/SwapStationPage.css';
 import ssProcessVideo from '../assets/SS Project/ss-process.webm';
 import swapMockupImg from '../assets/Frame 34768.png';
-import swapFlowImg from '../assets/swap_flow_diagram.png';
 import swapSol1Video from '../assets/solution 1.webm';
 import swapSol2Video from '../assets/SS Project/solution 2.webm';
 import baazLogo from '../assets/brand logos/Baaz-Bikes-LOGO.png';

@@ -3,8 +3,8 @@
    ========================================================================== */
 
 .referral-study-root {
-  background-color: #ffffff;
-  color: #27272a;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
   min-height: 100vh;
   padding-top: 100px;
   padding-bottom: 120px;
@@ -46,7 +46,7 @@
   gap: 8px;
   background: none;
   border: none;
-  color: #71717a;
+  color: var(--text-muted);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -56,7 +56,7 @@
 }
 
 .referral-back-link-btn:hover {
-  color: #18181b;
+  color: var(--text-main);
 }
 
 .referral-toc-nav {
@@ -76,7 +76,7 @@
 .referral-toc-btn {
   background: none;
   border: none;
-  color: #a1a1aa;
+  color: var(--text-dim);
   font-size: 14px;
   font-weight: 400;
   text-align: left;
@@ -87,27 +87,27 @@
 }
 
 .referral-toc-btn:hover {
-  color: #52525b;
+  color: var(--text-muted);
 }
 
 .referral-toc-btn.active {
-  color: #18181b;
+  color: var(--text-main);
   font-weight: 600;
 }
 
 .referral-sidebar-footer-actions {
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid #f4f4f5;
+  border-top: 1px solid var(--border-subtle);
 }
 
 .referral-action-icon-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #f4f4f5;
-  border: 1px solid #e4e4e7;
-  color: #3f3f46;
+  background: var(--bg-surface-hover, #f4f4f5);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
   font-size: 13px;
   font-weight: 500;
   padding: 6px 12px;
@@ -117,8 +117,8 @@
 }
 
 .referral-action-icon-btn:hover {
-  background: #e4e4e7;
-  color: #18181b;
+  background: var(--border-subtle);
+  color: var(--text-main);
 }
 
 /* ==========================================================================
@@ -140,7 +140,7 @@
   font-size: 14px;
   line-height: 18px;
   letter-spacing: 0.2px;
-  color: #3f3f46;
+  color: var(--text-muted);
   text-transform: uppercase;
   margin-bottom: 12px;
   font-weight: 500;
@@ -151,7 +151,7 @@
   font-size: 40px;
   line-height: 1.2;
   font-weight: 400;
-  color: #18181b;
+  color: var(--text-main);
   letter-spacing: -0.02em;
 }
 
@@ -170,9 +170,9 @@
   justify-content: center;
   position: relative;
   border-radius: 12px;
-  border: 1px solid #f4f4f5;
+  border: 1px solid var(--border-subtle);
   overflow: hidden;
-  background: #ffffff;
+  background: var(--bg-primary);
 }
 
 .referral-hero-banner-image,
@@ -204,7 +204,7 @@
   font-size: 15px;
   line-height: 18.4px;
   letter-spacing: 1px;
-  color: #5D5D5D;
+  color: var(--text-muted);
   text-transform: uppercase;
   font-weight: 400;
 }
@@ -212,7 +212,7 @@
 .referral-detail-value {
   font-family: var(--font-body, 'DM Sans', sans-serif);
   font-size: 15px;
-  color: #3f3f46;
+  color: var(--text-main);
   font-weight: 500;
 }
 
@@ -221,7 +221,7 @@
   flex-direction: column;
   font-family: var(--font-body, 'DM Sans', sans-serif);
   font-size: 15px;
-  color: #3f3f46;
+  color: var(--text-main);
   font-weight: 500;
 }
 
@@ -235,8 +235,8 @@
 }
 
 .referral-tldr-card-box {
-  background-color: #ffffff;
-  border: 1px solid #e4e4e7;
+  background-color: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-subtle);
   border-radius: 4px;
   padding: 32px;
   position: relative;
@@ -245,7 +245,7 @@
 .referral-tldr-badge {
   font-family: var(--font-body, 'DM Sans', sans-serif);
   font-size: 15px;
-  color: #3f3f46;
+  color: var(--text-main);
   font-weight: 500;
   text-transform: uppercase;
   margin-bottom: 16px;
@@ -253,7 +253,7 @@
 
 .referral-tldr-text {
   font-size: 16px;
-  color: #5D5D5D;
+  color: var(--text-muted);
   line-height: 1.7;
   margin-bottom: 32px;
 }
@@ -316,7 +316,7 @@
   font-size: 22px;
   font-weight: 500;
   line-height: 22px;
-  color: #0D0D0D;
+  color: var(--text-main);
   margin-bottom: 16px;
 }
 
@@ -325,7 +325,7 @@
   font-weight: 400;
   line-height: 28.5px;
   letter-spacing: -0.2px;
-  color: #0D0D0D;
+  color: var(--text-main);
   margin-bottom: 16px;
 }
 
@@ -372,7 +372,7 @@
 }
 
 .referral-flow-media-container {
-  background-color: #ffffff;
+  background-color: var(--bg-primary);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -380,13 +380,14 @@
   height: 100%;
   min-height: 340px;
   border-radius: 12px;
-  border: 1px solid #f4f4f5;
+  border: 2px solid var(--border);
   position: relative;
 }
 
 .referral-flow-media-image {
   width: 100%;
   object-fit: contain;
+  border-radius: inherit;
 }
 
 .referral-flow-text-col {
@@ -402,7 +403,7 @@
   font-size: 18px;
   line-height: 26px;
   font-weight: 500;
-  color: #0D0D0D;
+  color: var(--text-main);
   margin-bottom: 12px;
 }
 
@@ -419,8 +420,8 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: #fafafa;
-  border: 1px solid #e4e4e7;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
   padding: 16px 20px;
   border-radius: 12px;
   text-decoration: none;
@@ -462,12 +463,12 @@
   align-items: center;
   gap: 6px;
   font-weight: 600;
-  color: #18181b;
+  color: var(--text-main);
   font-size: 15px;
 }
 
 .referral-relink-arrow-icon {
-  color: #71717a;
+  color: var(--text-muted);
 }
 
 .referral-company-relink-sub {
@@ -483,8 +484,8 @@
   margin: 28px 0;
   border-radius: 12px;
   overflow: hidden;
-  background: #fdfdfd;
-  border: 1px solid #f4f4f5;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
   position: relative;
   width: 100%;
 }
@@ -609,7 +610,7 @@
   font-size: 17px;
   line-height: 28.5px;
   font-weight: 500;
-  color: #0d0d0d;
+  color: var(--text-main);
   letter-spacing: -0.2px;
   margin: 0;
 }
@@ -806,7 +807,7 @@
   font-size: 19px;
   line-height: 28px;
   font-weight: 600;
-  color: #18181b;
+  color: var(--text-main);
   margin: 0;
 }
 
@@ -866,7 +867,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .referral-study-container {
     flex-direction: column;
     gap: 32px;
@@ -874,8 +875,7 @@
   }
 
   .referral-study-sidebar {
-    width: 100%;
-    position: static;
+    display: none;
   }
 
   .referral-study-title {

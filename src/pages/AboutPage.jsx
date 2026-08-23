@@ -1,7 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FileText } from 'lucide-react';
 import cvFile from '../assets/CV/cv.pdf';
 import aboutHeroImg from '../assets/about-hero-photo.webp';
+
+// Interactive Eye-Tracking Images
+import imgCenter from '../assets/about-me/personal/center.webp';
+import imgTop from '../assets/about-me/personal/top.webp';
+import imgBottom from '../assets/about-me/personal/bottom.webp';
+import imgCenterLeft from '../assets/about-me/personal/center-left.webp';
+import imgCenterRight from '../assets/about-me/personal/center-right.webp';
+import imgTopLeft from '../assets/about-me/personal/top-left.webp';
+import imgTopRight from '../assets/about-me/personal/top-right.webp';
+import imgBottomLeft from '../assets/about-me/personal/bottom-left.webp';
+import imgBottomRight from '../assets/about-me/personal/bottom-right.webp';
 
 import post1 from '../assets/instagram/post 1.webp';
 import post2 from '../assets/instagram/post 2.webp';
@@ -10,6 +21,18 @@ import post4 from '../assets/instagram/post 4.webp';
 import post5 from '../assets/instagram/post 5.webp';
 
 import '../styles/AboutPage.css';
+
+const EYE_TRACKING_IMAGES = {
+  'center': imgCenter,
+  'top': imgTop,
+  'bottom': imgBottom,
+  'center-left': imgCenterLeft,
+  'center-right': imgCenterRight,
+  'top-left': imgTopLeft,
+  'top-right': imgTopRight,
+  'bottom-left': imgBottomLeft,
+  'bottom-right': imgBottomRight,
+};
 
 const photoItemsData = [
   { id: 'dharmashala', image: post1 },
@@ -75,9 +98,70 @@ const socialLinks = [
 const DEFAULT_PAGE_TITLE = "About Anish | a.niche Portfolio";
 
 export default function AboutPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }) {
+  const [activeEyeImage, setActiveEyeImage] = useState('center');
+  const cardRef = useRef(null);
+
   useEffect(() => {
     document.title = pageTitle;
   }, [pageTitle]);
+
+  // Preload all eye tracking images for 0-latency switching
+  useEffect(() => {
+    Object.values(EYE_TRACKING_IMAGES).forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
+  // Track mouse cursor relative to the photo card center
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!cardRef.current) return;
+      const rect = cardRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const deltaX = e.clientX - centerX;
+      const deltaY = e.clientY - centerY;
+
+      // Sensitivity deadzone thresholds
+      const deadzoneX = rect.width * 0.18;
+      const deadzoneY = rect.height * 0.18;
+
+      let dirX = 'center';
+      if (deltaX < -deadzoneX) dirX = 'left';
+      else if (deltaX > deadzoneX) dirX = 'right';
+
+      let dirY = 'center';
+      if (deltaY < -deadzoneY) dirY = 'top';
+      else if (deltaY > deadzoneY) dirY = 'bottom';
+
+      let key = 'center';
+      if (dirX === 'center' && dirY === 'center') {
+        key = 'center';
+      } else if (dirX === 'center') {
+        key = dirY;
+      } else if (dirY === 'center') {
+        key = `center-${dirX}`;
+      } else {
+        key = `${dirY}-${dirX}`;
+      }
+
+      setActiveEyeImage(key);
+    };
+
+    const handleMouseLeave = () => {
+      setActiveEyeImage('center');
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
 
   // Triple items array for 100% seamless, continuous carousel loop
   const carouselItems = [...photoItemsData, ...photoItemsData, ...photoItemsData];
@@ -113,12 +197,17 @@ export default function AboutPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE
           </div>
 
           <div className="about-hero-right">
-            <div className="about-photo-card">
-              <img
-                src={aboutHeroImg}
-                alt="Anish outdoors on a hike"
-                className="about-photo-img"
-              />
+            <div className="about-photo-card" ref={cardRef}>
+              {Object.entries(EYE_TRACKING_IMAGES).map(([key, src]) => (
+                <img
+                  key={key}
+                  src={src}
+                  alt="Anish looking towards cursor"
+                  loading="eager"
+                  decoding="sync"
+                  className={`about-photo-img ${key === 'center' ? 'is-base' : ''} ${activeEyeImage === key ? 'is-active' : ''}`}
+                />
+              ))}
             </div>
           </div>
         </section>

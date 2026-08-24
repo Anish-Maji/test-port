@@ -63,15 +63,10 @@ export function App() {
   });
 
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('portfolio_theme');
-    if (savedTheme) return savedTheme;
-    return 'light';
-  });
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('portfolio_theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {

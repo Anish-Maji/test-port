@@ -1,37 +1,26 @@
 import React from 'react';
+import baazBikesLogo from '../assets/brand logos/webp logos/baaz-bikes.webp';
+import crimsonLogo from '../assets/brand logos/webp logos/crimson.webp';
+import globalEsportsLogo from '../assets/brand logos/webp logos/global-esports.webp';
+import smartivityLogo from '../assets/brand logos/webp logos/smartivity.webp';
 import '../styles/BrandTicker.css';
 
-// Automatically import all image formats from 'src/assets/brand logos/'
-const logoModules = import.meta.glob('../assets/brand logos/*.{png,jpg,jpeg,webp,svg,gif}', {
-  eager: true,
-  import: 'default'
-});
-
-// Dynamically generate logo objects array
-const dynamicBrandLogos = Object.entries(logoModules).map(([path, url]) => {
-  const filename = path.split('/').pop() || '';
-  const cleanName = filename
-    .replace(/\.[^/.]+$/, '')
-    .replace(/[-_]/g, ' ')
-    .replace(/\b\w/g, (char) => char.toUpperCase());
-
-  return {
-    name: cleanName,
-    src: url,
-  };
-});
+const brandLogos = [
+  { name: 'Baaz Bikes', src: baazBikesLogo },
+  { name: 'Crimson Healthcare', src: crimsonLogo },
+  { name: 'Global Esports', src: globalEsportsLogo },
+  { name: 'Smartivity', src: smartivityLogo },
+];
 
 export const BrandTicker = () => {
-  const logoList = dynamicBrandLogos.length > 0 ? dynamicBrandLogos : [];
-
-  // Repeat logos array 4 times to ensure seamless infinite marquee loop across wide viewports
-  const repeatedLogos = logoList.length > 0
-    ? [...logoList, ...logoList, ...logoList, ...logoList]
-    : [];
-
-  if (repeatedLogos.length === 0) {
-    return null;
-  }
+  // Repeat logos 5 times to ensure smooth infinite marquee loop across wide viewports
+  const repeatedLogos = [
+    ...brandLogos,
+    ...brandLogos,
+    ...brandLogos,
+    ...brandLogos,
+    ...brandLogos,
+  ];
 
   return (
     <section className="ticker-section" aria-label="Brands worked with">
@@ -45,6 +34,8 @@ export const BrandTicker = () => {
                 alt={brand.name}
                 className="ticker-brand-image"
                 loading="lazy"
+                width={500}
+                height={500}
               />
             </div>
           ))}
@@ -59,6 +50,8 @@ export const BrandTicker = () => {
                 alt={brand.name}
                 className="ticker-brand-image"
                 loading="lazy"
+                width={500}
+                height={500}
               />
             </div>
           ))}

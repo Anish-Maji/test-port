@@ -4,12 +4,12 @@
 
 .ticker-section {
   background: transparent;
-  height: 60px;
+  height: 100px;
   align-items: center;
   justify-content: center;
   display: flex;
   width: 100%;
-  padding: 3rem 0;
+  padding: 0;
   overflow: hidden;
   position: relative;
   max-width: 1280px;
@@ -30,6 +30,7 @@
 .ticker-container {
   width: 100%;
   display: flex;
+  align-items: center;
   overflow: hidden;
   user-select: none;
   position: relative;
@@ -51,52 +52,33 @@
   align-items: center;
   width: max-content;
   flex-shrink: 0;
-  gap: 3.5rem;
-  padding-right: 3.5rem;
+  gap: 7rem;
+  padding-right: 7rem;
   will-change: transform;
   animation: scrollTicker 80s linear infinite;
-}
-
-.ticker-container:hover .ticker-track {
-  /* animation-play-state: paused; */
 }
 
 .ticker-item {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 0;
+  padding: 0;
   flex-shrink: 0;
-  cursor: pointer;
 }
 
 .ticker-brand-image {
-  height: 24px;
-  max-height: 32px;
-  width: auto;
-  max-width: 180px;
+  height: 80px;
+  width: 80px;
+  max-height: 84px;
+  max-width: 84px;
   object-fit: contain;
-  -webkit-filter: grayscale(100%) opacity(0.6);
-  filter: grayscale(100%) opacity(0.6);
-  transition: -webkit-filter 0.3s ease, filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
+  filter: none;
+  opacity: 1;
 }
 
-.ticker-brand-image:hover,
-.ticker-item:hover .ticker-brand-image {
-  -webkit-filter: grayscale(0%) opacity(1) !important;
-  filter: grayscale(0%) opacity(1) !important;
-}
-
+/* Dark Mode: Grayscale filter so logos stand out cleanly on dark backgrounds */
 [data-theme="dark"] .ticker-brand-image {
-  -webkit-filter: grayscale(100%) brightness(1.8) opacity(0.85);
-  filter: grayscale(100%) brightness(1.8) opacity(0.85);
-}
-
-[data-theme="dark"] .ticker-brand-image:hover,
-[data-theme="dark"] .ticker-item:hover .ticker-brand-image {
-  -webkit-filter: grayscale(0%) brightness(1) opacity(1) !important;
-  filter: grayscale(0%) brightness(1) opacity(1) !important;
+  filter: grayscale(100%) brightness(1.7) contrast(1.1) opacity(0.95);
 }
 
 @keyframes scrollTicker {
@@ -112,44 +94,57 @@
 /* Breakpoint responsiveness for 1200px, 768px, 360px */
 @media (min-width: 1200px) {
   .ticker-section {
-    padding: 3rem 0;
+    height: 110px;
+    padding: 0;
   }
 
   .ticker-track {
-    gap: 7rem;
-    padding-right: 7rem;
+    gap: 9rem;
+    padding-right: 9rem;
   }
 
   .ticker-brand-image {
-    height: 44px;
-    max-width: 200px;
+    height: 90px;
+    width: 90px;
+    max-height: 96px;
+    max-width: 96px;
   }
 }
 
 @media (max-width: 767px) {
   .ticker-section {
-    padding: 2.5rem 0;
+    height: 80px;
+    padding: 0;
   }
 
   .ticker-track {
-    gap: 2.5rem;
-    padding-right: 2.5rem;
+    gap: 5rem;
+    padding-right: 5rem;
   }
 
   .ticker-brand-image {
-    height: 32px;
-    max-width: 140px;
+    height: 60px;
+    width: 60px;
+    max-height: 64px;
+    max-width: 64px;
   }
 }
 
 @media (max-width: 360px) {
+  .ticker-section {
+    height: 70px;
+    padding: 0;
+  }
+
   .ticker-track {
-    gap: 2rem;
-    padding-right: 2rem;
+    gap: 3.5rem;
+    padding-right: 3.5rem;
   }
 
   .ticker-brand-image {
-    height: 28px;
-    max-width: 120px;
+    height: 50px;
+    width: 50px;
+    max-height: 54px;
+    max-width: 54px;
   }
 }

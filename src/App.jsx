@@ -19,9 +19,19 @@ import CinematicBrainSection from './components/CinematicBrainSection';
 import TestimonialsSection from './components/TestimonialsSection';
 import ProjectsSection from './components/ProjectsSection';
 import WebsiteLoader from './components/WebsiteLoader';
+import EmojiBurst from './components/EmojiBurst';
 import worksData from './data/worksData';
 import swapMockupImg from './assets/home/projects-ss.webp';
 import nintendoImg from './assets/home/nintendo.png';
+
+import navSwitchDefault from './assets/home/nitendo-switches/nav-switch.png';
+import navSwitchTop from './assets/home/nitendo-switches/nav-switch-top-clicked.png';
+import navSwitchBottom from './assets/home/nitendo-switches/nav-switch-bottom-clicked.png';
+import navSwitchLeft from './assets/home/nitendo-switches/nav-switch-left-clicked.png';
+import navSwitchRight from './assets/home/nitendo-switches/nav-switch-right-clicked.png';
+
+import likeBtnDefault from './assets/home/nitendo-switches/like-button.png';
+import likeBtnClicked from './assets/home/nitendo-switches/like-button-clicked.png';
 
 import project1 from './assets/playground/project-1.webp';
 import project2 from './assets/playground/project-2.webp';
@@ -65,6 +75,78 @@ export function App() {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [theme, setTheme] = useState('light');
 
+  // Interactive Nintendo Game Boy Control States
+  const [dpadActiveDir, setDpadActiveDir] = useState(null);
+  const [isBtnAPressed, setIsBtnAPressed] = useState(false);
+  const [isBtnBPressed, setIsBtnBPressed] = useState(false);
+  const [emojiParticles, setEmojiParticles] = useState([]);
+
+  const EMOJI_POOL = ['❤️', '👍'];
+
+  const triggerEmojiBurst = (e) => {
+    let startX = window.innerWidth / 2;
+    let startY = window.innerHeight / 2;
+
+    if (e && e.currentTarget) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      startX = rect.left + rect.width / 2;
+      startY = rect.top + rect.height / 2;
+    }
+
+    const count = 9;
+    const newParticles = Array.from({ length: count }).map((_, i) => ({
+      id: `${Date.now()}-${Math.random()}-${i}`,
+      emoji: EMOJI_POOL[Math.floor(Math.random() * EMOJI_POOL.length)],
+      x: startX + (Math.random() * 24 - 12),
+      y: startY + (Math.random() * 20 - 10),
+      driftX: Math.random() * 100 - 50,
+      floatY: -(130 + Math.random() * 110),
+      scale: 0.85 + Math.random() * 0.5,
+      rotate: Math.random() * 40 - 20,
+      duration: 1.3 + Math.random() * 0.5,
+      delay: i * 0.035,
+    }));
+
+    setEmojiParticles((prev) => [...prev, ...newParticles]);
+
+    setTimeout(() => {
+      const particleIds = new Set(newParticles.map((p) => p.id));
+      setEmojiParticles((prev) => prev.filter((p) => !particleIds.has(p.id)));
+    }, 2200);
+  };
+
+  const getNavSwitchImage = () => {
+    switch (dpadActiveDir) {
+      case 'top': return navSwitchTop;
+      case 'bottom': return navSwitchBottom;
+      case 'left': return navSwitchLeft;
+      case 'right': return navSwitchRight;
+      default: return navSwitchDefault;
+    }
+  };
+
+  const handleDpadPress = (direction) => {
+    setDpadActiveDir(direction);
+    if (direction === 'left' || direction === 'bottom') {
+      setActiveSlideIndex((prev) => (prev - 1 + heroSlideshowImages.length) % heroSlideshowImages.length);
+    } else {
+      setActiveSlideIndex((prev) => (prev + 1) % heroSlideshowImages.length);
+    }
+    setTimeout(() => setDpadActiveDir(null), 180);
+  };
+
+  const handleBtnAPress = (e) => {
+    setIsBtnAPressed(true);
+    triggerEmojiBurst(e);
+    setTimeout(() => setIsBtnAPressed(false), 200);
+  };
+
+  const handleBtnBPress = (e) => {
+    setIsBtnBPressed(true);
+    triggerEmojiBurst(e);
+    setTimeout(() => setIsBtnBPressed(false), 200);
+  };
+
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
@@ -78,13 +160,6 @@ export function App() {
       document.title = HOME_PAGE_TITLE;
     }
   }, [currentView]);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveSlideIndex((prev) => (prev + 1) % heroSlideshowImages.length);
-    }, 2800);
-    return () => clearInterval(timer);
-  }, []);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -114,23 +189,17 @@ export function App() {
     if (id === 'referral-system') {
       setCurrentView('referral-system');
       window.location.hash = 'referral-system';
-      window.scrollTo(0, 0);
     } else {
       setCurrentView('swap-station');
       window.location.hash = 'swap-station';
-      window.scrollTo(0, 0);
     }
+    window.scrollTo(0, 0);
   };
 
   const handleBackToWork = () => {
     setCurrentView('home');
     window.location.hash = 'work';
-    setTimeout(() => {
-      const workSection = document.getElementById('work');
-      if (workSection) {
-        workSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 50);
+    window.scrollTo(0, 0);
   };
 
   if (currentView === 'swap-station') {
@@ -277,6 +346,9 @@ export function App() {
       {/* Preloading Website Loader */}
       <WebsiteLoader />
 
+      {/* YouTube Live Stream Style Emoji Reaction Burst */}
+      <EmojiBurst particles={emojiParticles} />
+
       {/* Navigation Bar */}
       <Navbar onNavigateHome={handleBackToWork} activePage="home" />
 
@@ -327,7 +399,7 @@ export function App() {
               </div>
             </div>
 
-            {/* Right Column: Nintendo Game Boy SP Device & Screen Slideshow */}
+            {/* Right Column: Nintendo Game Boy SP Device & Interactive Controls */}
             <div className="hero-device-container">
               <div className="nintendo-device-wrapper">
                 <img
@@ -347,6 +419,70 @@ export function App() {
                     />
                   ))}
                 </div>
+
+                {/* Interactive D-Pad (Red Highlighted Area) */}
+                <div className="nintendo-dpad-container">
+                  <img
+                    src={getNavSwitchImage()}
+                    alt="Navigation Switch"
+                    className="nintendo-dpad-img"
+                    draggable={false}
+                  />
+                  <button
+                    type="button"
+                    className="dpad-btn dpad-btn-top"
+                    onClick={() => handleDpadPress('top')}
+                    aria-label="Previous Project Slide (Up)"
+                  />
+                  <button
+                    type="button"
+                    className="dpad-btn dpad-btn-bottom"
+                    onClick={() => handleDpadPress('bottom')}
+                    aria-label="Next Project Slide (Down)"
+                  />
+                  <button
+                    type="button"
+                    className="dpad-btn dpad-btn-left"
+                    onClick={() => handleDpadPress('left')}
+                    aria-label="Previous Project Slide (Left)"
+                  />
+                  <button
+                    type="button"
+                    className="dpad-btn dpad-btn-right"
+                    onClick={() => handleDpadPress('right')}
+                    aria-label="Next Project Slide (Right)"
+                  />
+                </div>
+
+                {/* Interactive Button B (Lower-Left Green Highlighted Area) */}
+                <button
+                  type="button"
+                  className={`nintendo-btn-b ${isBtnBPressed ? 'pressed' : ''}`}
+                  onClick={handleBtnBPress}
+                  aria-label="Button B - Previous Slide"
+                >
+                  <img
+                    src={isBtnBPressed ? likeBtnClicked : likeBtnDefault}
+                    alt="Button B"
+                    className="nintendo-btn-img"
+                    draggable={false}
+                  />
+                </button>
+
+                {/* Interactive Button A (Upper-Right Green Highlighted Area) */}
+                <button
+                  type="button"
+                  className={`nintendo-btn-a ${isBtnAPressed ? 'pressed' : ''}`}
+                  onClick={handleBtnAPress}
+                  aria-label="Button A - Next Slide"
+                >
+                  <img
+                    src={isBtnAPressed ? likeBtnClicked : likeBtnDefault}
+                    alt="Button A"
+                    className="nintendo-btn-img"
+                    draggable={false}
+                  />
+                </button>
               </div>
             </div>
           </div>

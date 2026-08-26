@@ -1,0 +1,43 @@
+/* ==========================================================================
+   YouTube Live Stream Style Floating Emoji Burst Animation
+   ========================================================================== */
+
+.emoji-burst-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.emoji-particle {
+  position: absolute;
+  font-size: 1.85rem;
+  user-select: none;
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation: youtubeEmojiBurst cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.25));
+}
+
+@keyframes youtubeEmojiBurst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
+  }
+
+  12% {
+    opacity: 1;
+    transform: translate(calc(-50% + var(--drift-x) * 0.2), calc(-50% + var(--float-y) * 0.2)) scale(calc(var(--scale) * 1.3)) rotate(var(--rotate));
+  }
+
+  65% {
+    opacity: 0.95;
+    transform: translate(calc(-50% + var(--drift-x) * 0.75), calc(-50% + var(--float-y) * 0.7)) scale(var(--scale)) rotate(calc(var(--rotate) * 1.5));
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--drift-x)), calc(-50% + var(--float-y))) scale(calc(var(--scale) * 0.6)) rotate(calc(var(--rotate) * 2.2));
+  }
+}

@@ -81,12 +81,11 @@ const educationData = [
     years: '2020-24',
     institution: 'Interaction Design, IIITDM Jabalpur'
   },
-
 ];
 
 const socialLinks = [
   { name: 'EMAIL', href: 'mailto:masteranishmaji@gmail.com' },
-  { name: 'LINKEDIN', href: 'www.linkedin.com/in/anish-maji', target: '_blank' },
+  { name: 'LINKEDIN', href: 'https://www.linkedin.com/in/anish-maji', target: '_blank' },
   { name: 'INSTAGRAM', href: 'https://www.instagram.com/anishmaji_/', target: '_blank' },
   { name: 'BEHANCE', href: 'https://www.behance.net/anishmaji_', target: '_blank' }
 ];
@@ -105,88 +104,70 @@ export default function AboutPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE
     document.title = pageTitle;
   }, [pageTitle]);
 
-  // Preload all eye tracking images for 0-latency switching
-  useEffect(() => {
-    Object.values(EYE_TRACKING_IMAGES).forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, []);
-
-  // Track mouse cursor relative to the photo card center
   useEffect(() => {
     const handleMouseMove = (e) => {
       if (!cardRef.current) return;
       const rect = cardRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
+      const cardCenterX = rect.left + rect.width / 2;
+      const cardCenterY = rect.top + rect.height / 2;
 
-      const deltaX = e.clientX - centerX;
-      const deltaY = e.clientY - centerY;
+      const deltaX = e.clientX - cardCenterX;
+      const deltaY = e.clientY - cardCenterY;
+      const distance = Math.hypot(deltaX, deltaY);
 
-      // Sensitivity deadzone thresholds
-      const deadzoneX = rect.width * 0.18;
-      const deadzoneY = rect.height * 0.18;
-
-      let dirX = 'center';
-      if (deltaX < -deadzoneX) dirX = 'left';
-      else if (deltaX > deadzoneX) dirX = 'right';
-
-      let dirY = 'center';
-      if (deltaY < -deadzoneY) dirY = 'top';
-      else if (deltaY > deadzoneY) dirY = 'bottom';
-
-      let key = 'center';
-      if (dirX === 'center' && dirY === 'center') {
-        key = 'center';
-      } else if (dirX === 'center') {
-        key = dirY;
-      } else if (dirY === 'center') {
-        key = `center-${dirX}`;
-      } else {
-        key = `${dirY}-${dirX}`;
+      if (distance < 40) {
+        setActiveEyeImage('center');
+        return;
       }
 
-      setActiveEyeImage(key);
-    };
+      const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
 
-    const handleMouseLeave = () => {
-      setActiveEyeImage('center');
+      if (angle >= -22.5 && angle < 22.5) {
+        setActiveEyeImage('center-right');
+      } else if (angle >= 22.5 && angle < 67.5) {
+        setActiveEyeImage('bottom-right');
+      } else if (angle >= 67.5 && angle < 112.5) {
+        setActiveEyeImage('bottom');
+      } else if (angle >= 112.5 && angle < 157.5) {
+        setActiveEyeImage('bottom-left');
+      } else if (angle >= 157.5 || angle < -157.5) {
+        setActiveEyeImage('center-left');
+      } else if (angle >= -157.5 && angle < -112.5) {
+        setActiveEyeImage('top-left');
+      } else if (angle >= -112.5 && angle < -67.5) {
+        setActiveEyeImage('top');
+      } else if (angle >= -67.5 && angle < -22.5) {
+        setActiveEyeImage('top-right');
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-    };
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Triple items array for 100% seamless, continuous carousel loop
-  const carouselItems = [...photoItemsData, ...photoItemsData, ...photoItemsData];
+  const carouselItems = [
+    ...photoItemsData,
+    ...photoItemsData,
+    ...photoItemsData,
+  ];
 
   return (
     <div className="about-page-root">
       <div className="about-page-container">
-
-        {/* ----------------------------------------------------------------- */}
-        {/* Tier 1: Hero Section (2-Column Grid)                              */}
-        {/* ----------------------------------------------------------------- */}
+        {/* Tier 1: Hero Section (2-Column Grid) */}
         <section className="about-hero-section">
           <div className="about-hero-left">
             <h1 className="about-hero-heading">
               I am a designer by passion and explorer by heart. I love the things that I am doing.
             </h1>
-
             <p className="about-hero-description">
               I grew up in the Cultural Capital of India, Kolkata and am now exploring the magical world of tech and design at Gurgaon.
             </p>
-
             <div className="about-resume-cta-wrap">
               <a
                 href={cvFile}
-                download="Anish_Maji_CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="about-resume-btn"
                 title="Download my resume"
               >
@@ -215,9 +196,7 @@ export default function AboutPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE
         {/* Divider */}
         <div className="about-divider"></div>
 
-        {/* ----------------------------------------------------------------- */}
-        {/* Tier 2: Continuous 1:1 Photo Carousel (with Section Header)      */}
-        {/* ----------------------------------------------------------------- */}
+        {/* Tier 2: Continuous 1:1 Photo Carousel */}
         <section className="about-carousel-section">
           <div className="about-carousel-header">
             <h2 className="about-carousel-title">director's cut</h2>
@@ -247,9 +226,7 @@ export default function AboutPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE
         {/* Divider */}
         <div className="about-divider"></div>
 
-        {/* ----------------------------------------------------------------- */}
-        {/* Tier 3: 3-Column Experience / Education & Skills / Say Hello     */}
-        {/* ----------------------------------------------------------------- */}
+        {/* Tier 3: 3-Column Experience / Education & Skills / Say Hello */}
         <section className="about-details-section">
           <div className="about-details-grid">
 

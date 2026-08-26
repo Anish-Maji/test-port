@@ -177,7 +177,7 @@
   max-width: 400px;
   aspect-ratio: 1 / 1;
   background: var(--bg-surface, #faf8f5);
-  border: 3px solid var(--text-main);
+  border: 1px solid var(--border-subtle);
   border-radius: 24px;
   overflow: hidden;
   /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); */
@@ -341,7 +341,28 @@
   line-height: 1.55;
   color: var(--text-muted);
   max-width: 540px;
-  margin-bottom: 0;
+  margin-bottom: 1.25rem;
+}
+
+.claw-quick-unlock-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-surface, #faf8f5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.claw-quick-unlock-btn:hover {
+  background: var(--text-main);
+  color: var(--bg-primary);
+  border-color: var(--text-main);
 }
 
 .claw-machine-section {
@@ -353,4 +374,48 @@
 
 .claw-machine-section .clawcap {
   margin: 0 auto;
+}
+
+/* 3D Dome Gallery Section (Appears after claw captcha verification) */
+.dome-gallery-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 2.5rem;
+  animation: fadeInDome 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInDome {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.dome-gallery-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dome-gallery-container {
+  width: 100%;
+  height: 720px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-surface, #faf8f5);
+}
+
+@media (max-width: 768px) {
+  .dome-gallery-container {
+    height: 520px;
+  }
 }

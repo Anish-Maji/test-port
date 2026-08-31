@@ -61,6 +61,7 @@ body {
   height: 100%;
   z-index: 0;
   pointer-events: auto;
+  opacity: 0.65;
 }
 
 .hero-layout-grid {
@@ -88,6 +89,25 @@ body {
   width: 100%;
   padding-bottom: 5rem;
   align-self: center;
+}
+
+.hero-content::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  bottom: 40px;
+  left: -40px;
+  right: -20px;
+  background: radial-gradient(ellipse at 50% 45%, var(--bg-primary) 45%, rgba(255, 255, 255, 0.75) 75%, transparent 100%);
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 40px;
+  filter: blur(24px);
+  opacity: 0.85;
+}
+
+[data-theme="dark"] .hero-content::before {
+  background: radial-gradient(ellipse at 35% 45%, var(--bg-primary) 45%, rgba(13, 13, 13, 0.75) 75%, transparent 100%);
 }
 
 .hero-content a,
@@ -294,36 +314,73 @@ body {
 .hero-all {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.1rem, 1.5rem, .65rem);
+  gap: clamp(0.1rem, 1.5rem, 1.25rem);
+}
+
+.hero-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
 }
 
 .hero-title {
-  font-family: var(--font-heading);
-  font-size: clamp(1.3rem, 5.5vw, 3rem);
-  font-weight: 800;
+  font-family: 'APK-Archivr21', var(--font-heading, serif);
+  font-size: clamp(1.5rem, 5.5vw, 3.25rem);
+  font-weight: 400;
   line-height: 1;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   text-align: left;
   color: var(--text-main);
   word-wrap: break-word;
 }
 
-.hero-designation {
-  font-family: var(--font-mono);
-  font-size: clamp(0.4rem, 4vw, 1rem);
-  font-weight: 100;
-  letter-spacing: 0.125rem;
-  text-align: left;
+.hero-designation-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 2px 20px;
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-primary, rgba(0, 0, 0, 0.02));
   color: var(--text-main);
-  word-wrap: break-word;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(0.875rem, 1.8vw, 1.05rem);
+  font-weight: 500;
+  width: fit-content;
+  transition: all 0.25s ease;
+  margin-bottom: 0.25rem;
+}
+
+.hero-designation-badge:hover {
+  border-color: var(--text-main);
+  transform: translateY(-1px);
+}
+
+.hero-designation-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: filter 0.25s ease;
+}
+
+[data-theme="dark"] .hero-designation-logo {
+  filter: brightness(0) invert(1);
+}
+
+[data-theme="dark"] .hero-designation-badge {
+  border-color: rgba(255, 255, 255, 0.16);
+  background-color: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
 
 .hero-sub {
   font-family: var(--font-mono);
   font-size: clamp(0.4rem, 4vw, 1rem);
-  font-weight: 100;
+  font-weight: 400;
   text-align: left;
-  color: var(--text-main);
+  color: var(--text-muted);
   word-wrap: break-word;
 }
 
@@ -333,7 +390,6 @@ body {
   max-width: 640px;
   width: 100%;
   font-size: clamp(0.85rem, 2vw, 1rem);
-  letter-spacing: .05rem;
   color: var(--text-muted);
   text-align: left;
   line-height: 1.5rem;

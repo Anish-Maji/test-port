@@ -97,7 +97,7 @@ export default function ProjectsSection({ worksData, onOpenCaseStudy }) {
                 {/* Details */}
                 <div className="bento-card-details">
                   <div className="bento-card-meta">
-                    CASE STUDY &bull; {work.id === 'swap-station' ? '2025' : '2024'}
+                    {work.bentoMeta || work.meta || 'CASE STUDY'}
                   </div>
                   <h3 className="bento-card-title">{work.shortTitle || work.title}</h3>
                   <p className="bento-card-subtitle">

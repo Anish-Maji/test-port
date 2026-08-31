@@ -1,7 +1,15 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'APK-Archivr21';
+  src: url('./assets/fonts/APK-Archivr21-Regular-Trial.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  --font-heading: 'Gelasio', -apple-system, BlinkMacSystemFont, serif;
+  --font-heading: 'APK-Archivr21', 'Gelasio', -apple-system, BlinkMacSystemFont, serif;
   --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'DM Mono', -apple-system, BlinkMacSystemFont, monospace;
 }
@@ -35,6 +43,7 @@
 
   /* Typography */
   --font-heading: 'Gelasio', -apple-system, BlinkMacSystemFont, serif;
+  --font-display: 'APK-Archivr21', 'Gelasio', -apple-system, BlinkMacSystemFont, serif;
   --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'DM Mono', -apple-system, BlinkMacSystemFont, monospace;
 

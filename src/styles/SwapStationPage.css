@@ -1494,6 +1494,7 @@
   font-size: 18px;
   font-weight: 700;
   line-height: 1.35;
+  white-space: pre-line;
 }
 
 /* Custom CSS/SVG Mockups for Streamline and Checkmate */

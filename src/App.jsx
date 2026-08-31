@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { PullCord } from 'pullcord';
 import 'pullcord/pullcord.css';
 import { Sun, Moon } from 'lucide-react';
@@ -23,6 +23,7 @@ import EmojiBurst from './components/EmojiBurst';
 import worksData from './data/worksData';
 import swapMockupImg from './assets/home/projects-ss.webp';
 import nintendoImg from './assets/home/nintendo.png';
+import baazBikesLogo from './assets/brand logos/webp logos/baaz-bikes.webp';
 
 import navSwitchDefault from './assets/home/nitendo-switches/nav-switch.png';
 import navSwitchTop from './assets/home/nitendo-switches/nav-switch-top-clicked.png';
@@ -33,23 +34,18 @@ import navSwitchRight from './assets/home/nitendo-switches/nav-switch-right-clic
 import likeBtnDefault from './assets/home/nitendo-switches/like-button.png';
 import likeBtnClicked from './assets/home/nitendo-switches/like-button-clicked.png';
 
-import project1 from './assets/playground/project-1.webp';
-import project2 from './assets/playground/project-2.webp';
-import project3 from './assets/playground/project-3.webp';
-import project4 from './assets/playground/project-4.webp';
-import project5 from './assets/playground/project-5.webp';
-import project6 from './assets/playground/project-6.webp';
+import slide1 from './assets/home/nitendo-slides/slide-1.webp';
+import slide2 from './assets/home/nitendo-slides/slide-2.webp';
+import slide3 from './assets/home/nitendo-slides/slide-3.webp';
+import slide4 from './assets/home/nitendo-slides/slide-4.webp';
 
 import './App.css';
 
 const heroSlideshowImages = [
-  swapMockupImg,
-  project2,
-  project1,
-  project3,
-  project4,
-  project5,
-  project6,
+  slide1,
+  slide2,
+  slide3,
+  slide4,
 ];
 
 // worksData is imported from ./data/worksData
@@ -61,7 +57,7 @@ const heroSlideshowImages = [
 // HOME PAGE TITLE CONFIGURATION
 // Change the string below to update the browser tab title for the homepage.
 // ============================================================================
-const HOME_PAGE_TITLE = "Anish Maji - Product Designer";
+const HOME_PAGE_TITLE = "Anish Maji | Product Designer";
 
 export function App() {
   const [currentView, setCurrentView] = useState(() => {
@@ -81,6 +77,18 @@ export function App() {
   const [isBtnBPressed, setIsBtnBPressed] = useState(false);
   const [emojiParticles, setEmojiParticles] = useState([]);
 
+  // Automation state & timers for initial landing demo
+  const automationCancelledRef = useRef(false);
+  const automationTimeoutsRef = useRef([]);
+
+  const cancelAutomation = () => {
+    if (!automationCancelledRef.current) {
+      automationCancelledRef.current = true;
+      automationTimeoutsRef.current.forEach(clearTimeout);
+      automationTimeoutsRef.current = [];
+    }
+  };
+
   const EMOJI_POOL = ['❤️', '👍'];
 
   const triggerEmojiBurst = (e) => {
@@ -91,6 +99,13 @@ export function App() {
       const rect = e.currentTarget.getBoundingClientRect();
       startX = rect.left + rect.width / 2;
       startY = rect.top + rect.height / 2;
+    } else {
+      const btnA = document.querySelector('.nintendo-btn-a');
+      if (btnA) {
+        const rect = btnA.getBoundingClientRect();
+        startX = rect.left + rect.width / 2;
+        startY = rect.top + rect.height / 2;
+      }
     }
 
     const count = 9;
@@ -125,7 +140,8 @@ export function App() {
     }
   };
 
-  const handleDpadPress = (direction) => {
+  const handleDpadPress = (direction, isManual = false) => {
+    if (isManual) cancelAutomation();
     setDpadActiveDir(direction);
     if (direction === 'left' || direction === 'bottom') {
       setActiveSlideIndex((prev) => (prev - 1 + heroSlideshowImages.length) % heroSlideshowImages.length);
@@ -135,17 +151,59 @@ export function App() {
     setTimeout(() => setDpadActiveDir(null), 180);
   };
 
-  const handleBtnAPress = (e) => {
+  const handleBtnAPress = (e, isManual = false) => {
+    if (isManual) cancelAutomation();
     setIsBtnAPressed(true);
     triggerEmojiBurst(e);
     setTimeout(() => setIsBtnAPressed(false), 200);
   };
 
-  const handleBtnBPress = (e) => {
+  const handleBtnBPress = (e, isManual = false) => {
+    if (isManual) cancelAutomation();
     setIsBtnBPressed(true);
     triggerEmojiBurst(e);
     setTimeout(() => setIsBtnBPressed(false), 200);
   };
+
+  // One-time automated slideshow demonstration on landing (Right x2, Left x1, Like x1)
+  useEffect(() => {
+    if (currentView !== 'home') return;
+
+    const handleAnyKey = () => {
+      cancelAutomation();
+    };
+
+    window.addEventListener('keydown', handleAnyKey);
+
+    const t1 = setTimeout(() => {
+      if (automationCancelledRef.current) return;
+      handleDpadPress('right');
+    }, 4000);
+
+    const t2 = setTimeout(() => {
+      if (automationCancelledRef.current) return;
+      handleDpadPress('right');
+    }, 6000);
+
+    const t3 = setTimeout(() => {
+      if (automationCancelledRef.current) return;
+      handleDpadPress('left');
+    }, 8000);
+
+    const t4 = setTimeout(() => {
+      if (automationCancelledRef.current) return;
+      setIsBtnAPressed(true);
+      triggerEmojiBurst();
+      setTimeout(() => setIsBtnAPressed(false), 200);
+    }, 9000);
+
+    automationTimeoutsRef.current.push(t1, t2, t3, t4);
+
+    return () => {
+      window.removeEventListener('keydown', handleAnyKey);
+      automationTimeoutsRef.current.forEach(clearTimeout);
+    };
+  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -360,8 +418,8 @@ export function App() {
             speed={0.01}
             squareSize={40}
             direction="diagonal"
-            borderColor={theme === 'dark' ? "rgba(255, 255, 255, 0.08)" : "rgba(0, 0, 0, 0.06)"}
-            hoverFillColor={theme === 'dark' ? "rgba(255, 255, 255, 0.16)" : "rgba(0, 0, 0, 0.12)"}
+            borderColor={theme === 'dark' ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.04)"}
+            hoverFillColor={theme === 'dark' ? "rgba(255, 255, 255, 0.10)" : "rgba(0, 0, 0, 0.07)"}
             shape="square"
             hoverTrailAmount={5}
             className="hero-shapegrid-bg"
@@ -370,31 +428,38 @@ export function App() {
           <div className="hero-layout-grid">
             {/* Left Content Column */}
             <div className="hero-content">
-              <Shuffle
-                text="a.niche"
-                tag="h1"
-                className="hero-title"
-                shuffleDirection="right"
-                duration={0.35}
-                animationMode="evenodd"
-                shuffleTimes={1}
-                ease="power3.out"
-                stagger={0.03}
-                threshold={0.1}
-                triggerOnce={true}
-                triggerOnHover={true}
-                respectReducedMotion={true}
-                textAlign="left"
-              />
-              <div className='hero-all'>
-                <p className="hero-designation">
-                  PRODUCT DESIGNER
-                </p>
-                <p className="hero-sub">
+              <div className="hero-title-row">
+                <Shuffle
+                  text="A.NICHE"
+                  tag="h1"
+                  className="hero-title"
+                  shuffleDirection="up"
+                  duration={0.35}
+                  animationMode="evenodd"
+                  shuffleTimes={1}
+                  ease="power3.out"
+                  stagger={0.03}
+                  threshold={0.1}
+                  triggerOnce={true}
+                  triggerOnHover={true}
+                  respectReducedMotion={true}
+                  textAlign="left"
+                />
+                <span className="hero-sub">
                   /anish/
-                </p>
+                </span>
+              </div>
+              <div className='hero-all'>
+                <div className="hero-designation-badge">
+                  <span>Product Designer at</span>
+                  <img
+                    src={baazBikesLogo}
+                    alt="Baaz Bikes"
+                    className="hero-designation-logo"
+                  />
+                </div>
                 <p className="hero-description">
-                  a.niche. a place where ideas find their purpose. A personal space for thoughtful design, experimentation, and craftsmanship.
+                  a.niche (n.) a designer's natural habitat, discovered by accident while spelling his own name. Small, cluttered, occasionally brilliant.
                 </p>
               </div>
             </div>
@@ -431,25 +496,25 @@ export function App() {
                   <button
                     type="button"
                     className="dpad-btn dpad-btn-top"
-                    onClick={() => handleDpadPress('top')}
+                    onClick={() => handleDpadPress('top', true)}
                     aria-label="Previous Project Slide (Up)"
                   />
                   <button
                     type="button"
                     className="dpad-btn dpad-btn-bottom"
-                    onClick={() => handleDpadPress('bottom')}
+                    onClick={() => handleDpadPress('bottom', true)}
                     aria-label="Next Project Slide (Down)"
                   />
                   <button
                     type="button"
                     className="dpad-btn dpad-btn-left"
-                    onClick={() => handleDpadPress('left')}
+                    onClick={() => handleDpadPress('left', true)}
                     aria-label="Previous Project Slide (Left)"
                   />
                   <button
                     type="button"
                     className="dpad-btn dpad-btn-right"
-                    onClick={() => handleDpadPress('right')}
+                    onClick={() => handleDpadPress('right', true)}
                     aria-label="Next Project Slide (Right)"
                   />
                 </div>
@@ -458,7 +523,7 @@ export function App() {
                 <button
                   type="button"
                   className={`nintendo-btn-b ${isBtnBPressed ? 'pressed' : ''}`}
-                  onClick={handleBtnBPress}
+                  onClick={(e) => handleBtnBPress(e, true)}
                   aria-label="Button B - Previous Slide"
                 >
                   <img
@@ -473,7 +538,7 @@ export function App() {
                 <button
                   type="button"
                   className={`nintendo-btn-a ${isBtnAPressed ? 'pressed' : ''}`}
-                  onClick={handleBtnAPress}
+                  onClick={(e) => handleBtnAPress(e, true)}
                   aria-label="Button A - Next Slide"
                 >
                   <img

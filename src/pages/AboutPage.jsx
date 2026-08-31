@@ -1,7 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FileText } from 'lucide-react';
+import { FileText, GraduationCap } from 'lucide-react';
 import cvFile from '../assets/CV/cv.pdf';
-import aboutHeroImg from '../assets/about-hero-photo.webp';
+
+// Brand Logos
+import baazBikesLogo from '../assets/brand logos/webp logos/baaz-bikes.webp';
+import smartivityLogo from '../assets/brand logos/webp logos/smartivity.webp';
+import tangleLogo from '../assets/brand logos/webp logos/tangle.webp';
+import crimsonLogo from '../assets/brand logos/webp logos/crimson.webp';
+import globalEsportsLogo from '../assets/brand logos/webp logos/global-esports.webp';
+import iiitLogo from '../assets/brand logos/webp logos/iiit.webp';
 
 // Interactive Eye-Tracking Images
 import imgCenter from '../assets/about-me/personal/center.webp';
@@ -42,58 +49,76 @@ const photoItemsData = [
   { id: 'delhi', image: post5 }
 ];
 
-const workExperiences = [
+const journeyData = [
   {
-    role: 'Product & Visual Designer',
-    company: 'Baaz Bikes',
-    period: '2023 - Present',
-    location: 'Gurugram, India'
+    id: 'baaz',
+    role: 'Product Designer',
+    organization: 'Baaz Bikes',
+    employmentType: 'Full-time',
+    period: 'June 2023 – Present',
+    location: 'Gurugram, Haryana, India',
+    logo: baazBikesLogo,
+    logoAlt: 'Baaz Bikes',
+    description: 'Lead end-to-end product design across Baaz Mobility’s EV ecosystem, including driver mobile apps, touch kiosk swap station interfaces, and internal operations dashboards. Redesigned battery swapping workflows from 90 seconds to under 50 seconds and built scalable design systems.',
   },
   {
+    id: 'tangle',
+    role: 'UI/UX Design Intern',
+    organization: 'Tangle Design',
+    employmentType: 'Internship',
+    period: 'March 2023 – June 2023',
+    location: 'Pune, Maharashtra, India',
+    logo: tangleLogo,
+    logoAlt: 'Tangle Design',
+    description: 'Designed user experiences, web & mobile UI screens, design systems, and interactive prototypes for client digital products.',
+  },
+  {
+    id: 'smartivity',
     role: 'Visual Designer Freelancer',
-    company: 'Smartivity',
+    organization: 'Smartivity Labs',
+    employmentType: 'Freelance',
+    period: 'August 2022 – October 2022',
     location: 'New Delhi, India',
-    period: '2022 - 2023'
+    logo: smartivityLogo,
+    logoAlt: 'Smartivity',
+    description: 'Designed engaging STEAM toy packaging, brand identity assets, instructional visual guides, and interactive companion mobile app assets for global distribution.',
   },
   {
-    role: 'UI UX Design Intern',
-    company: 'Tangle Design',
-    location: 'Pune, India',
-    period: 'Jun 2021 - Sep 2021'
-  },
-  {
+    id: 'crimson',
     role: 'Visual Design Intern',
-    company: 'Crimson Healthcare Pvt Ltd',
+    organization: 'Crimson Healthcare Pvt Ltd',
+    employmentType: 'Internship',
+    period: 'May 2022 – July 2022',
     location: 'New Delhi, India',
-    period: 'May - Aug 2022'
+    logo: crimsonLogo,
+    logoAlt: 'Crimson Healthcare',
+    description: 'Developed medical technology visual systems, product documentation manuals, and digital marketing materials for specialized clinical ostomy care devices.',
   },
   {
+    id: 'global-esports',
     role: 'Visual & Production Designer',
-    company: 'Global Esports India',
+    organization: 'Global Esports',
+    employmentType: 'Part-time / Contract',
+    period: 'Sep 2020 – Feb 2022',
     location: 'Mumbai, India',
-    period: 'Sep 2020 - Feb 2022'
+    logo: globalEsportsLogo,
+    logoAlt: 'Global Esports',
+    description: 'Crafted tournament broadcast graphics, esports event visual campaigns, social media assets, YouTube thumbnails, and brand identity collateral for India’s premier esports organization.',
+  },
+  {
+    id: 'education',
+    role: 'Bachelor of Design (B.Des)',
+    organization: 'Indian Institute of Information Technology, Design & Manufacturing (IIITDM) Jabalpur',
+    employmentType: 'Interaction Design',
+    period: '2020 – 2024',
+    location: 'Jabalpur, Madhya Pradesh, India',
+    isEducation: true,
+    logo: iiitLogo,
+    logoAlt: 'IIITDM Jabalpur',
+    description: 'Specialized in Interaction Design & Industrial Design. Core focus on Human-Computer Interaction (HCI), user research, ergonomics, design thinking, physical computing, and digital design systems.',
   }
 ];
 
-const educationData = [
-  {
-    degree: 'Bachelor of Design',
-    years: '2020-24',
-    institution: 'Interaction Design, IIITDM Jabalpur'
-  },
-];
-
-const socialLinks = [
-  { name: 'EMAIL', href: 'mailto:masteranishmaji@gmail.com' },
-  { name: 'LINKEDIN', href: 'https://www.linkedin.com/in/anish-maji', target: '_blank' },
-  { name: 'INSTAGRAM', href: 'https://www.instagram.com/anishmaji_/', target: '_blank' },
-  { name: 'BEHANCE', href: 'https://www.behance.net/anishmaji_', target: '_blank' }
-];
-
-// ============================================================================
-// PAGE TITLE CONFIGURATION
-// Change the string below to update the browser tab title for this page.
-// ============================================================================
 const DEFAULT_PAGE_TITLE = "About Anish | a.niche Portfolio";
 
 export default function AboutPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }) {
@@ -141,8 +166,17 @@ export default function AboutPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE
       }
     };
 
+    const handleMouseLeave = () => {
+      setActiveEyeImage('center');
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+    };
   }, []);
 
   const carouselItems = [
@@ -226,68 +260,52 @@ export default function AboutPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE
         {/* Divider */}
         <div className="about-divider"></div>
 
-        {/* Tier 3: 3-Column Experience / Education & Skills / Say Hello */}
-        <section className="about-details-section">
-          <div className="about-details-grid">
+        {/* Tier 3: Revamped Journey So Far / Experience & Education Timeline */}
+        <section className="about-journey-section">
+          <div className="about-journey-header">
+            <span className="about-journey-badge">EXPERIENCE</span>
+            <h2 className="about-journey-title">Journey so far</h2>
+            <p className="about-journey-subtitle">
+              From leading product and visual systems to crafting interactive hardware & EV mobility platforms.
+            </p>
+          </div>
 
-            {/* Column 1: WORK EXPERIENCE */}
-            <div className="about-col">
-              <h3 className="about-col-title">WORK EXPERIENCE</h3>
-              <div className="about-experience-list">
-                {workExperiences.map((exp, index) => (
-                  <div key={index} className="about-experience-item">
-                    <h4 className="about-exp-role">
-                      {exp.role}, <span className="about-exp-company">{exp.company}</span>
-                    </h4>
-                    {exp.location && <p className="about-exp-location">{exp.location}</p>}
-                    <p className="about-exp-period">{exp.period}</p>
+          <div className="about-journey-timeline">
+            {journeyData.map((item, idx) => (
+              <div key={item.id || idx} className="journey-timeline-item">
+                {/* Left Column: Brand Logo with vertical timeline line */}
+                <div className="journey-logo-column">
+                  <div className="journey-logo-wrap">
+                    {item.logo ? (
+                      <img
+                        src={item.logo}
+                        alt={item.logoAlt || item.organization}
+                        className="journey-logo-img"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="journey-edu-logo-badge">
+                        <GraduationCap size={20} className="journey-edu-icon" />
+                        <span>{item.logoText || 'IIITDM'}</span>
+                      </div>
+                    )}
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>
 
-            {/* Column 2: EDUCATION & SKILLS */}
-            <div className="about-col">
-              <div className="about-sub-block">
-                <h3 className="about-col-title">EDUCATION</h3>
-                <div className="about-education-list">
-                  {educationData.map((edu, index) => (
-                    <div key={index} className="about-edu-item">
-                      <h4 className="about-edu-degree">
-                        {edu.degree}, <span className="about-edu-years">{edu.years}</span>
-                      </h4>
-                      <p className="about-edu-institution">{edu.institution}</p>
-                    </div>
-                  ))}
+                {/* Right Column: Experience Details */}
+                <div className="journey-content-column">
+                  <h3 className="journey-role-title">{item.role}</h3>
+                  <p className="journey-org-meta">
+                    {item.organization} &bull; {item.employmentType}
+                  </p>
+                  <div className="journey-time-loc">
+                    <span>{item.period}</span>
+                    <span>{item.location}</span>
+                  </div>
+                  <p className="journey-description">{item.description}</p>
                 </div>
               </div>
-
-              <div className="about-sub-block skills-block">
-                <h3 className="about-col-title">SKILLS</h3>
-                <p className="about-skills-text">
-                  Softwares- Figma, Sketch, Principle, Adobe Creative Suite (Photoshop, Illustrator, InDesign), FontLab, Glyphs
-                </p>
-              </div>
-            </div>
-
-            {/* Column 3: SAY HELLO */}
-            <div className="about-col">
-              <h3 className="about-col-title">SAY HELLO</h3>
-              <div className="about-social-list">
-                {socialLinks.map((link, index) => (
-                  <a
-                    key={index}
-                    href={link.href}
-                    target={link.target || '_self'}
-                    rel="noopener noreferrer"
-                    className="about-social-link"
-                  >
-                    <span>{link.name}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-
+            ))}
           </div>
         </section>
 

@@ -3,13 +3,15 @@ import baazBikesLogo from '../assets/brand logos/webp logos/baaz-bikes.webp';
 import crimsonLogo from '../assets/brand logos/webp logos/crimson.webp';
 import globalEsportsLogo from '../assets/brand logos/webp logos/global-esports.webp';
 import smartivityLogo from '../assets/brand logos/webp logos/smartivity.webp';
+import tangleLogo from '../assets/brand logos/webp logos/tangle.webp';
 import '../styles/BrandTicker.css';
 
 const brandLogos = [
   { name: 'Baaz Bikes', src: baazBikesLogo },
+  { name: 'Smartivity', src: smartivityLogo },
+  { name: 'Tangle Design', src: tangleLogo },
   { name: 'Crimson Healthcare', src: crimsonLogo },
   { name: 'Global Esports', src: globalEsportsLogo },
-  { name: 'Smartivity', src: smartivityLogo },
 ];
 
 export const BrandTicker = () => {

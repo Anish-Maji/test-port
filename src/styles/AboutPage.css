@@ -269,186 +269,197 @@
 }
 
 /* ==========================================================================
-   Tier 3: 3-Column Experience / Education & Skills / Say Hello
+   Tier 3: Modern Experience & Education Timeline (Journey so far)
    ========================================================================== */
 
-.about-details-section {
+.about-journey-section {
   padding-top: 64px;
+  padding-bottom: 96px;
+  max-width: 960px;
 }
 
-.about-details-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1.1fr 0.7fr;
-  gap: 56px;
+.about-journey-header {
+  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
   align-items: flex-start;
 }
 
-.about-col {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-
-.about-col-title {
-  font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: clamp(1rem, 2vw, 1.2rem);
+.about-journey-badge {
+  font-family: var(--font-mono, 'DM Mono', monospace);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 0.75rem;
   font-weight: 500;
-  line-height: 1.2;
-  color: var(--text-dim);
-  margin: 0 0 28px 0;
-  letter-spacing: 0.05rem;
 }
 
-/* Work Experience Column */
-.about-experience-list {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.about-experience-item {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.about-exp-role {
+.about-journey-title {
   font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: 15px;
+  font-size: clamp(2rem, 3.8vw, 2.75rem);
   font-weight: 700;
   color: var(--text-main);
-  margin: 0;
-  line-height: 1.35;
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
 }
 
-.about-exp-company {
-  font-weight: 600;
-}
-
-.about-exp-location {
+.about-journey-subtitle {
   font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: 13.5px;
-  color: var(--text-muted);
-  margin: 0;
-}
-
-.about-exp-period {
-  font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: 13.5px;
-  color: var(--text-dim);
-  margin: 0;
-}
-
-/* Education & Skills Column */
-.about-sub-block {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.about-sub-block.skills-block {
-  margin-top: 16px;
-}
-
-.about-education-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.about-edu-item {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.about-edu-degree {
-  font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-main);
-  margin: 0;
-  line-height: 1.35;
-}
-
-.about-edu-years {
-  font-weight: 600;
-}
-
-.about-edu-institution {
-  font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: 13.5px;
-  color: var(--text-muted);
-  margin: 0;
-}
-
-.about-skills-text {
-  font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: 14px;
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
   line-height: 1.6;
   color: var(--text-muted);
+  max-width: 680px;
   margin: 0;
 }
 
-/* Say Hello Column */
-.about-social-list {
+/* Timeline Layout */
+.about-journey-timeline {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
-.about-social-link {
-  font-family: var(--font-mono, 'DM Mono', monospace);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+.journey-timeline-item {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 48px;
+  position: relative;
+  padding-bottom: 56px;
+}
+
+.journey-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* Left Logo Column with Centered Vertical Timeline Line */
+.journey-logo-column {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.journey-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 94px;
+  position: relative;
+  z-index: 2;
+}
+
+.journey-timeline-item:not(:last-child) .journey-logo-column::after {
+  content: '';
+  position: absolute;
+  top: 104px;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  border-left: 1.5px dashed var(--border-subtle);
+  pointer-events: none;
+}
+
+.journey-logo-img {
+  max-width: 260px;
+  max-height: 84px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.04));
+  transition: filter 0.25s ease;
+}
+
+[data-theme="dark"] .journey-logo-img {
+  filter: brightness(0) invert(1);
+}
+
+.journey-edu-logo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 13px 26px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 19px;
+  font-weight: 700;
   color: var(--text-main);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  transition: opacity 0.2s ease;
-  width: fit-content;
+  letter-spacing: 0.04em;
 }
 
-.about-social-link:hover {
-  opacity: 0.7;
+.journey-edu-icon {
+  color: var(--text-dim);
 }
 
-/* ==========================================================================
-   Responsive Layout Adjustments
-   ========================================================================== */
-
-@media (max-width: 1120px) {
-  .about-directors-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .about-details-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-  }
+/* Right Content Column */
+.journey-content-column {
+  display: flex;
+  flex-direction: column;
 }
 
-@media (max-width: 868px) {
-  .about-hero-section {
+.journey-role-title {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+}
+
+.journey-org-meta {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0 0 4px 0;
+}
+
+.journey-time-loc {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.journey-description {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 680px;
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+  .journey-timeline-item {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 16px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    border-left: 1.5px dashed var(--border-subtle);
   }
 
-  .about-hero-left {
-    padding-right: 0;
+  .journey-logo-column {
+    align-items: flex-start;
   }
 
-  .about-hero-right {
-    justify-content: center;
+  .journey-logo-wrap {
+    justify-content: flex-start;
+    height: auto;
   }
 
-  .about-photo-card {
-    max-width: 100%;
-  }
-
-  .about-details-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .journey-timeline-item:not(:last-child) .journey-logo-column::after {
+    display: none;
   }
 }
 

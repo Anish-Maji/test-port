@@ -20,6 +20,8 @@ import TestimonialsSection from './components/TestimonialsSection';
 import ProjectsSection from './components/ProjectsSection';
 import WebsiteLoader from './components/WebsiteLoader';
 import EmojiBurst from './components/EmojiBurst';
+import { motion } from 'motion/react';
+import { TextEffect } from '@/components/core/text-effect';
 import worksData from './data/worksData';
 import swapMockupImg from './assets/home/projects-ss.webp';
 import nintendoImg from './assets/home/nintendo.png';
@@ -70,6 +72,12 @@ export function App() {
 
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [theme, setTheme] = useState('light');
+  const [isSiteLoaded, setIsSiteLoaded] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsSiteLoaded(true), 2500);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Interactive Nintendo Game Boy Control States
   const [dpadActiveDir, setDpadActiveDir] = useState(null);
@@ -402,7 +410,7 @@ export function App() {
       </button>
 
       {/* Preloading Website Loader */}
-      <WebsiteLoader />
+      <WebsiteLoader onFinish={() => setIsSiteLoaded(true)} />
 
       {/* YouTube Live Stream Style Emoji Reaction Burst */}
       <EmojiBurst particles={emojiParticles} />
@@ -427,8 +435,22 @@ export function App() {
 
           <div className="hero-layout-grid">
             {/* Left Content Column */}
-            <div className="hero-content">
-              <div className="hero-title-row">
+            <motion.div
+              layout="position"
+              transition={{
+                duration: 0.85,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="hero-content"
+            >
+              <motion.div
+                layout="position"
+                transition={{
+                  duration: 0.85,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="hero-title-row"
+              >
                 <Shuffle
                   text="A.NICHE"
                   tag="h1"
@@ -448,21 +470,48 @@ export function App() {
                 <span className="hero-sub">
                   /anish/
                 </span>
-              </div>
-              <div className='hero-all'>
+              </motion.div>
+              <motion.div
+                layout="position"
+                transition={{
+                  duration: 0.85,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className='hero-all'
+              >
                 <div className="hero-designation-badge">
-                  <span>Product Designer at</span>
+                  <a href="https://www.baaz.bike/" target="_blank" rel="noopener noreferrer">
+                    <span>Product Designer at</span>
+                  </a>
                   <img
                     src={baazBikesLogo}
                     alt="Baaz Bikes"
                     className="hero-designation-logo"
                   />
                 </div>
-                <p className="hero-description">
-                  a.niche (n.) a designer's natural habitat, discovered by accident while spelling his own name. Small, cluttered, occasionally brilliant.
-                </p>
-              </div>
-            </div>
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={isSiteLoaded ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
+                  transition={{
+                    height: { duration: 0.85, ease: [0.16, 1, 0.3, 1] },
+                    opacity: { duration: 0.5, delay: 0.1 },
+                  }}
+                  style={{ overflow: 'hidden' }}
+                >
+                  <TextEffect
+                    per='char'
+                    preset='fade'
+                    as='p'
+                    className='hero-description'
+                    trigger={isSiteLoaded}
+                    delay={0.15}
+                    speedReveal={1.3}
+                  >
+                    a.niche (n.) a designer's natural habitat, discovered by accident while spelling his own name. Small, cluttered, occasionally brilliant.
+                  </TextEffect>
+                </motion.div>
+              </motion.div>
+            </motion.div>
 
             {/* Right Column: Nintendo Game Boy SP Device & Interactive Controls */}
             <div className="hero-device-container">
@@ -561,7 +610,11 @@ export function App() {
         <div className="simple-divider"></div>
 
         {/* Redesigned Works / Case Studies Section */}
-        <ProjectsSection worksData={worksData} onOpenCaseStudy={handleOpenCaseStudy} />
+        <ProjectsSection
+          worksData={worksData}
+          onOpenCaseStudy={handleOpenCaseStudy}
+          isLoaded={isSiteLoaded}
+        />
 
         <div className="simple-divider"></div>
 

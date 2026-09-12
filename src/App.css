@@ -352,10 +352,6 @@ body {
   margin-bottom: 0.25rem;
 }
 
-.hero-designation-badge:hover {
-  border-color: var(--text-main);
-  transform: translateY(-1px);
-}
 
 .hero-designation-logo {
   height: 48px;

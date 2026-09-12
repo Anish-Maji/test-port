@@ -1,10 +1,24 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, ArrowDown, ArrowUp } from 'lucide-react';
+import { AnimatedGroup } from '@/components/core/animated-group';
 import './ProjectsSection.css';
 
-export default function ProjectsSection({ worksData, onOpenCaseStudy }) {
+export default function ProjectsSection({ worksData, onOpenCaseStudy, isLoaded = true }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 1440
+  );
   const videoRefs = useRef({});
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Desktop/Laptop (> 992px) within 1280px has 2 columns; Mobile (<= 992px) has 1 column
+  const itemsInFirstRow = windowWidth > 992 ? 2 : 1;
+  const hasMore = worksData.length > itemsInFirstRow;
 
   const handleCardMouseEnter = (work) => {
     const video = videoRefs.current[work.id];
@@ -30,6 +44,8 @@ export default function ProjectsSection({ worksData, onOpenCaseStudy }) {
     }
   };
 
+  const isCollapsed = hasMore && !isExpanded;
+
   return (
     <section className="projects-redesign-section" id="work">
       {/* Header Bar */}
@@ -44,8 +60,37 @@ export default function ProjectsSection({ worksData, onOpenCaseStudy }) {
       </div>
 
       {/* Bento Grid Wrapper with transition heights & gradient mask */}
-      <div className={`projects-grid-wrapper ${isExpanded ? 'expanded' : 'collapsed'}`}>
-        <div className="projects-bento-grid">
+      <div className={`projects-grid-wrapper ${isCollapsed ? 'collapsed' : 'expanded'}`}>
+        <AnimatedGroup
+          className="projects-bento-grid"
+          trigger={isLoaded}
+          variants={{
+            container: {
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.05,
+                  delayChildren: 0.1,
+                },
+              },
+            },
+            item: {
+              hidden: { opacity: 0, y: 40, filter: 'blur(4px)' },
+              visible: {
+                opacity: 1,
+                y: 0,
+                filter: 'blur(0px)',
+                transition: {
+                  duration: 1.2,
+                  type: 'spring',
+                  bounce: 0.3,
+                },
+              },
+            },
+          }}
+          viewport={{ once: true, amount: 0.1 }}
+        >
           {worksData.map((work) => {
             const isClickable = work.isInteractive || !!work.externalUrl;
             return (
@@ -107,29 +152,31 @@ export default function ProjectsSection({ worksData, onOpenCaseStudy }) {
               </div>
             );
           })}
-        </div>
+        </AnimatedGroup>
 
         {/* Gradient mask visible only when collapsed */}
-        {!isExpanded && <div className="projects-fade-mask"></div>}
+        {isCollapsed && <div className="projects-fade-mask"></div>}
       </div>
 
-      {/* Show more / Show less trigger button */}
-      <div className="show-more-container">
-        <button
-          className="show-more-btn"
-          onClick={() => setIsExpanded(!isExpanded)}
-          aria-label={isExpanded ? 'Show less projects' : 'Show more projects'}
-        >
-          <span className="arrow-down-circle">
-            {isExpanded ? (
-              <ArrowUp size={20} color="#ffffff" strokeWidth={2.5} />
-            ) : (
-              <ArrowDown size={20} color="#ffffff" strokeWidth={2.5} />
-            )}
-          </span>
-          <span>{isExpanded ? 'Show less projects' : 'Show more projects'}</span>
-        </button>
-      </div>
+      {/* Show more / Show less trigger button (visible when there are more projects than row 1) */}
+      {hasMore && (
+        <div className="show-more-container">
+          <button
+            className="show-more-btn"
+            onClick={() => setIsExpanded(!isExpanded)}
+            aria-label={isExpanded ? 'Show less projects' : 'Show more projects'}
+          >
+            <span className="arrow-down-circle">
+              {isExpanded ? (
+                <ArrowUp size={20} color="#ffffff" strokeWidth={2.5} />
+              ) : (
+                <ArrowDown size={20} color="#ffffff" strokeWidth={2.5} />
+              )}
+            </span>
+            <span>{isExpanded ? 'Show less projects' : 'Show more projects'}</span>
+          </button>
+        </div>
+      )}
     </section>
   );
 }

@@ -63,7 +63,7 @@ const DEFAULT_PAGE_TITLE = "Baaz Swap Station | a.niche";
 // Set to `true` to require password protection for this case study.
 // Set to `false` to disable password protection (case study becomes freely accessible).
 // ============================================================================
-const ENABLE_PASSWORD_PROTECTION = true;
+const ENABLE_PASSWORD_PROTECTION = false;
 
 export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE, worksData: propsWorksData, onOpenCaseStudy }) {
   useEffect(() => {

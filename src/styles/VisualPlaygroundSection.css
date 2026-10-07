@@ -27,8 +27,10 @@
   margin: 0 auto;
   padding: 5rem 1.5rem 2rem 1.5rem;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
+  gap: 72px;
+
 }
 
 .playground-title {

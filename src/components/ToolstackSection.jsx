@@ -68,7 +68,7 @@ export function ToolstackSection() {
       <div className="toolstack-header">
         <h2 className="toolstack-title">What's in my toolstack</h2>
         <p className="toolstack-subtitle">
-          Every tool has a function. This toolbox covers my entire design process, from wireframes and prototypes to code, animation, and artificial intelligence.
+          My periodic table. Fewer noble gases, <br />more monthly subscriptions.
         </p>
       </div>
 
@@ -124,7 +124,7 @@ export function ToolstackSection() {
           );
         })}
       </div>
-    </section>
+    </section >
   );
 }
 

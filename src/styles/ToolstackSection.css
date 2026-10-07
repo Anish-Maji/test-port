@@ -13,6 +13,10 @@
 .toolstack-header {
   margin-bottom: 2.5rem;
   text-align: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 72px;
 }
 
 .toolstack-title {
@@ -20,7 +24,6 @@
   font-size: clamp(1.8rem, 3.5vw, 2.5rem);
   font-weight: 500;
   color: var(--text-main);
-  margin-bottom: 0.75rem;
   letter-spacing: .05rem;
 }
 

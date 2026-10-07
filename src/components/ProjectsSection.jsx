@@ -24,7 +24,7 @@ export default function ProjectsSection({ worksData, onOpenCaseStudy, isLoaded =
     const video = videoRefs.current[work.id];
     if (video) {
       video.currentTime = 0;
-      video.play().catch(() => {});
+      video.play().catch(() => { });
     }
   };
 

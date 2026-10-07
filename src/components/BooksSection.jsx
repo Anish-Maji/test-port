@@ -132,9 +132,9 @@ export default function BooksSection() {
       <div className="books-container">
 
         <div className="books-header-wrapper">
-          <h2 className="books-title">How I get inspired?</h2>
+          <h2 className="books-title">What's on my bookshelf</h2>
           <p className='books-details'>
-            Great ideas rarely come from a single place. These books have shaped how I think about design, human behavior, creativity, and building products that people genuinely enjoy using.
+            Books that shaped how I think. <br />I finished most of them. Okay, some of them.
           </p>
         </div>
 

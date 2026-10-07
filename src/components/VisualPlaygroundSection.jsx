@@ -75,7 +75,7 @@ export default function VisualPlaygroundSection() {
 
         {/* Header Section */}
         <div className="playground-header-wrapper">
-          <h2 className="playground-title">visual playground</h2>
+          <h2 className="playground-title">Visual Playground</h2>
           <p className="playground-details">
             A curated archive of visual experiments, brand identity concepts, posters, packaging, and micro-creations.
           </p>

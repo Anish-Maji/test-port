@@ -19,7 +19,8 @@ import CinematicBrainSection from './components/CinematicBrainSection';
 import TestimonialsSection from './components/TestimonialsSection';
 import ProjectsSection from './components/ProjectsSection';
 import WebsiteLoader from './components/WebsiteLoader';
-import EmojiBurst from './components/EmojiBurst';
+import PixelResumeGame from './components/PixelResumeGame';
+import cvFile from './assets/CV/cv.pdf';
 import { motion } from 'motion/react';
 import { TextEffect } from '@/components/core/text-effect';
 import worksData from './data/worksData';
@@ -35,20 +36,10 @@ import navSwitchRight from './assets/home/nitendo-switches/nav-switch-right-clic
 
 import likeBtnDefault from './assets/home/nitendo-switches/like-button.png';
 import likeBtnClicked from './assets/home/nitendo-switches/like-button-clicked.png';
-
-import slide1 from './assets/home/nitendo-slides/slide-1.webp';
-import slide2 from './assets/home/nitendo-slides/slide-2.webp';
-import slide3 from './assets/home/nitendo-slides/slide-3.webp';
-import slide4 from './assets/home/nitendo-slides/slide-4.webp';
+import downloadBtnDefault from './assets/home/nitendo-switches/download-btn.webp';
+import downloadBtnClicked from './assets/home/nitendo-switches/download-btn-clicked.webp';
 
 import './App.css';
-
-const heroSlideshowImages = [
-  slide1,
-  slide2,
-  slide3,
-  slide4,
-];
 
 // worksData is imported from ./data/worksData
 
@@ -70,7 +61,6 @@ export function App() {
     return 'home';
   });
 
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [theme, setTheme] = useState('light');
   const [isSiteLoaded, setIsSiteLoaded] = useState(false);
 
@@ -79,64 +69,12 @@ export function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Interactive Nintendo Game Boy Control States
+  // Interactive Nintendo Game Boy Controls: the D-pad drives the in-screen game,
+  // A and B download the resume
   const [dpadActiveDir, setDpadActiveDir] = useState(null);
   const [isBtnAPressed, setIsBtnAPressed] = useState(false);
   const [isBtnBPressed, setIsBtnBPressed] = useState(false);
-  const [emojiParticles, setEmojiParticles] = useState([]);
-
-  // Automation state & timers for initial landing demo
-  const automationCancelledRef = useRef(false);
-  const automationTimeoutsRef = useRef([]);
-
-  const cancelAutomation = () => {
-    if (!automationCancelledRef.current) {
-      automationCancelledRef.current = true;
-      automationTimeoutsRef.current.forEach(clearTimeout);
-      automationTimeoutsRef.current = [];
-    }
-  };
-
-  const EMOJI_POOL = ['❤️', '👍'];
-
-  const triggerEmojiBurst = (e) => {
-    let startX = window.innerWidth / 2;
-    let startY = window.innerHeight / 2;
-
-    if (e && e.currentTarget) {
-      const rect = e.currentTarget.getBoundingClientRect();
-      startX = rect.left + rect.width / 2;
-      startY = rect.top + rect.height / 2;
-    } else {
-      const btnA = document.querySelector('.nintendo-btn-a');
-      if (btnA) {
-        const rect = btnA.getBoundingClientRect();
-        startX = rect.left + rect.width / 2;
-        startY = rect.top + rect.height / 2;
-      }
-    }
-
-    const count = 9;
-    const newParticles = Array.from({ length: count }).map((_, i) => ({
-      id: `${Date.now()}-${Math.random()}-${i}`,
-      emoji: EMOJI_POOL[Math.floor(Math.random() * EMOJI_POOL.length)],
-      x: startX + (Math.random() * 24 - 12),
-      y: startY + (Math.random() * 20 - 10),
-      driftX: Math.random() * 100 - 50,
-      floatY: -(130 + Math.random() * 110),
-      scale: 0.85 + Math.random() * 0.5,
-      rotate: Math.random() * 40 - 20,
-      duration: 1.3 + Math.random() * 0.5,
-      delay: i * 0.035,
-    }));
-
-    setEmojiParticles((prev) => [...prev, ...newParticles]);
-
-    setTimeout(() => {
-      const particleIds = new Set(newParticles.map((p) => p.id));
-      setEmojiParticles((prev) => prev.filter((p) => !particleIds.has(p.id)));
-    }, 2200);
-  };
+  const gameInputRef = useRef({ left: false, right: false, down: false, jump: false });
 
   const getNavSwitchImage = () => {
     switch (dpadActiveDir) {
@@ -148,70 +86,63 @@ export function App() {
     }
   };
 
-  const handleDpadPress = (direction, isManual = false) => {
-    if (isManual) cancelAutomation();
+  const DPAD_INPUT_KEYS = { left: 'left', right: 'right', bottom: 'down' };
+
+  const handleDpadDown = (direction) => {
     setDpadActiveDir(direction);
-    if (direction === 'left' || direction === 'bottom') {
-      setActiveSlideIndex((prev) => (prev - 1 + heroSlideshowImages.length) % heroSlideshowImages.length);
+    if (direction === 'top') {
+      gameInputRef.current.jump = true;
     } else {
-      setActiveSlideIndex((prev) => (prev + 1) % heroSlideshowImages.length);
+      gameInputRef.current[DPAD_INPUT_KEYS[direction]] = true;
     }
-    setTimeout(() => setDpadActiveDir(null), 180);
   };
 
-  const handleBtnAPress = (e, isManual = false) => {
-    if (isManual) cancelAutomation();
+  const handleDpadUp = (direction) => {
+    setDpadActiveDir((prev) => (prev === direction ? null : prev));
+    if (direction !== 'top') {
+      gameInputRef.current[DPAD_INPUT_KEYS[direction]] = false;
+    }
+  };
+
+  // Keyboard activation (Enter/Space) has no pointer events, so treat it as a short tap
+  const handleDpadKeyboardClick = (e, direction) => {
+    if (e.detail !== 0) return;
+    handleDpadDown(direction);
+    setTimeout(() => handleDpadUp(direction), 250);
+  };
+
+  const getDpadHandlers = (direction) => ({
+    onPointerDown: (e) => {
+      e.preventDefault();
+      handleDpadDown(direction);
+    },
+    onPointerUp: () => handleDpadUp(direction),
+    onPointerLeave: () => handleDpadUp(direction),
+    onPointerCancel: () => handleDpadUp(direction),
+    onContextMenu: (e) => e.preventDefault(),
+    onClick: (e) => handleDpadKeyboardClick(e, direction),
+  });
+
+  const downloadResume = () => {
+    const link = document.createElement('a');
+    link.href = cvFile;
+    link.download = 'Anish-Maji-Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
+
+  const handleBtnAPress = () => {
     setIsBtnAPressed(true);
-    triggerEmojiBurst(e);
+    downloadResume();
     setTimeout(() => setIsBtnAPressed(false), 200);
   };
 
-  const handleBtnBPress = (e, isManual = false) => {
-    if (isManual) cancelAutomation();
+  const handleBtnBPress = () => {
     setIsBtnBPressed(true);
-    triggerEmojiBurst(e);
+    downloadResume();
     setTimeout(() => setIsBtnBPressed(false), 200);
   };
-
-  // One-time automated slideshow demonstration on landing (Right x2, Left x1, Like x1)
-  useEffect(() => {
-    if (currentView !== 'home') return;
-
-    const handleAnyKey = () => {
-      cancelAutomation();
-    };
-
-    window.addEventListener('keydown', handleAnyKey);
-
-    const t1 = setTimeout(() => {
-      if (automationCancelledRef.current) return;
-      handleDpadPress('right');
-    }, 4000);
-
-    const t2 = setTimeout(() => {
-      if (automationCancelledRef.current) return;
-      handleDpadPress('right');
-    }, 6000);
-
-    const t3 = setTimeout(() => {
-      if (automationCancelledRef.current) return;
-      handleDpadPress('left');
-    }, 8000);
-
-    const t4 = setTimeout(() => {
-      if (automationCancelledRef.current) return;
-      setIsBtnAPressed(true);
-      triggerEmojiBurst();
-      setTimeout(() => setIsBtnAPressed(false), 200);
-    }, 9000);
-
-    automationTimeoutsRef.current.push(t1, t2, t3, t4);
-
-    return () => {
-      window.removeEventListener('keydown', handleAnyKey);
-      automationTimeoutsRef.current.forEach(clearTimeout);
-    };
-  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -412,9 +343,6 @@ export function App() {
       {/* Preloading Website Loader */}
       <WebsiteLoader onFinish={() => setIsSiteLoaded(true)} />
 
-      {/* YouTube Live Stream Style Emoji Reaction Burst */}
-      <EmojiBurst particles={emojiParticles} />
-
       {/* Navigation Bar */}
       <Navbar onNavigateHome={handleBackToWork} activePage="home" />
 
@@ -523,15 +451,7 @@ export function App() {
                   draggable={false}
                 />
                 <div className="nintendo-screen-viewport">
-                  {heroSlideshowImages.map((src, idx) => (
-                    <img
-                      key={idx}
-                      src={src}
-                      alt={`Project Slide ${idx + 1}`}
-                      className={`nintendo-screen-slide ${idx === activeSlideIndex ? 'active' : ''}`}
-                      loading="eager"
-                    />
-                  ))}
+                  <PixelResumeGame inputRef={gameInputRef} />
                 </div>
 
                 {/* Interactive D-Pad (Red Highlighted Area) */}
@@ -545,26 +465,26 @@ export function App() {
                   <button
                     type="button"
                     className="dpad-btn dpad-btn-top"
-                    onClick={() => handleDpadPress('top', true)}
-                    aria-label="Previous Project Slide (Up)"
+                    {...getDpadHandlers('top')}
+                    aria-label="Jump (Up)"
                   />
                   <button
                     type="button"
                     className="dpad-btn dpad-btn-bottom"
-                    onClick={() => handleDpadPress('bottom', true)}
-                    aria-label="Next Project Slide (Down)"
+                    {...getDpadHandlers('bottom')}
+                    aria-label="Crouch (Down)"
                   />
                   <button
                     type="button"
                     className="dpad-btn dpad-btn-left"
-                    onClick={() => handleDpadPress('left', true)}
-                    aria-label="Previous Project Slide (Left)"
+                    {...getDpadHandlers('left')}
+                    aria-label="Walk backward (Left)"
                   />
                   <button
                     type="button"
                     className="dpad-btn dpad-btn-right"
-                    onClick={() => handleDpadPress('right', true)}
-                    aria-label="Next Project Slide (Right)"
+                    {...getDpadHandlers('right')}
+                    aria-label="Walk forward (Right)"
                   />
                 </div>
 
@@ -572,8 +492,8 @@ export function App() {
                 <button
                   type="button"
                   className={`nintendo-btn-b ${isBtnBPressed ? 'pressed' : ''}`}
-                  onClick={(e) => handleBtnBPress(e, true)}
-                  aria-label="Button B - Previous Slide"
+                  onClick={handleBtnBPress}
+                  aria-label="Button B - Download resume"
                 >
                   <img
                     src={isBtnBPressed ? likeBtnClicked : likeBtnDefault}
@@ -587,11 +507,11 @@ export function App() {
                 <button
                   type="button"
                   className={`nintendo-btn-a ${isBtnAPressed ? 'pressed' : ''}`}
-                  onClick={(e) => handleBtnAPress(e, true)}
-                  aria-label="Button A - Next Slide"
+                  onClick={handleBtnAPress}
+                  aria-label="Button A - Download resume"
                 >
                   <img
-                    src={isBtnAPressed ? likeBtnClicked : likeBtnDefault}
+                    src={isBtnAPressed ? downloadBtnClicked : downloadBtnDefault}
                     alt="Button A"
                     className="nintendo-btn-img"
                     draggable={false}

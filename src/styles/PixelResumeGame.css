@@ -1,0 +1,140 @@
+/* Pixel Resume Game — sizes use cqw so the scene scales with the Game Boy screen */
+.pixel-game {
+  position: absolute;
+  inset: 0;
+  container-type: inline-size;
+  overflow: hidden;
+  background: #1766d8;
+}
+
+.pixel-game-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.pixel-game-title {
+  position: absolute;
+  left: 0;
+  top: 12.5%;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.42cqw;
+  font-family: 'Pixelify Sans', 'Press Start 2P', monospace;
+  font-weight: 700;
+  line-height: 0.9;
+  pointer-events: none;
+}
+
+.pixel-game-title-top {
+  position: relative;
+  display: block;
+  font-size: 11.67cqw;
+  letter-spacing: 0.2cqw;
+}
+
+.pixel-game-title-top-shadow {
+  color: #1a0d05;
+  text-shadow:
+    -0.52cqw 0 #1a0d05, 0.52cqw 0 #1a0d05, 0 -0.52cqw #1a0d05,
+    -0.52cqw -0.52cqw #1a0d05, 0.52cqw -0.52cqw #1a0d05,
+    -0.52cqw 0.52cqw #1a0d05, 0.52cqw 0.52cqw #1a0d05,
+    0 0.83cqw #c42a10, -0.52cqw 0.83cqw #1a0d05, 0.52cqw 0.83cqw #1a0d05,
+    0 1.35cqw #1a0d05;
+}
+
+.pixel-game-title-top-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(180deg, #ffd640 0%, #ffb020 45%, #ff7a1a 80%, #f0401a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.pixel-game-title-bottom {
+  display: block;
+  font-size: 10.83cqw;
+  letter-spacing: 0.2cqw;
+  color: #fff1e0;
+  text-shadow:
+    0 0.63cqw #2a5fe0, -0.31cqw 0.63cqw #2a5fe0, 0.31cqw 0.63cqw #2a5fe0,
+    -0.52cqw 0 #0a0a14, 0.52cqw 0 #0a0a14, 0 -0.52cqw #0a0a14,
+    -0.52cqw -0.52cqw #0a0a14, 0.52cqw -0.52cqw #0a0a14,
+    -0.52cqw 0.63cqw #0a0a14, 0.52cqw 0.63cqw #0a0a14,
+    0 1.15cqw #0a0a14, -0.52cqw 1.15cqw #0a0a14, 0.52cqw 1.15cqw #0a0a14;
+}
+
+.pixel-game-prompt {
+  position: absolute;
+  left: 0;
+  top: 47%;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 3cqw;
+  line-height: 1.2;
+  color: #ffffff;
+  white-space: nowrap;
+  text-shadow:
+    -0.31cqw 0 #0e1b44, 0.31cqw 0 #0e1b44, 0 -0.31cqw #0e1b44, 0 0.31cqw #0e1b44,
+    0.31cqw 0.31cqw #0e1b44, -0.31cqw 0.31cqw #0e1b44;
+  pointer-events: none;
+}
+
+.pixel-game-prompt .pixel-game-blink {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.6cqw;
+}
+
+/* Navy outline to match the prompt text's pixel shadow */
+.pixel-game-prompt-icon {
+  display: block;
+  width: 4.6cqw;
+  height: auto;
+  filter:
+    drop-shadow(0.31cqw 0 0 #0e1b44) drop-shadow(-0.31cqw 0 0 #0e1b44)
+    drop-shadow(0 0.31cqw 0 #0e1b44) drop-shadow(0 -0.31cqw 0 #0e1b44);
+}
+
+.pixel-game-scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.07) 0, rgba(0, 0, 0, 0.07) 1px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 3px);
+}
+
+@keyframes pixel-game-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes pixel-game-bob {
+  0%, 49% { transform: translateY(0); }
+  50%, 100% { transform: translateY(-1px); }
+}
+
+.pixel-game-blink {
+  animation: pixel-game-blink 1.1s steps(1) infinite;
+}
+
+.pixel-game-bob {
+  animation: pixel-game-bob 1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel-game-blink,
+  .pixel-game-bob {
+    animation: none;
+  }
+}

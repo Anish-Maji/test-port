@@ -4,9 +4,7 @@
 
 .site-footer {
   width: 100%;
-  border-top: 1px solid var(--border-subtle);
   background-color: var(--bg-primary);
-  margin-top: 5rem;
 }
 
 .footer-top-grid {

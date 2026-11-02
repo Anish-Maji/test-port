@@ -563,10 +563,10 @@ export function App() {
 
         <div className="simple-divider"></div>
 
-      </main>
+      </main >
 
       <Footer />
-    </div>
+    </div >
   );
 }
 

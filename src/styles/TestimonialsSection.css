@@ -4,7 +4,6 @@
 
 .testimonials-section {
   width: 100%;
-  padding: 5rem 0 6rem 0;
   position: relative;
   overflow: hidden;
   background: transparent;
@@ -14,8 +13,10 @@
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 4rem 0 5rem 0;
   box-sizing: border-box;
+  border-left: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
 }
 
 .testimonials-header-wrapper {
@@ -29,6 +30,7 @@
   color: var(--text-main);
   letter-spacing: -0.02em;
   margin: 0;
+  padding-left: 1.5rem;
 }
 
 /* Infinite Marquee Container */
@@ -39,7 +41,7 @@
   padding: 8px 0;
 
   /* Smooth edge fading mask */
-  mask-image: linear-gradient(to right,
+  /* mask-image: linear-gradient(to right,
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 1) 4%,
       rgba(0, 0, 0, 1) 96%,
@@ -48,7 +50,7 @@
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 1) 4%,
       rgba(0, 0, 0, 1) 96%,
-      rgba(0, 0, 0, 0) 100%);
+      rgba(0, 0, 0, 0) 100%); */
 }
 
 .testimonials-marquee-track {

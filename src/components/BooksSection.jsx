@@ -134,7 +134,7 @@ export default function BooksSection() {
         <div className="books-header-wrapper">
           <h2 className="books-title">What's on my bookshelf</h2>
           <p className='books-details'>
-            Books that shaped how I think. <br />I finished most of them. Okay, some of them.
+            Books that shaped how I think. I finished most of them. Okay, some of them.
           </p>
         </div>
 

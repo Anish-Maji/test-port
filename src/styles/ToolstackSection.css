@@ -8,6 +8,8 @@
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
+  border-left: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
 }
 
 .toolstack-header {
@@ -41,13 +43,12 @@
   flex-wrap: wrap;
   gap: 20px;
   align-items: stretch;
-  margin-bottom: 2.5rem;
+  margin-top: 1.6rem;
 }
 
 .toolstack-group-card {
   background: var(--card-bg, #FAFAFA);
   border: 1px solid var(--border-subtle);
-  border-radius: 4px;
   padding: 16px;
   transition: all 0.3s ease;
   position: relative;

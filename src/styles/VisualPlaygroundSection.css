@@ -6,19 +6,20 @@
   background-color: var(--bg-primary);
   overflow: hidden;
   position: relative;
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
   width: 100%;
   margin: 0 auto;
-  padding-bottom: 4rem;
 }
 
 .playground-container {
   width: 100%;
   margin: 0 auto;
+  padding-bottom: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 1280px;
+  border-left: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
 }
 
 .playground-header-wrapper {
@@ -27,10 +28,8 @@
   margin: 0 auto;
   padding: 5rem 1.5rem 2rem 1.5rem;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 72px;
-
+  flex-direction: column;
+  align-items: left;
 }
 
 .playground-title {
@@ -68,7 +67,7 @@
   /* Hide scrollbar Firefox */
   -ms-overflow-style: none;
   /* Hide scrollbar IE */
-  mask-image: linear-gradient(to right,
+  /* mask-image: linear-gradient(to right,
       transparent 0%,
       black 5%,
       black 95%,
@@ -77,7 +76,7 @@
       transparent 0%,
       black 5%,
       black 95%,
-      transparent 100%);
+      transparent 100%); */
 }
 
 .playground-carousel-wrapper::-webkit-scrollbar {

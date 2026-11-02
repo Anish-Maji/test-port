@@ -6,8 +6,6 @@
   background-color: var(--bg-primary);
   overflow: hidden;
   position: relative;
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
   width: 100%;
   margin: 0 auto;
 }
@@ -18,17 +16,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-left: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+  max-width: 1280px;
 }
 
 .books-header-wrapper {
   width: 100%;
   max-width: 1280px;
   padding: 5rem 1.5rem;
+  padding-bottom: 0;
   text-align: left;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 72px;
+  flex-direction: column;
+  align-items: left;
 }
 
 .books-header-wrapper .books-title {
@@ -45,7 +46,6 @@
   font-size: 14px;
   color: var(--text-muted);
   max-width: 554px;
-  line-height: 1.6;
 }
 
 /* ==========================================================================
@@ -58,9 +58,9 @@
   margin: 0 auto;
   overflow: hidden;
   position: relative;
-  padding: 40px 0 60px;
+  padding: 2.5rem 0 5rem 0;
   cursor: grab;
-  mask-image: linear-gradient(to right,
+  /* mask-image: linear-gradient(to right,
       transparent 0%,
       black 8%,
       black 92%,
@@ -69,7 +69,7 @@
       transparent 0%,
       black 8%,
       black 92%,
-      transparent 100%);
+      transparent 100%); */
 }
 
 .books-track {

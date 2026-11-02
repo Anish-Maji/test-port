@@ -67,9 +67,25 @@ export function ToolstackSection() {
     <section className="toolstack-section container">
       <div className="toolstack-header">
         <h2 className="toolstack-title">What's in my toolstack</h2>
-        <p className="toolstack-subtitle">
+        {/* <p className="toolstack-subtitle">
           My periodic table. Fewer noble gases, <br />more monthly subscriptions.
-        </p>
+        </p> */}
+      </div>
+      {/* Filter Category Pills */}
+      <div className="toolstack-filter-bar">
+        {categories.map((cat) => {
+          const isActive = activeCategory === cat;
+          return (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`toolstack-filter-pill ${isActive ? 'active' : ''}`}
+            >
+              <span className={`pill-radio-dot ${isActive ? 'active' : ''}`}></span>
+              <span className="pill-text">{cat}</span>
+            </button>
+          );
+        })}
       </div>
 
       {/* Grid of Tool Groups */}
@@ -108,22 +124,7 @@ export function ToolstackSection() {
         })}
       </div>
 
-      {/* Filter Category Pills */}
-      <div className="toolstack-filter-bar">
-        {categories.map((cat) => {
-          const isActive = activeCategory === cat;
-          return (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`toolstack-filter-pill ${isActive ? 'active' : ''}`}
-            >
-              <span className={`pill-radio-dot ${isActive ? 'active' : ''}`}></span>
-              <span className="pill-text">{cat}</span>
-            </button>
-          );
-        })}
-      </div>
+
     </section >
   );
 }

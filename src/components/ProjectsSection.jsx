@@ -1,24 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, ArrowDown, ArrowUp } from 'lucide-react';
+import React, { useRef } from 'react';
+import { ArrowRight } from 'lucide-react';
 import { AnimatedGroup } from '@/components/core/animated-group';
 import './ProjectsSection.css';
 
 export default function ProjectsSection({ worksData, onOpenCaseStudy, isLoaded = true }) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : 1440
-  );
   const videoRefs = useRef({});
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Desktop/Laptop (> 992px) within 1280px has 2 columns; Mobile (<= 992px) has 1 column
-  const itemsInFirstRow = windowWidth > 992 ? 2 : 1;
-  const hasMore = worksData.length > itemsInFirstRow;
 
   const handleCardMouseEnter = (work) => {
     const video = videoRefs.current[work.id];
@@ -44,8 +30,6 @@ export default function ProjectsSection({ worksData, onOpenCaseStudy, isLoaded =
     }
   };
 
-  const isCollapsed = hasMore && !isExpanded;
-
   return (
     <section className="projects-redesign-section" id="work">
       {/* Header Bar */}
@@ -59,8 +43,8 @@ export default function ProjectsSection({ worksData, onOpenCaseStudy, isLoaded =
         </div>
       </div>
 
-      {/* Bento Grid Wrapper with transition heights & gradient mask */}
-      <div className={`projects-grid-wrapper ${isCollapsed ? 'collapsed' : 'expanded'}`}>
+      {/* Bento Grid Wrapper */}
+      <div className="projects-grid-wrapper">
         <AnimatedGroup
           className="projects-bento-grid"
           trigger={isLoaded}
@@ -153,30 +137,7 @@ export default function ProjectsSection({ worksData, onOpenCaseStudy, isLoaded =
             );
           })}
         </AnimatedGroup>
-
-        {/* Gradient mask visible only when collapsed */}
-        {isCollapsed && <div className="projects-fade-mask"></div>}
       </div>
-
-      {/* Show more / Show less trigger button (visible when there are more projects than row 1) */}
-      {hasMore && (
-        <div className="show-more-container">
-          <button
-            className="show-more-btn"
-            onClick={() => setIsExpanded(!isExpanded)}
-            aria-label={isExpanded ? 'Show less projects' : 'Show more projects'}
-          >
-            <span className="arrow-down-circle">
-              {isExpanded ? (
-                <ArrowUp size={20} color="#ffffff" strokeWidth={2.5} />
-              ) : (
-                <ArrowDown size={20} color="#ffffff" strokeWidth={2.5} />
-              )}
-            </span>
-            <span>{isExpanded ? 'Show less projects' : 'Show more projects'}</span>
-          </button>
-        </div>
-      )}
     </section>
   );
 }

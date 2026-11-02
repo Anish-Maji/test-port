@@ -92,34 +92,10 @@
   opacity: 0.8;
 }
 
-/* Bento Grid Wrapper with Collapsible Height */
+/* Bento Grid Wrapper */
 .projects-grid-wrapper {
   position: relative;
   width: 100%;
-  overflow: hidden;
-  transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.projects-grid-wrapper.collapsed {
-  max-height: 800px;
-  /* displays 1st row fully with title & subtitle, softly clipping 2nd row */
-}
-
-.projects-grid-wrapper.expanded {
-  max-height: 2200px;
-  /* high enough for all projects */
-}
-
-/* Fade Mask for Collapsed State */
-.projects-fade-mask {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 120px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, var(--bg-primary) 90%, var(--bg-primary) 100%);
-  pointer-events: none;
-  z-index: 15;
 }
 
 /* Bento Grid */
@@ -253,66 +229,11 @@
   line-height: 1.55;
 }
 
-/* Show More Actions Section */
-.show-more-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
-}
-
-.show-more-btn {
-  background: none;
-  border: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-  cursor: pointer;
-  font-family: var(--font-body, "DM Sans", sans-serif);
-  font-size: 20px;
-  color: var(--text-muted);
-  font-weight: 500;
-  padding: 8px 16px;
-  transition: color 0.2s;
-  transition: transform 0.2s ease-in-out;
-}
-
-.show-more-btn:hover {
-  color: var(--text-main);
-  transform: scale(1.05);
-}
-
-.arrow-down-circle {
-  width: 40px;
-  height: 40px;
-  background-color: #84cc16;
-  /* neutral iOS grey as in reference screen */
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s;
-}
-
-.show-more-btn:hover .arrow-down-circle {
-  background-color: #18181b;
-  /* transform: translateY(2px); */
-
-}
-
 /* Responsive Overrides */
 @media (max-width: 992px) {
   .projects-bento-grid {
     grid-template-columns: 1fr;
     gap: 48px;
-  }
-
-  .projects-grid-wrapper.collapsed {
-    max-height: 1100px;
-    /* displays 2 cards stacked vertically */
-  }
-
-  .projects-grid-wrapper.expanded {
-    max-height: 3500px;
   }
 
   .bento-card-media {
@@ -331,10 +252,6 @@
 
   .projects-header-center {
     display: none;
-  }
-
-  .projects-grid-wrapper.collapsed {
-    max-height: 980px;
   }
 
   .bento-card-media {

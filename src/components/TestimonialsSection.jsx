@@ -44,7 +44,7 @@ const testimonialsData = [
     id: 4,
     quote: (
       <>
-        "I've seen him enhance UX keeping in mind the use case, the flow of information and end user persona in mind. As a person, Anish is intelligent, curious, creative and has a great work ethic. He can communicate really well and works well with people across teams."
+        I've seen him enhance UX keeping in mind the use case, the flow of information and end user persona in mind. As a person, Anish is intelligent, curious, creative and has a great work ethic. He can communicate really well and works well with people across teams.
       </>
     ),
     author: 'Prasad Prabhu',

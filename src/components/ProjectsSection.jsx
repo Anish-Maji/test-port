@@ -3,6 +3,27 @@ import { ArrowRight } from 'lucide-react';
 import { AnimatedGroup } from '@/components/core/animated-group';
 import './ProjectsSection.css';
 
+const getTags = (work) => {
+  if (Array.isArray(work.tags) && work.tags.length > 0) {
+    return work.tags;
+  }
+  const raw = work.bentoMeta || work.meta || 'CASE STUDY';
+  return raw
+    .split(/[•·.]/)
+    .map((t) => t.trim())
+    .filter(Boolean)
+    .map((tag) => {
+      if (/^[A-Z\s]+$/.test(tag) && tag.length > 3) {
+        return tag
+          .toLowerCase()
+          .split(' ')
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(' ');
+      }
+      return tag;
+    });
+};
+
 export default function ProjectsSection({ worksData, onOpenCaseStudy, isLoaded = true }) {
   const videoRefs = useRef({});
 
@@ -97,9 +118,12 @@ export default function ProjectsSection({ worksData, onOpenCaseStudy, isLoaded =
                   className="bento-card-media"
                   style={{ background: work.bgColor || '#f4f4f5' }}
                 >
-                  {/* Arrow Circle */}
-                  <div className="bento-arrow-circle">
-                    <ArrowRight size={15} />
+                  {/* Read Time & Turning Arrow Badge */}
+                  <div className="bento-action-badge">
+                    <span className="bento-badge-text">
+                      {work.readTime || '3 mins read'}
+                    </span>
+                    <ArrowRight size={14} className="bento-badge-arrow" />
                   </div>
 
                   {work.video ? (
@@ -125,8 +149,12 @@ export default function ProjectsSection({ worksData, onOpenCaseStudy, isLoaded =
 
                 {/* Details */}
                 <div className="bento-card-details">
-                  <div className="bento-card-meta">
-                    {work.bentoMeta || work.meta || 'CASE STUDY'}
+                  <div className="bento-card-tags">
+                    {getTags(work).map((tag, idx) => (
+                      <span key={idx} className="bento-tag-pill">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                   <h3 className="bento-card-title">{work.shortTitle || work.title}</h3>
                   <p className="bento-card-subtitle">

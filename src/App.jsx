@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { PullCord } from 'pullcord';
 import 'pullcord/pullcord.css';
 import { Sun, Moon } from 'lucide-react';
@@ -8,23 +8,21 @@ import ShapeGrid from './components/ShapeGrid';
 import Shuffle from './components/Shuffle';
 import SwapStationPage from './pages/SwapStationPage';
 import ReferralSystemPage from './pages/ReferralSystemPage';
-import PlayPage from './pages/PlayPage';
 import AboutPage from './pages/AboutPage';
 import Footer from './components/Footer';
 
 import ToolstackSection from './components/ToolstackSection';
 import BooksSection from './components/BooksSection';
-import VisualPlaygroundSection from './components/VisualPlaygroundSection';
-import CinematicBrainSection from './components/CinematicBrainSection';
 import TestimonialsSection from './components/TestimonialsSection';
 import ProjectsSection from './components/ProjectsSection';
+import SidequestsSection from './components/SidequestsSection';
 import WebsiteLoader from './components/WebsiteLoader';
-import PixelResumeGame from './components/PixelResumeGame';
+import SnakeResumeGame from './components/SnakeResumeGame';
+import NameRoll from './components/NameRoll';
 import cvFile from './assets/CV/cv.pdf';
 import { motion } from 'motion/react';
 import { TextEffect } from '@/components/core/text-effect';
 import worksData from './data/worksData';
-import swapMockupImg from './assets/home/projects-ss.webp';
 import nintendoImg from './assets/home/nintendo.png';
 import baazBikesLogo from './assets/brand logos/webp logos/baaz-bikes.webp';
 
@@ -56,7 +54,6 @@ export function App() {
   const [currentView, setCurrentView] = useState(() => {
     if (window.location.hash.includes('swap-station')) return 'swap-station';
     if (window.location.hash.includes('referral-system')) return 'referral-system';
-    if (window.location.hash.includes('play')) return 'play';
     if (window.location.hash.includes('about')) return 'about';
     return 'home';
   });
@@ -70,11 +67,12 @@ export function App() {
   }, []);
 
   // Interactive Nintendo Game Boy Controls: the D-pad drives the in-screen game,
-  // A and B download the resume
+  // A downloads the resume and B (the heart) shows a thank-you on screen
   const [dpadActiveDir, setDpadActiveDir] = useState(null);
   const [isBtnAPressed, setIsBtnAPressed] = useState(false);
   const [isBtnBPressed, setIsBtnBPressed] = useState(false);
-  const gameInputRef = useRef({ left: false, right: false, down: false, jump: false });
+  // Set by SnakeResumeGame: { steer(direction), love() }
+  const snakeControlsRef = useRef(null);
 
   const getNavSwitchImage = () => {
     switch (dpadActiveDir) {
@@ -86,22 +84,13 @@ export function App() {
     }
   };
 
-  const DPAD_INPUT_KEYS = { left: 'left', right: 'right', bottom: 'down' };
-
   const handleDpadDown = (direction) => {
     setDpadActiveDir(direction);
-    if (direction === 'top') {
-      gameInputRef.current.jump = true;
-    } else {
-      gameInputRef.current[DPAD_INPUT_KEYS[direction]] = true;
-    }
+    snakeControlsRef.current?.steer(direction);
   };
 
   const handleDpadUp = (direction) => {
     setDpadActiveDir((prev) => (prev === direction ? null : prev));
-    if (direction !== 'top') {
-      gameInputRef.current[DPAD_INPUT_KEYS[direction]] = false;
-    }
   };
 
   // Keyboard activation (Enter/Space) has no pointer events, so treat it as a short tap
@@ -123,6 +112,49 @@ export function App() {
     onClick: (e) => handleDpadKeyboardClick(e, direction),
   });
 
+  // Keyboard arrows press the matching side of the D-pad. They only take over
+  // while the Game Boy screen is mostly in view, so arrows still scroll elsewhere.
+  const nintendoScreenRef = useRef(null);
+
+  useEffect(() => {
+    const screen = nintendoScreenRef.current;
+    if (currentView !== 'home' || !screen) return undefined;
+
+    const ARROW_DIRECTIONS = { ArrowUp: 'top', ArrowDown: 'bottom', ArrowLeft: 'left', ArrowRight: 'right' };
+    let screenVisible = false;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      screenVisible = entry.intersectionRatio >= 0.5;
+    }, { threshold: [0, 0.5, 1] });
+    observer.observe(screen);
+
+    const isTyping = (target) =>
+      target instanceof HTMLElement &&
+      (target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName));
+
+    const handleKeyDown = (e) => {
+      const direction = ARROW_DIRECTIONS[e.key];
+      if (!direction || !screenVisible || e.altKey || e.ctrlKey || e.metaKey || isTyping(e.target)) return;
+      e.preventDefault();
+      setDpadActiveDir(direction);
+      // Holding a key repeats keydown; only the first press steers
+      if (!e.repeat) snakeControlsRef.current?.steer(direction);
+    };
+
+    const handleKeyUp = (e) => {
+      const direction = ARROW_DIRECTIONS[e.key];
+      if (direction) setDpadActiveDir((prev) => (prev === direction ? null : prev));
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, [currentView]);
+
   const downloadResume = () => {
     const link = document.createElement('a');
     link.href = cvFile;
@@ -140,13 +172,31 @@ export function App() {
 
   const handleBtnBPress = () => {
     setIsBtnBPressed(true);
-    downloadResume();
+    snakeControlsRef.current?.love();
     setTimeout(() => setIsBtnBPressed(false), 200);
   };
 
+  // The About page's photography section turns the whole site dark while it
+  // (and anything below it, like the footer) is on screen. It never changes
+  // the visitor's own theme choice, it only layers dark on top of it.
+  const [inDarkZone, setInDarkZone] = useState(false);
+
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
+    if (currentView !== 'about') setInDarkZone(false);
+  }, [currentView]);
+
+  const themeFadeTimer = useRef(null);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const next = inDarkZone ? 'dark' : theme;
+    if (root.getAttribute('data-theme') === next) return;
+    // Fade colours instead of snapping (see .theme-fading in index.css)
+    root.classList.add('theme-fading');
+    root.setAttribute('data-theme', next);
+    clearTimeout(themeFadeTimer.current);
+    themeFadeTimer.current = setTimeout(() => root.classList.remove('theme-fading'), 700);
+  }, [theme, inDarkZone]);
 
   const toggleTheme = () => {
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
@@ -158,21 +208,28 @@ export function App() {
     }
   }, [currentView]);
 
+  // Every page switch starts at the top. This runs before the new page paints
+  // and jumps instantly: a plain scrollTo would be animated by the global
+  // `scroll-behavior: smooth`, sliding up through the new page from wherever
+  // the old one was scrolled to.
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [currentView]);
+
+  // Stop the browser restoring old scroll positions on Back/Forward
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+  }, []);
+
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
       if (hash.includes('swap-station')) {
         setCurrentView('swap-station');
-        window.scrollTo(0, 0);
       } else if (hash.includes('referral-system')) {
         setCurrentView('referral-system');
-        window.scrollTo(0, 0);
-      } else if (hash.includes('play')) {
-        setCurrentView('play');
-        window.scrollTo(0, 0);
       } else if (hash.includes('about')) {
         setCurrentView('about');
-        window.scrollTo(0, 0);
       } else if (currentView !== 'home' && (hash === '#work' || hash === '')) {
         setCurrentView('home');
       }
@@ -190,13 +247,11 @@ export function App() {
       setCurrentView('swap-station');
       window.location.hash = 'swap-station';
     }
-    window.scrollTo(0, 0);
   };
 
   const handleBackToWork = () => {
     setCurrentView('home');
     window.location.hash = 'work';
-    window.scrollTo(0, 0);
   };
 
   if (currentView === 'swap-station') {
@@ -257,35 +312,6 @@ export function App() {
     );
   }
 
-  if (currentView === 'play') {
-    return (
-      <div className="app-layout">
-        <PullCord
-          className="desktop-pullcord"
-          onPull={toggleTheme}
-          pulled={theme === 'dark'}
-          ariaLabel="Toggle theme"
-          config={{
-            gravity: 1250,
-            damping: 0.94,
-            iterations: 20,
-            stretchMax: 28,
-          }}
-        />
-        <button
-          className="mobile-theme-toggle-btn"
-          onClick={toggleTheme}
-          aria-label="Toggle theme"
-        >
-          {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} strokeWidth={2.2} />}
-        </button>
-        <Navbar onNavigateHome={handleBackToWork} activePage="play" />
-        <PlayPage onBackToWork={handleBackToWork} />
-        <Footer />
-      </div>
-    );
-  }
-
   if (currentView === 'about') {
     return (
       <div className="app-layout">
@@ -309,7 +335,7 @@ export function App() {
           {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} strokeWidth={2.2} />}
         </button>
         <Navbar onNavigateHome={handleBackToWork} activePage="about" />
-        <AboutPage onBackToWork={handleBackToWork} />
+        <AboutPage onDarkZoneChange={setInDarkZone} />
         <Footer />
       </div>
     );
@@ -395,9 +421,7 @@ export function App() {
                   respectReducedMotion={true}
                   textAlign="left"
                 />
-                <span className="hero-sub">
-                  /anish/
-                </span>
+                <NameRoll className="hero-sub" />
               </motion.div>
               <motion.div
                 layout="position"
@@ -450,8 +474,8 @@ export function App() {
                   className="nintendo-device-img"
                   draggable={false}
                 />
-                <div className="nintendo-screen-viewport">
-                  <PixelResumeGame inputRef={gameInputRef} />
+                <div className="nintendo-screen-viewport" ref={nintendoScreenRef}>
+                  <SnakeResumeGame controlsRef={snakeControlsRef} />
                 </div>
 
                 {/* Interactive D-Pad (Red Highlighted Area) */}
@@ -466,25 +490,25 @@ export function App() {
                     type="button"
                     className="dpad-btn dpad-btn-top"
                     {...getDpadHandlers('top')}
-                    aria-label="Jump (Up)"
+                    aria-label="Snake up"
                   />
                   <button
                     type="button"
                     className="dpad-btn dpad-btn-bottom"
                     {...getDpadHandlers('bottom')}
-                    aria-label="Crouch (Down)"
+                    aria-label="Snake down"
                   />
                   <button
                     type="button"
                     className="dpad-btn dpad-btn-left"
                     {...getDpadHandlers('left')}
-                    aria-label="Walk backward (Left)"
+                    aria-label="Snake left"
                   />
                   <button
                     type="button"
                     className="dpad-btn dpad-btn-right"
                     {...getDpadHandlers('right')}
-                    aria-label="Walk forward (Right)"
+                    aria-label="Snake right"
                   />
                 </div>
 
@@ -493,7 +517,7 @@ export function App() {
                   type="button"
                   className={`nintendo-btn-b ${isBtnBPressed ? 'pressed' : ''}`}
                   onClick={handleBtnBPress}
-                  aria-label="Button B - Download resume"
+                  aria-label="Button B - Send some love"
                 >
                   <img
                     src={isBtnBPressed ? likeBtnClicked : likeBtnDefault}
@@ -538,6 +562,11 @@ export function App() {
 
         <div className="simple-divider"></div>
 
+        {/* Sidequests Section */}
+        <SidequestsSection />
+
+        <div className="simple-divider"></div>
+
         {/* Toolstack Section */}
         <ToolstackSection />
 
@@ -548,20 +577,8 @@ export function App() {
 
         <div className="simple-divider"></div>
 
-        {/* Visual Playground / Archive Section */}
-        <VisualPlaygroundSection />
-
-        <div className="simple-divider"></div>
-
-        {/* My Cinematic Brain / Instagram Feed Section */}
-        <CinematicBrainSection />
-
-        <div className="simple-divider"></div>
-
         {/* Testimonials Section */}
         <TestimonialsSection />
-
-        <div className="simple-divider"></div>
 
       </main >
 

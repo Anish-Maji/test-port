@@ -10,6 +10,14 @@ import crimsonLogo from '../assets/brand logos/webp logos/crimson.webp';
 import globalEsportsLogo from '../assets/brand logos/webp logos/global-esports.webp';
 import iiitLogo from '../assets/brand logos/webp logos/iiit.webp';
 
+// A few Global Esports YouTube thumbnails, shown under that role
+import esportsAsiaGames from '../assets/about-me/global-esports/Asia-Games-2022 1.webp';
+import esportsIndian from '../assets/about-me/global-esports/Indian-esports 1.webp';
+import esportsTopAthletes from '../assets/about-me/global-esports/top esports athletes 1.webp';
+import esportsYearRewind from '../assets/about-me/global-esports/etw-year rewind v2 1.webp';
+import esportsPokemonUnite from '../assets/about-me/global-esports/What is Pokemon Unite 1.webp';
+import esportsSoulDominate from '../assets/about-me/global-esports/Spero - Soul dominate 2022 1.webp';
+
 // Interactive Eye-Tracking Images
 import imgCenter from '../assets/about-me/personal/center.webp';
 import imgTop from '../assets/about-me/personal/top.webp';
@@ -21,11 +29,7 @@ import imgTopRight from '../assets/about-me/personal/top-right.webp';
 import imgBottomLeft from '../assets/about-me/personal/bottom-left.webp';
 import imgBottomRight from '../assets/about-me/personal/bottom-right.webp';
 
-import post1 from '../assets/instagram/post 1.webp';
-import post2 from '../assets/instagram/post 2.webp';
-import post3 from '../assets/instagram/post 3.webp';
-import post4 from '../assets/instagram/post 4.webp';
-import post5 from '../assets/instagram/post 5.webp';
+import PhotographySection from '../components/PhotographySection';
 
 import '../styles/AboutPage.css';
 
@@ -40,14 +44,6 @@ const EYE_TRACKING_IMAGES = {
   'bottom-left': imgBottomLeft,
   'bottom-right': imgBottomRight,
 };
-
-const photoItemsData = [
-  { id: 'dharmashala', image: post1 },
-  { id: 'andamans', image: post2 },
-  { id: 'yamuna', image: post3 },
-  { id: 'kolkata', image: post4 },
-  { id: 'delhi', image: post5 }
-];
 
 const journeyData = [
   {
@@ -104,6 +100,14 @@ const journeyData = [
     logo: globalEsportsLogo,
     logoAlt: 'Global Esports',
     description: 'Crafted tournament broadcast graphics, esports event visual campaigns, social media assets, YouTube thumbnails, and brand identity collateral for India’s premier esports organization.',
+    gallery: [
+      { src: esportsAsiaGames, alt: 'Asia Games 2022 thumbnail' },
+      { src: esportsIndian, alt: 'Indian esports thumbnail' },
+      { src: esportsTopAthletes, alt: 'Top esports athletes thumbnail' },
+      { src: esportsYearRewind, alt: 'Esports This Week year rewind thumbnail' },
+      { src: esportsPokemonUnite, alt: 'What is Pokemon Unite thumbnail' },
+      { src: esportsSoulDominate, alt: 'Spero, Soul dominate 2022 thumbnail' },
+    ],
   },
   {
     id: 'education',
@@ -121,7 +125,7 @@ const journeyData = [
 
 const DEFAULT_PAGE_TITLE = "About Anish | a.niche Portfolio";
 
-export default function AboutPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE }) {
+export default function AboutPage({ onDarkZoneChange, pageTitle = DEFAULT_PAGE_TITLE }) {
   const [activeEyeImage, setActiveEyeImage] = useState('center');
   const cardRef = useRef(null);
 
@@ -179,12 +183,6 @@ export default function AboutPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE
     };
   }, []);
 
-  const carouselItems = [
-    ...photoItemsData,
-    ...photoItemsData,
-    ...photoItemsData,
-  ];
-
   return (
     <div className="about-page-root">
       <div className="about-page-container">
@@ -230,40 +228,9 @@ export default function AboutPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE
         {/* Divider */}
         <div className="about-divider"></div>
 
-        {/* Tier 2: Continuous 1:1 Photo Carousel */}
-        <section className="about-carousel-section">
-          <div className="about-carousel-header">
-            <h2 className="about-carousel-title">director's cut</h2>
-          </div>
-
-          <div className="about-carousel-wrapper">
-            <div className="about-carousel-track">
-              {carouselItems.map((item, index) => (
-                <div
-                  key={`${item.id}-${index}`}
-                  className="about-carousel-card-item"
-                >
-                  <div className="about-carousel-card">
-                    <img
-                      src={item.image}
-                      alt=""
-                      className="about-carousel-img"
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Divider */}
-        <div className="about-divider"></div>
-
-        {/* Tier 3: Revamped Journey So Far / Experience & Education Timeline */}
+        {/* Tier 2: Journey So Far / Experience & Education Timeline */}
         <section className="about-journey-section">
           <div className="about-journey-header">
-            <span className="about-journey-badge">EXPERIENCE</span>
             <h2 className="about-journey-title">Journey so far</h2>
             <p className="about-journey-subtitle">
               From leading product and visual systems to crafting interactive hardware & EV mobility platforms.
@@ -303,13 +270,26 @@ export default function AboutPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE
                     <span>{item.location}</span>
                   </div>
                   <p className="journey-description">{item.description}</p>
+                  {item.gallery && (
+                    <ul className="journey-gallery" aria-label={`Work from ${item.organization}`}>
+                      {item.gallery.map((image) => (
+                        <li key={image.alt}>
+                          <img src={image.src} alt={image.alt} loading="lazy" draggable={false} />
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </div>
             ))}
           </div>
         </section>
 
+        {/* Tier 3: Photography. Scrolling into it turns the site dark */}
+        <PhotographySection onDarkZoneChange={onDarkZoneChange} />
+
       </div>
     </div>
+
   );
 }

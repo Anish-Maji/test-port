@@ -78,7 +78,6 @@ export function SwapStationPage({ onBackToWork, pageTitle = DEFAULT_PAGE_TITLE, 
     return sessionStorage.getItem('ss_unlocked') === 'true';
   });
   const [activeSection, setActiveSection] = useState('tldr');
-  const [activeTab, setActiveTab] = useState('mobile');
   const [copied, setCopied] = useState(false);
 
   // QA section video player states & refs

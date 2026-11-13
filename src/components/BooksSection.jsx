@@ -9,55 +9,6 @@ import historyofGraphicsCover from '../assets/books cover/history of graphics de
 import shoeDogCover from '../assets/books cover/shoe dog.webp';
 import thinkingFastSlowCover from '../assets/books cover/thinking fast and slow.webp';
 
-
-// SVG Data URIs for additional iconic book covers
-const steveJobsCover = "data:image/svg+xml;utf8," + encodeURIComponent(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 320" width="220" height="320">
-  <rect width="220" height="320" fill="#ffffff"/>
-  <rect x="0" y="0" width="6" height="320" fill="#e4e4e7"/>
-  <text x="24" y="58" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#09090b">Steve Jobs</text>
-  <text x="24" y="82" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#71717a">by Walter Isaacson</text>
-  <g transform="translate(45, 115)" opacity="0.85">
-    <path d="M65 20 C40 20 25 40 25 65 C25 85 35 100 65 100 C95 100 105 85 105 65 C105 40 90 20 65 20 Z" fill="#18181b"/>
-    <path d="M30 110 C30 95 45 90 65 90 C85 90 100 95 100 110 L100 140 L30 140 Z" fill="#18181b"/>
-    <circle cx="50" cy="55" r="7" fill="#ffffff"/>
-    <circle cx="80" cy="55" r="7" fill="#ffffff"/>
-    <rect x="42" y="52" width="46" height="3" fill="#18181b"/>
-  </g>
-  <text x="24" y="295" font-family="system-ui, sans-serif" font-size="9" letter-spacing="2" font-weight="bold" fill="#a1a1aa">SIMON &amp; SCHUSTER</text>
-</svg>
-`);
-
-const normanCover = "data:image/svg+xml;utf8," + encodeURIComponent(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 320" width="220" height="320">
-  <rect width="220" height="320" fill="#c82333"/>
-  <text x="20" y="38" font-family="system-ui, sans-serif" font-size="8.5" font-weight="bold" letter-spacing="1.5" fill="#ffffff" opacity="0.9">REVISED &amp; EXPANDED EDITION</text>
-  <text x="20" y="78" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#ffffff">The Design</text>
-  <text x="20" y="104" font-family="Georgia, serif" font-size="19" fill="#ffffff" opacity="0.95">of Everyday Things</text>
-  <g transform="translate(65, 135)">
-    <path d="M30 10 C15 10 5 25 5 45 C5 65 15 80 30 80 L60 80 C75 80 85 65 85 45 C85 25 75 10 60 10 Z" fill="none" stroke="#ffffff" stroke-width="4"/>
-    <circle cx="45" cy="45" r="12" fill="none" stroke="#ffffff" stroke-width="3"/>
-  </g>
-  <text x="20" y="285" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#ffffff">Don Norman</text>
-</svg>
-`);
-
-const atomicHabitsCover = "data:image/svg+xml;utf8," + encodeURIComponent(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 320" width="220" height="320">
-  <rect width="220" height="320" fill="#faf8f5"/>
-  <g opacity="0.25">
-    <circle cx="110" cy="160" r="80" fill="none" stroke="#d97706" stroke-width="1" stroke-dasharray="2,4"/>
-    <circle cx="110" cy="160" r="60" fill="none" stroke="#d97706" stroke-width="1" stroke-dasharray="2,4"/>
-    <circle cx="110" cy="160" r="40" fill="none" stroke="#d97706" stroke-width="1" stroke-dasharray="2,4"/>
-  </g>
-  <text x="24" y="70" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="#d97706">Atomic</text>
-  <text x="24" y="105" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="#18181b">Habits</text>
-  <text x="24" y="135" font-family="system-ui, sans-serif" font-size="9.5" fill="#52525b">An Easy &amp; Proven Way to Build Good Habits</text>
-  <text x="24" y="148" font-family="system-ui, sans-serif" font-size="9.5" fill="#52525b">&amp; Break Bad Ones</text>
-  <text x="24" y="285" font-family="Georgia, serif" font-size="18" font-weight="bold" fill="#18181b">James Clear</text>
-</svg>
-`);
-
 const booksData = [
   {
     id: 1,

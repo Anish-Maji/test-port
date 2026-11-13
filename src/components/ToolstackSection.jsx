@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PixelTile from './PixelTile';
 import '../styles/ToolstackSection.css';
 
 const toolsData = [
@@ -106,8 +107,9 @@ export function ToolstackSection() {
                 {group.tools.map((tool) => {
                   const isToolActive = activeCategory === 'all tools' || activeCategory === tool.category;
                   return (
-                    <div
+                    <PixelTile
                       key={tool.id}
+                      color={tool.color}
                       className={`tool-tile ${!isToolActive ? 'tile-dimmed' : ''}`}
                     >
                       <span className="tool-number">{tool.id}</span>
@@ -115,7 +117,7 @@ export function ToolstackSection() {
                         {tool.symbol}
                       </span>
                       <span className="tool-name">{tool.name}</span>
-                    </div>
+                    </PixelTile>
                   );
                 })}
               </div>

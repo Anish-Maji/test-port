@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, ArrowUpRight, Mail } from 'lucide-react';
+import { ArrowUpRight, Mail } from 'lucide-react';
 import '../styles/Footer.css';
 
 const verbs = ['design', 'create', 'build'];
@@ -55,6 +55,7 @@ const BehanceIcon = ({ size = 18 }) => (
 export function Footer() {
   return (
     <footer id="contact" className="site-footer">
+      <div className="simple-divider"></div>
       <div className="footer-top-grid">
         {/* Left Block: Open for Roles CTA */}
         <div className="footer-cta-col">

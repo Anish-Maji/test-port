@@ -22,11 +22,11 @@
 }
 
 .toolstack-title {
-  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-family: var(--font-retro, "APK-Archivr21", monospace);
   font-size: clamp(1.8rem, 3.5vw, 2.5rem);
   font-weight: 500;
   color: var(--text-main);
-  letter-spacing: .05rem;
+  letter-spacing: -.15rem;
 }
 
 .toolstack-subtitle {
@@ -90,18 +90,32 @@
     background-color 0.2s ease,
     opacity 0.2s ease;
   position: relative;
+  overflow: hidden;
   user-select: none;
   z-index: 1;
 }
 
-/* Hovered / Highlighted Tile Effect - POP UP like reference image */
+/* Hover: the tile keeps its size, fills with twinkling pixels (PixelTile's
+   canvas) and the symbol grows */
 .tool-tile:hover {
-  transform: translateY(0px) scale(1.1);
   background-color: var(--tool-card-hover);
-  border-color: var(--accent-primary);
-  box-shadow: 0 20px 38px -8px rgba(0, 0, 0, 0.2), 0 8px 16px -4px rgba(0, 0, 0, 0.12);
+  /* Border takes the tool's own colour (set by PixelTile as --tile-color) */
+  border-color: var(--tile-color, var(--accent-primary));
+  box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.18);
   z-index: 20;
   opacity: 1 !important;
+}
+
+.pixel-tile-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
+/* Text sits above the pixels */
+.tool-tile > span {
+  position: relative;
 }
 
 .tool-tile.tile-dimmed {
@@ -129,11 +143,17 @@
   line-height: 1;
   letter-spacing: -0.02em;
   margin-top: -2px;
-  transition: transform 0.2s ease;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .tool-tile:hover .tool-symbol {
-  transform: scale(1.05);
+  transform: scale(1.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-symbol {
+    transition: none;
+  }
 }
 
 .tool-name {

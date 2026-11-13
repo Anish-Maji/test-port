@@ -108,7 +108,7 @@ export default function TestimonialsSection({
       <div className="testimonials-container">
         {/* Header Section */}
         <div className="testimonials-header-wrapper">
-          <h2 className="testimonials-title">what they say about me....</h2>
+          <h2 className="testimonials-title">What they say about me...</h2>
         </div>
 
         {/* Marquee Track Container */}

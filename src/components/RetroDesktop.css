@@ -1,0 +1,474 @@
+/* ==========================================================================
+   Retro Desktop (Windows 98 style), laid out at 520x394 virtual px
+   ========================================================================== */
+
+.r98-desktop {
+  --r98-face: #c0c0c0;
+  --r98-light: #ffffff;
+  --r98-mid: #dfdfdf;
+  --r98-shadow: #808080;
+  --r98-dark: #000000;
+  --r98-title: linear-gradient(90deg, #000080, #1084d0);
+  --r98-title-inactive: linear-gradient(90deg, #808080, #b5b5b5);
+
+  position: relative;
+  width: 520px;
+  height: 394px;
+  overflow: hidden;
+  background: #008080;
+  font-family: Tahoma, 'MS Sans Serif', 'Segoe UI', sans-serif;
+  font-size: 11px;
+  line-height: 1.2;
+  color: #000000;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+.r98-desktop button {
+  font: inherit;
+  color: inherit;
+}
+
+/* Raised 3D bevel shared by buttons, windows and the taskbar */
+.r98-button,
+.r98-window,
+.r98-title-btn {
+  background: var(--r98-face);
+  box-shadow:
+    inset -1px -1px var(--r98-dark),
+    inset 1px 1px var(--r98-light),
+    inset -2px -2px var(--r98-shadow),
+    inset 2px 2px var(--r98-mid);
+}
+
+.r98-button {
+  min-height: 22px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.r98-button:active:not(:disabled),
+.r98-button.is-pressed {
+  box-shadow:
+    inset -1px -1px var(--r98-light),
+    inset 1px 1px var(--r98-dark),
+    inset -2px -2px var(--r98-mid),
+    inset 2px 2px var(--r98-shadow);
+}
+
+.r98-button.is-pressed {
+  background:
+    repeating-conic-gradient(var(--r98-face) 0% 25%, var(--r98-light) 0% 50%) 0 0 / 2px 2px;
+  font-weight: 700;
+}
+
+.r98-button:disabled {
+  color: var(--r98-shadow);
+  text-shadow: 1px 1px var(--r98-light);
+  cursor: default;
+}
+
+.r98-desktop button:focus-visible {
+  outline: 1px dotted #000000;
+  outline-offset: -4px;
+}
+
+/* Desktop icons */
+.r98-icons {
+  position: absolute;
+  top: 8px;
+  left: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.r98-icon {
+  width: 72px;
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.r98-icon-image svg {
+  display: block;
+}
+
+.r98-icon-label {
+  padding: 1px 2px;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 1px 1px #000000;
+}
+
+.r98-icon.is-selected .r98-icon-image {
+  filter: brightness(0.55) sepia(1) hue-rotate(190deg) saturate(4);
+}
+
+.r98-icon.is-selected .r98-icon-label {
+  background: #000080;
+  outline: 1px dotted #ffffff;
+  text-shadow: none;
+}
+
+.r98-desktop .r98-icon:focus-visible {
+  outline: none;
+}
+
+.r98-icon:focus-visible .r98-icon-label {
+  outline: 1px dotted #ffffff;
+}
+
+/* Windows */
+.r98-window {
+  position: absolute;
+  box-sizing: border-box;
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+}
+
+.r98-window.is-minimized {
+  display: none;
+}
+
+.r98-titlebar {
+  flex: 0 0 18px;
+  padding: 0 2px 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  background: var(--r98-title-inactive);
+  color: #dfdfdf;
+  font-weight: 700;
+  touch-action: none;
+}
+
+.r98-window.is-active .r98-titlebar {
+  background: var(--r98-title);
+  color: #ffffff;
+}
+
+.r98-titlebar-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.r98-titlebar-buttons {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.r98-title-btn {
+  width: 16px;
+  height: 14px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.r98-title-btn svg {
+  fill: #000000;
+}
+
+.r98-title-btn-close {
+  margin-left: 2px;
+}
+
+.r98-title-btn:active {
+  box-shadow:
+    inset -1px -1px var(--r98-light),
+    inset 1px 1px var(--r98-dark),
+    inset -2px -2px var(--r98-mid),
+    inset 2px 2px var(--r98-shadow);
+}
+
+.r98-window-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-top: 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sunken panel used by the player screen and browser page */
+.r98-player-screen,
+.r98-browser-page,
+.r98-browser-address {
+  box-shadow:
+    inset -1px -1px var(--r98-light),
+    inset 1px 1px var(--r98-shadow),
+    inset -2px -2px var(--r98-mid),
+    inset 2px 2px var(--r98-dark);
+}
+
+/* Media player */
+.r98-player {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 0;
+}
+
+.r98-player-screen {
+  flex: 1;
+  min-height: 0;
+  padding: 2px;
+  background: #000000;
+}
+
+.r98-player-screen video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #000000;
+}
+
+.r98-player-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.r98-player-status {
+  margin-left: auto;
+  padding-right: 4px;
+}
+
+/* Browser */
+.r98-browser {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 0;
+}
+
+.r98-browser-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.r98-browser-address-label {
+  margin-left: 4px;
+}
+
+.r98-browser-address {
+  flex: 1;
+  min-width: 0;
+  height: 20px;
+  padding: 0 6px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background: #ffffff;
+}
+
+.r98-browser-page {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  padding: 2px;
+  background: #ffffff;
+}
+
+/* Measures the area inside the sunken border; the iframe is scaled into it */
+.r98-browser-viewport {
+  position: absolute;
+  inset: 2px;
+  pointer-events: none;
+}
+
+.r98-browser-page iframe {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  display: block;
+  border: none;
+  transform-origin: 0 0;
+}
+
+.r98-browser-placeholder {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.r98-browser-placeholder p {
+  margin: 0;
+}
+
+/* Taskbar */
+.r98-taskbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 28px;
+  box-sizing: border-box;
+  padding: 3px 2px 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--r98-face);
+  box-shadow: inset 0 1px var(--r98-mid), inset 0 2px var(--r98-light);
+  z-index: 1000;
+}
+
+.r98-start {
+  height: 22px;
+  padding: 0 6px 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+}
+
+/* Start menu: raised panel above the Start button with a vertical banner */
+.r98-start-menu {
+  position: absolute;
+  left: 2px;
+  bottom: 26px;
+  z-index: 1001;
+  display: flex;
+  padding: 3px;
+  background: var(--r98-face);
+  box-shadow:
+    inset -1px -1px var(--r98-dark),
+    inset 1px 1px var(--r98-light),
+    inset -2px -2px var(--r98-shadow),
+    inset 2px 2px var(--r98-mid);
+}
+
+.r98-start-menu-banner {
+  width: 22px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 6px;
+  background: linear-gradient(0deg, #000080, #1084d0);
+}
+
+.r98-start-menu-banner span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 15px;
+  font-weight: 700;
+  color: #c0c0c0;
+  letter-spacing: 0.5px;
+}
+
+.r98-start-menu-banner b {
+  color: #ffffff;
+}
+
+.r98-start-menu-items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: 150px;
+}
+
+.r98-start-menu-items li.has-divider {
+  margin-top: 3px;
+  padding-top: 3px;
+  border-top: 1px solid var(--r98-shadow);
+  box-shadow: inset 0 1px var(--r98-light);
+}
+
+.r98-start-menu-item {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.r98-start-menu-item svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.r98-start-menu-item:hover,
+.r98-start-menu-item:focus-visible {
+  background: #000080;
+  color: #ffffff;
+}
+
+.r98-desktop .r98-start-menu-item:focus-visible {
+  outline: none;
+}
+
+.r98-taskbar-divider {
+  width: 2px;
+  height: 20px;
+  border-left: 1px solid var(--r98-shadow);
+  border-right: 1px solid var(--r98-light);
+  box-sizing: border-box;
+}
+
+.r98-tasks {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 3px;
+}
+
+.r98-task {
+  width: 130px;
+  min-width: 0;
+  height: 22px;
+  padding: 0 6px 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-align: left;
+}
+
+.r98-task svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.r98-task span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.r98-tray {
+  height: 22px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  box-shadow: inset -1px -1px var(--r98-light), inset 1px 1px var(--r98-shadow);
+}

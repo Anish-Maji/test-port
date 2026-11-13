@@ -1,45 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/WebsiteLoader.css';
 
-// Import essential images for preloading
-import swapMockupImg from '../assets/home/projects-ss.webp';
-import crimsonImg from '../assets/brand logos/crimson_healthcare_pvt_ltd_cover.jpeg';
-import globalEsportsImg from '../assets/brand logos/Global esports.webp';
-import kioskScreenImg from '../assets/swap_flow_kiosk_screen.png';
-import historyScreenImg from '../assets/swap_flow_history_screen.png';
+// Images preloaded during the intro. Only list images the site actually shows,
+// since every first-time visitor downloads all of them before the site appears.
+// (Photography photos load lazily as visitors scroll to them, so they're not
+// here: the intro would get slower with every photo added to that folder.)
 import frameImg from '../assets/Frame 34768.png';
 
-import project1 from '../assets/playground/project-1.webp';
-import project2 from '../assets/playground/project-2.webp';
-import project3 from '../assets/playground/project-3.webp';
-import project4 from '../assets/playground/project-4.webp';
-import project5 from '../assets/playground/project-5.webp';
-import project6 from '../assets/playground/project-6.webp';
-
-import post1 from '../assets/instagram/post 1.webp';
-import post2 from '../assets/instagram/post 2.webp';
-import post3 from '../assets/instagram/post 3.webp';
-import post4 from '../assets/instagram/post 4.webp';
-import post5 from '../assets/instagram/post 5.webp';
-
 const defaultImagesToPreload = [
-  swapMockupImg,
-  crimsonImg,
-  globalEsportsImg,
-  kioskScreenImg,
-  historyScreenImg,
   frameImg,
-  project1,
-  project2,
-  project3,
-  project4,
-  project5,
-  project6,
-  post1,
-  post2,
-  post3,
-  post4,
-  post5,
 ];
 
 // Module-level flag: persists across SPA page switches (Work, Play, About, CV),

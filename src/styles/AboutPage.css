@@ -140,86 +140,9 @@
   z-index: 2;
 }
 
-.about-photo-overlay {
-  position: absolute;
-  top: 32px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.about-photo-tagline {
-  font-family: var(--font-heading, 'Gelasio', Georgia, serif);
-  font-style: italic;
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
-  letter-spacing: -0.01em;
-}
-
 /* ==========================================================================
    Tier 2: 1:1 Pure Photo Carousel (No Text Overlays)
    ========================================================================== */
-
-.about-carousel-section {
-  padding-top: 64px;
-  padding-bottom: 64px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
-}
-
-.about-carousel-header {
-  display: flex;
-  align-items: center;
-}
-
-.about-carousel-title {
-  font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-  font-weight: 500;
-  line-height: 1.2;
-  color: var(--text-main);
-  margin: 0 0 28px 0;
-  letter-spacing: 0.05rem;
-}
-
-.about-carousel-wrapper {
-  width: 100%;
-  overflow-x: auto;
-  position: relative;
-  padding: 10px 0;
-  cursor: grab;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  mask-image: linear-gradient(to right,
-      transparent 0%,
-      black 4%,
-      black 96%,
-      transparent 100%);
-  -webkit-mask-image: linear-gradient(to right,
-      transparent 0%,
-      black 4%,
-      black 96%,
-      transparent 100%);
-}
-
-.about-carousel-wrapper::-webkit-scrollbar {
-  display: none;
-}
-
-.about-carousel-track {
-  display: flex;
-  gap: 20px;
-  width: max-content;
-  animation: scrollAboutMarquee 35s linear infinite;
-  will-change: transform;
-}
-
 
 @keyframes scrollAboutMarquee {
   0% {
@@ -228,43 +151,6 @@
 
   100% {
     transform: translateX(0);
-  }
-}
-
-.about-carousel-card-item {
-  flex-shrink: 0;
-}
-
-.about-carousel-card {
-  width: 320px;
-  aspect-ratio: 1 / 1;
-  border-radius: 4px;
-  overflow: hidden;
-  position: relative;
-  background: var(--bg-surface-hover, #F4F4F5);
-  border: 1px solid var(--border-subtle);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-}
-
-.about-carousel-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
-}
-
-
-@media (max-width: 768px) {
-  .about-carousel-card {
-    width: 240px;
-  }
-}
-
-@media (max-width: 768px) {
-  .about-carousel-card {
-    width: 320px;
-    height: 220px;
   }
 }
 
@@ -285,29 +171,19 @@
   align-items: flex-start;
 }
 
-.about-journey-badge {
-  font-family: var(--font-mono, 'DM Mono', monospace);
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 0.75rem;
-  font-weight: 500;
-}
-
 .about-journey-title {
-  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-family: var(--font-retro, 'APK-Archivr21', monospace);
   font-size: clamp(2rem, 3.8vw, 2.75rem);
-  font-weight: 700;
+  font-weight: 4500;
   color: var(--text-main);
   margin: 0 0 1rem 0;
-  letter-spacing: -0.01em;
+  letter-spacing: -.15rem;
   line-height: 1.15;
 }
 
 .about-journey-subtitle {
   font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  font-size: 14px;
   line-height: 1.6;
   color: var(--text-muted);
   max-width: 680px;
@@ -439,6 +315,38 @@
   max-width: 680px;
 }
 
+/* Small strip of work samples under a role */
+.journey-gallery {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 680px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.journey-gallery li {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+}
+
+.journey-gallery img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+@media (max-width: 520px) {
+  .journey-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Responsive Overrides */
 @media (max-width: 768px) {
   .journey-timeline-item {
@@ -466,15 +374,5 @@
 @media (max-width: 640px) {
   .about-page-root {
     padding-top: 90px;
-  }
-
-  .about-directors-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 440px) {
-  .about-directors-grid {
-    grid-template-columns: 1fr;
   }
 }

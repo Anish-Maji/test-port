@@ -30,21 +30,14 @@
 }
 
 .projects-terminal-title {
-  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-family: var(--font-retro, 'APK-Archivr21', monospace);
   font-size: clamp(1.8rem, 3.5vw, 2.5rem);
   font-weight: 500;
   color: var(--text-main);
   display: flex;
   align-items: center;
   gap: 4px;
-  letter-spacing: 0.05rem;
-}
-
-.projects-prompt-symbol {
-  color: #84cc16;
-  /* terminal prompt accent */
-  font-weight: 800;
-  margin-right: 2px;
+  letter-spacing: -.15rem;
 }
 
 .projects-title-text {
@@ -76,20 +69,6 @@
   color: var(--text-muted);
   margin: 0;
   max-width: 544px;
-}
-
-.projects-header-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.projects-count-badge {
-  font-family: var(--font-mono, 'DM Mono', monospace);
-  font-size: 0.95rem;
-  color: var(--text-dim);
-  font-weight: 500;
-  opacity: 0.8;
 }
 
 /* Bento Grid Wrapper */
@@ -227,22 +206,11 @@
   color: var(--text-muted);
   background-color: var(--bg-surface, #fafafa);
   border: 1px solid var(--border-subtle);
-  border-radius: 9999px;
   padding: 3px 10px;
   letter-spacing: -0.01em;
   font-weight: 400;
   white-space: nowrap;
   transition: color 0.2s ease, border-color 0.2s ease;
-}
-
-
-.bento-card-meta {
-  font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: 12px;
-  color: var(--text-muted);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-weight: 400;
 }
 
 .bento-card-title {
@@ -289,10 +257,6 @@
 
   .projects-header-container {
     margin-bottom: 2rem;
-  }
-
-  .projects-header-center {
-    display: none;
   }
 
   .bento-card-media {

@@ -60,26 +60,6 @@
   gap: 1.5rem;
 }
 
-.theme-toggle-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: transparent;
-  border: 1px solid var(--border-subtle);
-  color: var(--text-main);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.theme-toggle-btn:hover {
-  background: var(--border-subtle);
-  color: var(--text-main);
-  transform: scale(1.05);
-}
-
 /* Desktop & Tablet Navigation Menu */
 .nav-menu {
   display: flex;

@@ -1,0 +1,78 @@
+/* ==========================================================================
+   Edge rulers: hidden until there's room beside the 1280px content.
+   1360px leaves 40px each side for a 28px ruler plus breathing room.
+   ========================================================================== */
+
+.edge-ruler {
+  --ruler-ink: var(--text-dim, rgba(0, 0, 0, 0.3));
+
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 999; /* just under the navbar's frosted bar */
+  width: 28px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+@media (min-width: 1360px) {
+  .edge-ruler {
+    display: block;
+  }
+}
+
+.edge-ruler-left {
+  left: 0;
+  border-right: 1px solid var(--border-subtle);
+}
+
+.edge-ruler-right {
+  right: 0;
+  border-left: 1px solid var(--border-subtle);
+}
+
+/* Minor tick every 10px, medium every 50px, long every 100px */
+.edge-ruler-ticks {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(100% + 100px);
+  background-image:
+    repeating-linear-gradient(180deg, var(--ruler-ink) 0 1px, transparent 1px 100px),
+    repeating-linear-gradient(180deg, var(--ruler-ink) 0 1px, transparent 1px 50px),
+    repeating-linear-gradient(180deg, var(--ruler-ink) 0 1px, transparent 1px 10px);
+  background-size: 12px 100%, 8px 100%, 4px 100%;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+
+.edge-ruler-left .edge-ruler-ticks {
+  background-position: right top, right top, right top;
+}
+
+.edge-ruler-right .edge-ruler-ticks {
+  background-position: left top, left top, left top;
+}
+
+/* Page position labels, rotated to read along the ruler */
+.edge-ruler-label {
+  position: absolute;
+  margin-top: 4px;
+  font-family: var(--font-mono, 'DM Mono', monospace);
+  font-size: 9px;
+  line-height: 1;
+  color: var(--ruler-ink);
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+}
+
+.edge-ruler-left .edge-ruler-label {
+  left: 4px;
+}
+
+.edge-ruler-right .edge-ruler-label {
+  right: 4px;
+}
